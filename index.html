@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="A free browser-only checklist for NRIs. Find out whether your spouse, family, or trusted person can access your money, accounts, and documents if something happens tomorrow." />
+<title>NRI Money Access Checklist | RupeeStories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-2: #142536;
+    --navy-3: #1d3047;
+    --cream: #f4e9d3;
+    --cream-2: #faf3e0;
+    --cream-3: #ede1c6;
+    --gold: #d4a84b;
+    --gold-2: #b8902f;
+    --ink: #1a1410;
+    --ink-2: #3a322a;
+    --muted: #6b5f50;
+    --line: #d8c9a8;
+    --done: #4a7c4e;
+    --done-bg: #d9e8d4;
+    --needs: #c97d2e;
+    --needs-bg: #fae4ca;
+    --na: #6b6b6b;
+    --na-bg: #e3e0d8;
+    --danger: #a04035;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 8px 24px rgba(13,27,42,0.06);
+    --radius: 14px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--navy);
+    color: var(--cream);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(212,168,75,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 30% at 90% 100%, rgba(212,168,75,0.04) 0%, transparent 60%);
+    background-attachment: fixed;
+  }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 28px 18px 80px;
+  }
+
+  /* Header */
+  header.hero {
+    text-align: left;
+    padding: 12px 0 24px;
+  }
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(32px, 5vw, 46px);
+    line-height: 1.1;
+    margin: 0 0 14px;
+    color: var(--cream);
+    letter-spacing: -0.01em;
+  }
+  h1 .accent {
+    color: var(--gold);
+    font-style: italic;
+    font-weight: 500;
+  }
+  .lede {
+    font-size: clamp(16px, 2.2vw, 18px);
+    color: rgba(244, 233, 211, 0.78);
+    max-width: 640px;
+    margin: 0 0 22px;
+    line-height: 1.55;
+  }
+
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--cream);
+    background: rgba(244, 233, 211, 0.08);
+    border: 1px solid rgba(244, 233, 211, 0.18);
+    padding: 6px 11px;
+    border-radius: 100px;
+  }
+  .badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  /* Score Card (sticky) */
+  .score-wrap {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding-top: 14px;
+    padding-bottom: 6px;
+    margin: 0 -18px;
+    padding-left: 18px;
+    padding-right: 18px;
+    background: linear-gradient(to bottom, var(--navy) 60%, rgba(13,27,42,0.85) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .score-card {
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 14px 18px;
+    align-items: center;
+  }
+  .score-main {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .score-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 1;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .score-num .pct { font-size: 24px; color: var(--muted); margin-left: 2px; }
+  .score-meta {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .risk-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--na-bg);
+    color: var(--ink);
+    border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  .risk-pill.good { background: var(--done-bg); color: #2d5230; border-color: #b5d2af; }
+  .risk-pill.cleanup { background: #fbf0d5; color: #7a5a14; border-color: #e3cc88; }
+  .risk-pill.risk { background: var(--needs-bg); color: #7a4a12; border-color: #e8b97f; }
+  .risk-pill.high { background: #f4d4cf; color: #5e2b25; border-color: #d99b91; }
+  .risk-pill::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.7;
+  }
+
+  .progress-bar {
+    grid-column: 1 / -1;
+    height: 8px;
+    background: var(--cream-3);
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-bar .fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-2), var(--gold));
+    width: 0;
+    transition: width 0.4s ease;
+    border-radius: 100px;
+  }
+  .score-counts {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .score-counts span strong { color: var(--ink); font-weight: 600; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+  .dot.done { background: var(--done); }
+  .dot.needs { background: var(--needs); }
+  .dot.na { background: var(--na); }
+
+  .critical-row {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 6px 14px;
+    align-items: center;
+  }
+  .critical-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--danger);
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .shield { width: 14px; height: 14px; flex-shrink: 0; }
+  .critical-meta {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    justify-content: flex-end;
+    text-align: right;
+    flex-wrap: wrap;
+  }
+  .critical-meta strong {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .critical-meta .pct { font-size: 13px; color: var(--muted); }
+  .critical-meta .crit-detail { color: var(--muted); }
+  .progress-bar.small {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    height: 5px;
+  }
+  .crit-fill {
+    background: linear-gradient(90deg, #a04035, #c97d2e);
+  }
+  .crit-fill.good { background: linear-gradient(90deg, #4a7c4e, #6ba36e); }
+
+  .critical-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--danger);
+    background: #f4d4cf;
+    padding: 2px 7px;
+    border-radius: 100px;
+    margin-left: 8px;
+    vertical-align: middle;
+    border: 1px solid #e8b9b2;
+  }
+  .critical-flag::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--danger);
+    border-radius: 50%;
+  }
+
+  /* Section accordion */
+  .sections {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* View controls */
+  .view-controls {
+    margin-top: 22px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .view-controls-right {
+    display: flex;
+    gap: 8px;
+  }
+  .chip-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    border: 1px solid rgba(244, 233, 211, 0.22);
+    background: rgba(244, 233, 211, 0.04);
+    color: var(--cream);
+    transition: all 0.15s;
+  }
+  .chip-btn:hover {
+    background: rgba(244, 233, 211, 0.12);
+    border-color: rgba(244, 233, 211, 0.4);
+  }
+  .chip-btn.active {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+  .shield-sm { width: 13px; height: 13px; }
+
+  /* Critical-only filter */
+  body.critical-only .item:not(.is-critical) { display: none; }
+  body.critical-only details.section .items:not(:has(.item.is-critical))::after {
+    content: 'No critical items in this section.';
+    display: block;
+    padding: 14px 0;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  details.section {
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    overflow: hidden;
+  }
+  details.section[open] {
+    border-color: var(--gold);
+  }
+  summary {
+    cursor: pointer;
+    padding: 18px 20px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  summary:hover { background: var(--cream-2); }
+  summary::-webkit-details-marker { display: none; }
+  .sec-num {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    width: 26px;
+    flex-shrink: 0;
+  }
+  .sec-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 19px;
+    color: var(--ink);
+    flex: 1;
+    line-height: 1.25;
+  }
+  .sec-score {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 4px 10px;
+    background: var(--cream-3);
+    border-radius: 100px;
+  }
+  .sec-score.complete { background: var(--done-bg); color: #2d5230; }
+  .chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  details[open] .chevron { transform: rotate(90deg); }
+
+  .items {
+    padding: 4px 20px 20px;
+    border-top: 1px solid var(--line);
+    background: var(--cream-2);
+  }
+  .item {
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .item:last-child { border-bottom: none; }
+  .item-text {
+    font-size: 15px;
+    color: var(--ink-2);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .item-controls {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+  .opt {
+    flex: 1;
+    min-width: 90px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    background: var(--cream);
+    color: var(--ink-2);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .opt:hover { border-color: var(--muted); }
+  .opt[aria-pressed="true"][data-val="done"] {
+    background: var(--done);
+    border-color: var(--done);
+    color: white;
+  }
+  .opt[aria-pressed="true"][data-val="needs"] {
+    background: var(--needs);
+    border-color: var(--needs);
+    color: white;
+  }
+  .opt[aria-pressed="true"][data-val="na"] {
+    background: var(--na);
+    border-color: var(--na);
+    color: white;
+  }
+  .note-toggle {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 0;
+    font-family: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--line);
+    text-underline-offset: 3px;
+  }
+  .note-toggle:hover { color: var(--ink-2); }
+  textarea.note {
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    background: var(--cream);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    border-radius: var(--radius-sm);
+    resize: vertical;
+    min-height: 60px;
+    display: none;
+  }
+  textarea.note.show { display: block; }
+  textarea.note:focus { outline: 2px solid var(--gold); outline-offset: -1px; border-color: var(--gold); }
+
+  /* Action list */
+  .panel {
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin-top: 22px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+  }
+  .panel h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0 0 6px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .panel .sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 16px;
+  }
+  .action-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .action-list li {
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--line);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .action-list li:last-child { border-bottom: none; }
+  .action-list .tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--needs);
+    background: var(--needs-bg);
+    padding: 3px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .action-list .tag.critical {
+    color: var(--danger);
+    background: #f4d4cf;
+  }
+  .action-list .tag.empty {
+    color: var(--muted);
+    background: var(--cream-3);
+  }
+  .action-list .sec-ref {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .empty-state {
+    padding: 18px;
+    background: var(--done-bg);
+    border-radius: var(--radius-sm);
+    color: #2d5230;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  /* Export buttons */
+  .actions-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .btn {
+    padding: 11px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    border: 1px solid rgba(244, 233, 211, 0.25);
+    background: rgba(244, 233, 211, 0.06);
+    color: var(--cream);
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .btn:hover {
+    background: rgba(244, 233, 211, 0.12);
+    border-color: rgba(244, 233, 211, 0.4);
+  }
+  .btn.primary {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+  .btn.primary:hover { background: var(--gold-2); border-color: var(--gold-2); }
+  .btn.danger { color: #f4b0a8; border-color: rgba(244, 176, 168, 0.25); }
+  .btn.danger:hover { background: rgba(244, 176, 168, 0.08); color: #f4b0a8; }
+
+  /* Disclaimer */
+  .fine-print {
+    margin-top: 24px;
+    padding: 18px;
+    background: rgba(244, 233, 211, 0.04);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    font-size: 13px;
+    color: rgba(244, 233, 211, 0.72);
+    line-height: 1.6;
+  }
+  .fine-print strong { color: var(--cream); font-weight: 600; }
+  .fine-print + .fine-print { margin-top: 10px; }
+
+  /* Footer */
+  footer {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid rgba(244, 233, 211, 0.12);
+    text-align: center;
+    font-size: 13px;
+    color: rgba(244, 233, 211, 0.55);
+    line-height: 1.6;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--ink);
+    color: var(--cream);
+    padding: 12px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* Modal */
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(13, 27, 42, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-bg.show { display: flex; }
+  .modal {
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 24px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  }
+  .modal h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .modal p { font-size: 14px; color: var(--ink-2); margin: 0 0 18px; }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+  .modal .btn { color: var(--ink); background: var(--cream-3); border-color: var(--line); }
+  .modal .btn:hover { background: var(--cream-2); }
+  .modal .btn.danger { background: var(--danger); color: white; border-color: var(--danger); }
+  .modal .btn.danger:hover { background: #8a352c; border-color: #8a352c; }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .score-wrap { position: static; padding-top: 6px; }
+    .score-card { padding: 14px; grid-template-columns: 1fr; }
+    .score-num { font-size: 36px; }
+    summary { padding: 14px 16px; gap: 10px; }
+    .sec-num { width: 22px; font-size: 13px; }
+    .sec-title { font-size: 17px; }
+    .items { padding: 4px 16px 16px; }
+    .opt { font-size: 12px; padding: 9px 6px; min-width: 0; }
+    .panel { padding: 18px; }
+    .panel h2 { font-size: 19px; }
+    .btn { font-size: 13px; padding: 10px 14px; }
+  }
+
+  /* Print */
+  @media print {
+    body { background: white; color: black; background-image: none; }
+    .wrap { max-width: 100%; padding: 0; }
+    .score-wrap { position: static; background: white; padding: 0; margin: 0; backdrop-filter: none; }
+    .score-card, .panel { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; background: white; }
+    details.section {
+      box-shadow: none;
+      border: 1px solid #ccc;
+      page-break-inside: avoid;
+      background: white;
+      margin-bottom: 8px;
+    }
+    details.section[open] { border-color: #ccc; }
+    details.section .items { display: block !important; background: white; border-top: 1px solid #eee; }
+    .chevron { display: none; }
+    .actions-bar, .badges, .note-toggle, .fine-print, footer, .toast, .modal-bg { display: none !important; }
+    .opt[aria-pressed="false"] { display: none !important; }
+    .opt[aria-pressed="true"] { background: white !important; color: black !important; border: 1.5px solid black !important; }
+    textarea.note { display: block !important; border: 1px solid #ccc; background: white; color: black; }
+    textarea.note:empty, textarea.note:placeholder-shown { display: none !important; }
+    .lede, h1, .sec-title, .sec-num, .item-text, .panel h2 { color: black !important; }
+    .h1 .accent { color: #888 !important; }
+    .badge { color: black; border-color: #ccc; background: white; }
+    .badge::before { background: black; }
+    .eyebrow { color: #888 !important; }
+    .item { padding: 8px 0; }
+    summary { padding: 12px 16px; }
+    .items { padding: 4px 16px 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">RupeeStories · Free Tool</div>
+  <h1>NRI Money Access <span class="accent">Checklist</span></h1>
+  <p class="lede">Can your spouse or family access the money, accounts, documents, and contacts if something happens tomorrow? Most NRI money problems are not about money. They are about access. Find the weak spots before life forces you to.</p>
+  <div class="badges">
+    <span class="badge">No login</span>
+    <span class="badge">No data collected</span>
+    <span class="badge">Private browser-only</span>
+    <span class="badge">Not legal or tax advice</span>
+  </div>
+</header>
+
+<div class="score-wrap">
+  <div class="score-card">
+    <div class="score-main">
+      <div class="score-num"><span id="score-val">0</span><span class="pct">%</span></div>
+      <div class="score-meta">
+        <div><strong id="applicable-count">0</strong> applicable items</div>
+        <div id="score-summary">Start checking items below to see your readiness</div>
+      </div>
+    </div>
+    <div class="risk-pill" id="risk-pill">Not started</div>
+    <div class="progress-bar"><div class="fill" id="progress-fill"></div></div>
+    <div class="score-counts">
+      <span><span class="dot done"></span><strong id="done-count">0</strong> done</span>
+      <span><span class="dot needs"></span><strong id="needs-count">0</strong> needs work</span>
+      <span><span class="dot na"></span><strong id="na-count">0</strong> not applicable</span>
+    </div>
+    <div class="critical-row">
+      <div class="critical-label">
+        <svg class="shield" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5l5.5 2v4.5c0 3.5-2.5 6-5.5 6.5-3-.5-5.5-3-5.5-6.5V3.5L8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.5 8l2 2 3-3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Critical access
+      </div>
+      <div class="critical-meta">
+        <strong id="crit-val">0</strong><span class="pct">%</span>
+        <span class="crit-detail" id="crit-detail">Items that gate everything else</span>
+      </div>
+      <div class="progress-bar small"><div class="fill crit-fill" id="crit-fill"></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="view-controls">
+  <button class="chip-btn" onclick="toggleCriticalOnly()" id="crit-toggle">
+    <svg class="shield-sm" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5l5.5 2v4.5c0 3.5-2.5 6-5.5 6.5-3-.5-5.5-3-5.5-6.5V3.5L8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+    <span id="crit-toggle-label">Show critical only</span>
+  </button>
+  <div class="view-controls-right">
+    <button class="chip-btn" onclick="expandAll()">Expand all</button>
+    <button class="chip-btn" onclick="collapseAll()">Collapse all</button>
+  </div>
+</div>
+
+<div class="sections" id="sections"></div>
+
+<div class="panel">
+  <h2>Action list</h2>
+  <p class="sub">Critical items appear first. Fix these before chasing the rest.</p>
+  <ul class="action-list" id="action-list"></ul>
+</div>
+
+<div class="actions-bar">
+  <button class="btn primary" onclick="exportPDF()">Print or save as PDF</button>
+  <button class="btn" onclick="exportCSV()">Export CSV</button>
+  <button class="btn" onclick="exportJSON()">Backup JSON</button>
+  <button class="btn" onclick="document.getElementById('import-file').click()">Restore from JSON</button>
+  <input type="file" id="import-file" accept=".json" style="display:none" onchange="importJSON(event)">
+  <button class="btn danger" onclick="confirmReset()">Reset checklist</button>
+</div>
+
+<div class="fine-print">
+  <strong>Privacy.</strong> This checklist runs entirely in your browser. Nothing is uploaded. Your answers and notes are saved only in this browser's local storage. Do not enter full account numbers, passwords, Social Security numbers, Aadhaar numbers, PAN numbers, or other sensitive identifiers in the notes. <strong>Use notes for reminders only, not secrets.</strong>
+</div>
+<div class="fine-print">
+  <strong>Disclaimer.</strong> This is not legal, tax, financial, or estate advice. Use this as a starting point and talk to the right professionals for your situation. Rules around NRE/NRO accounts, repatriation, beneficiaries, and inheritance differ by country and change over time.
+</div>
+
+<footer>
+  Built by <a href="https://rupeestories.substack.com" target="_blank" rel="noopener">RupeeStories</a> · Free tool · No login · No data collected<br>
+  <small style="opacity:0.7">A practical checklist made by another NRI who has seen these problems.</small>
+</footer>
+
+</div>
+
+<div class="toast" id="toast">Saved</div>
+
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <h3>Reset checklist?</h3>
+    <p>This will clear all your answers and notes. This cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn danger" onclick="doReset()">Reset everything</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SECTIONS = [
+  { id: 's1', title: 'Bank logins', items: [
+    'I can log in to all Indian bank accounts',
+    'I can log in to all US or foreign bank accounts',
+    'Transaction passwords are known or stored safely',
+    'MPIN or app PIN is working',
+    'Registered email is current',
+    'Registered mobile number is current',
+    'Debit cards are active if needed',
+    'Beneficiaries or transfer limits are checked',
+    'Dormant or inactive accounts are identified',
+    'Family knows the main bank accounts'
+  ]},
+  { id: 's2', title: 'Mobile numbers and OTP access', items: [
+    'I know which mobile number is linked to each Indian bank account',
+    'I know which number is linked to PAN',
+    'I know which number is linked to Aadhaar',
+    'I know which number is linked to demat',
+    'I know which number is linked to mutual funds',
+    'I can receive OTPs outside India',
+    'My old Indian SIM is not the only access point',
+    'My parent\u2019s phone number is not controlling my accounts',
+    'I have a backup plan if the SIM is lost'
+  ]},
+  { id: 's3', title: 'Aadhaar and PAN', items: [
+    'PAN and Aadhaar are linked if required',
+    'Aadhaar mobile number is current',
+    'PAN name and Aadhaar name match',
+    'Date of birth is consistent',
+    'Address details are known',
+    'I can access Aadhaar OTP',
+    'I can log in to the income tax portal'
+  ]},
+  { id: 's4', title: 'NRE and NRO accounts', items: [
+    'I can log in to NRE account',
+    'I can log in to NRO account',
+    'Nominees are added',
+    'Current mobile number is linked',
+    'Email is updated',
+    'FATCA status is updated',
+    'Passport details are current',
+    'OCI details are updated if needed',
+    'Old resident accounts were converted if needed',
+    'I know how NRO repatriation works',
+    'I know what forms the bank asks for'
+  ]},
+  { id: 's5', title: 'Demat and investments in India', items: [
+    'Broker login works',
+    'CDSL or NSDL login works',
+    'TPIN is known or resettable',
+    'Nominee is added',
+    'Linked bank account is correct',
+    'Registered email is current',
+    'Registered mobile is current',
+    'KYC status is valid',
+    'NRI or resident status is correct',
+    'I can sell holdings from outside India',
+    'Proceeds go to the right account'
+  ]},
+  { id: 's6', title: 'Nominees and beneficiaries', items: [
+    'Indian bank nominees are added',
+    'NRE/NRO nominees are added',
+    'Demat nominees are added',
+    'Mutual fund nominees are added',
+    'Insurance nominees are added',
+    'PPF, EPF, or NPS nominees are checked if applicable',
+    '401k beneficiaries are updated',
+    'IRA or Roth IRA beneficiaries are updated',
+    'HSA beneficiaries are updated',
+    '529 account successor or owner info is known',
+    'Spouse or trusted family knows where nominee info is stored'
+  ]},
+  { id: 's7', title: 'Joint access', items: [
+    'Spouse can access main bank info',
+    'Spouse knows where passwords are stored',
+    'Spouse can unlock emergency files if needed',
+    'Spouse knows main investment accounts',
+    'Spouse knows insurance details',
+    'Spouse knows auto-pay list',
+    'Spouse knows mortgage or rent details',
+    'Trusted person knows who to call in India',
+    'Trusted person knows who to call in the US or current country'
+  ]},
+  { id: 's8', title: 'Parents\u2019 documents in India', items: [
+    'Aadhaar copies are available',
+    'PAN copies are available',
+    'Passport or ID copies are available',
+    'Pension documents are known',
+    'Bank account list is known',
+    'FD details are known',
+    'Property documents location is known',
+    'Will location is known if available',
+    'Medical insurance card is available',
+    'Life insurance policies are known',
+    'Locker details are known',
+    'Utility bills or property tax receipts are available',
+    'Someone in India can physically access the documents'
+  ]},
+  { id: 's9', title: 'US or foreign retirement accounts', items: [
+    '401k login works',
+    'Roth 401k login works if applicable',
+    'Traditional IRA login works if applicable',
+    'Roth IRA login works if applicable',
+    'HSA login works if applicable',
+    '529 login works if applicable',
+    'Old employer plans are listed',
+    'Pension login is listed if applicable',
+    'Beneficiaries are updated',
+    'Trusted contact is added if available',
+    'Spouse knows these accounts exist',
+    'Two-factor authentication is not locked to one lost device'
+  ]},
+  { id: 's10', title: 'India tax login', items: [
+    'Income tax portal login works',
+    'Linked mobile is current',
+    'Linked email is current',
+    'Bank account is validated',
+    'Past returns can be accessed',
+    'Form 26AS can be accessed',
+    'AIS can be accessed',
+    'CA contact is saved',
+    'Pending notices are checked',
+    'Foreign asset reporting is reviewed if applicable'
+  ]},
+  { id: 's11', title: 'Emergency contact list', items: [
+    'Spouse contact is listed',
+    'Sibling or close family contact is listed',
+    'Close friend in current country is listed',
+    'Close friend or relative in India is listed',
+    'India CA is listed',
+    'US CPA or local tax person is listed',
+    'Immigration lawyer is listed if applicable',
+    'Estate lawyer is listed if applicable',
+    'Bank contact is listed',
+    'Insurance contact is listed',
+    'Property contact is listed',
+    'Employer HR contact is listed'
+  ]},
+  { id: 's12', title: 'CA and lawyer contacts', items: [
+    'India CA name and contact saved',
+    'US CPA or local tax contact saved',
+    'India property lawyer contact saved',
+    'Estate lawyer contact saved',
+    'Immigration lawyer contact saved',
+    'Bank relationship manager saved if any',
+    'I wrote what each person helps with'
+  ]},
+  { id: 's13', title: 'Property documents', items: [
+    'Property list is written down',
+    'Owner names are written down',
+    'Sale deed location is known',
+    'Link documents are available if applicable',
+    'Encumbrance certificate is available if applicable',
+    'Property tax receipts are available',
+    'Utility bills are available',
+    'Loan documents are available if applicable',
+    'Rental agreement is available if rented',
+    'Tenant contact is saved if rented',
+    'Property manager contact is saved',
+    'Original document location is known',
+    'Scanned copies are stored safely',
+    'Someone knows the sale or transfer process',
+    'Property tax payment login works',
+    'Electricity bill login works',
+    'Water bill login works',
+    'Society or HOA contact is saved',
+    'Tenant police verification is stored if applicable',
+    'Rental deposit details are known',
+    'Local caretaker contact is saved',
+    'Property keys location is known',
+    'Property photos or inventory are stored',
+    'Any pending litigation or dispute is noted'
+  ]},
+  { id: 's14', title: 'Passwords and access system', items: [
+    'Password manager is used or a safe backup exists',
+    'Trusted person knows how to access emergency info',
+    'Main financial email is identified',
+    'Main OTP phone is identified',
+    'Backup email is identified',
+    'Phone unlock process is documented if appropriate',
+    'Laptop or document folder access is documented if appropriate',
+    'High priority accounts are marked'
+  ]},
+  { id: 's15', title: 'One-page NRI money access sheet', items: [
+    'Main Indian bank listed',
+    'Main foreign bank listed',
+    'NRE bank listed',
+    'NRO bank listed',
+    'Demat broker listed',
+    'US or foreign brokerage listed',
+    'Retirement account providers listed',
+    'Insurance providers listed',
+    'CA and CPA listed',
+    'Lawyers listed',
+    'Property list added',
+    'Parent document location added',
+    'Emergency contacts added',
+    'Main OTP phone added',
+    'Main finance email added',
+    'Password storage location added'
+  ]},
+  { id: 's16', title: 'Insurance access', items: [
+    'Term life insurance policy details are listed',
+    'Health insurance policy details are listed',
+    'India health insurance details are listed',
+    'US or foreign health insurance details are listed',
+    'Employer life insurance is listed if applicable',
+    'Disability insurance is listed if applicable',
+    'Umbrella insurance is listed if applicable',
+    'Policy numbers are stored safely outside this tool',
+    'Nominees or beneficiaries are checked',
+    'Claim contact or agent contact is saved'
+  ]},
+  { id: 's17', title: 'Will, POA, and estate documents', items: [
+    'US will or trust status is known',
+    'India will status is known if applicable',
+    'Healthcare proxy is listed',
+    'Financial power of attorney is listed',
+    'India POA is prepared or reviewed if needed',
+    'Guardianship instructions for minor children are documented',
+    'Executor or trusted person is identified',
+    'Document location is known',
+    'Spouse or trusted person knows who to call',
+    'Estate lawyer contact is saved'
+  ]},
+  { id: 's18', title: 'Kids and dependent planning', items: [
+    'Kids\u2019 passports are current',
+    'OCI cards are current if applicable',
+    'Birth certificates are stored',
+    'School emergency contacts are current',
+    '529 account access is known',
+    'UTMA or custodial account access is known',
+    'Guardian information is documented',
+    'Medical insurance cards are available',
+    'Pediatrician or doctor contact is saved',
+    'Travel consent documents are available if one parent travels alone with kids'
+  ]},
+  { id: 's19', title: 'Immigration documents', items: [
+    'Passport copies are stored',
+    'Visa copies are stored if applicable',
+    'I-797 copies are stored if applicable',
+    'Green card copies are stored if applicable',
+    'OCI copies are stored if applicable',
+    'Naturalization certificate is stored if applicable',
+    'I-94 history is accessible if applicable',
+    'Immigration lawyer contact is saved',
+    'Employer immigration contact is saved',
+    'Family knows where immigration documents are stored'
+  ]},
+  { id: 's20', title: 'Credit cards, loans, and liabilities', items: [
+    'US or foreign credit card list is written down',
+    'India credit card list is written down',
+    'Auto-pay list is known',
+    'Mortgage login is known',
+    'Car loan login is known',
+    'Personal loan details are listed if any',
+    'Student loan details are listed if any',
+    'India home loan details are listed if any',
+    'Credit card annual fees are known',
+    'Spouse knows which cards to close or keep if needed'
+  ]},
+  { id: 's21', title: 'Recurring payments and subscriptions', items: [
+    'Main auto-pay accounts are listed',
+    'Utility payments are listed',
+    'Insurance premiums are listed',
+    'SIPs or automatic investments are listed',
+    'Mortgage or rent payment is listed',
+    'Credit card autopay is listed',
+    'Subscriptions are listed',
+    'Charitable recurring payments are listed',
+    'Family knows which payments are critical',
+    'Family knows which payments can be paused'
+  ]},
+  { id: 's22', title: 'Digital life and email recovery', items: [
+    'Main financial email is identified',
+    'Backup email is identified',
+    'Recovery email is current',
+    'Recovery phone is current',
+    'Google or Apple account recovery is tested',
+    'Password manager recovery process is known',
+    'Cloud storage location is known',
+    'Important scanned documents folder is known',
+    'Two-factor backup codes are stored safely',
+    'Trusted person knows how to access emergency folder'
+  ]},
+  { id: 's23', title: 'Medical emergency information', items: [
+    'Health insurance card is available',
+    'Primary doctor contact is saved',
+    'Specialist contacts are saved',
+    'Medication list is saved',
+    'Allergy list is saved',
+    'Blood group is known',
+    'Emergency hospital preference is known',
+    'Medical power of attorney is listed if available',
+    'Parents\u2019 doctor contact in India is saved',
+    'Recent medical reports location is known'
+  ]},
+  { id: 's24', title: 'Repatriation and money movement', items: [
+    'I know which money is in NRE',
+    'I know which money is in NRO',
+    'I know which money is in resident accounts if any',
+    'I know which accounts can send money abroad',
+    'CA certificate process is understood',
+    'Form 15CA/15CB process is understood if applicable',
+    'Bank branch contact for repatriation is saved',
+    'Source of funds documents are stored',
+    'Old property sale documents are stored',
+    'Family knows which money may be harder to move'
+  ]},
+  { id: 's25', title: 'Death certificate and claims process', items: [
+    'Family knows how to get death certificates in current country',
+    'Family knows how many certified copies may be needed',
+    'Family knows who to notify first',
+    'Employer benefits contact is saved',
+    'Life insurance claim process is known',
+    'Bank claim process is roughly understood',
+    'Brokerage or retirement account claim process is roughly understood',
+    'India document attestation or apostille need is understood if applicable',
+    'Spouse or trusted person knows where to start',
+    'A simple first-week checklist is written down'
+  ]}
+];
+
+// Items flagged as critical: the ones that gate everything else.
+// Failing any of these means the rest of the plan can't be executed in emergency.
+const CRITICAL_KEYS = new Set([
+  // Logins and access
+  's1-0',    // Indian bank login works
+  's1-1',    // US or foreign bank login works
+  's2-0',    // Know mobile linked to Indian bank accounts
+  's2-5',    // Can receive OTPs outside India
+  's3-6',    // Can log in to income tax portal
+  's4-0',    // Can log in to NRE account
+  's4-1',    // Can log in to NRO account
+  's5-0',    // Broker login works
+  's5-10',   // Proceeds go to the right account
+  // Beneficiaries and joint access
+  's6-0',    // Indian bank nominees added
+  's6-10',   // Family knows where nominee info is stored
+  's7-0',    // Spouse can access main bank info
+  's7-1',    // Spouse knows where passwords are stored
+  's9-10',   // Spouse knows retirement accounts exist
+  // Contacts
+  's11-4',   // India CA is listed
+  's11-5',   // US CPA or local tax person is listed
+  // Documents
+  's13-11',  // Original property document location is known
+  's17-7',   // Estate document location is known
+  's17-9',   // Estate lawyer contact saved
+  's19-9',   // Family knows where immigration docs are stored
+  // Master keys
+  's14-1',   // Trusted person knows how to access emergency info
+  's14-2',   // Main financial email identified
+  's14-3',   // Main OTP phone identified
+  's22-2',   // Recovery email is current
+  's22-5',   // Password manager recovery process is known
+  's22-9',   // Trusted person knows how to access emergency folder
+  // Insurance and payments
+  's16-0',   // Term life insurance listed
+  's16-1',   // Health insurance listed
+  's20-2',   // Auto-pay list is known
+  's21-8',   // Family knows which payments are critical
+  // Medical and repatriation
+  's23-0',   // Health insurance card is available
+  's24-6'    // Bank branch contact for repatriation saved
+]);
+
+const STORAGE_KEY = 'nri_money_access_v1';
+let state = {};
+
+// Load saved state
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) state = JSON.parse(saved);
+} catch (e) { state = {}; }
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+}
+
+function itemKey(sIdx, iIdx) { return SECTIONS[sIdx].id + '-' + iIdx; }
+function getItem(sIdx, iIdx) {
+  const k = itemKey(sIdx, iIdx);
+  return state[k] || { status: null, note: '' };
+}
+function setItemStatus(sIdx, iIdx, status) {
+  const k = itemKey(sIdx, iIdx);
+  if (!state[k]) state[k] = { status: null, note: '' };
+  state[k].status = state[k].status === status ? null : status;
+  save();
+  updateScores();
+}
+function setItemNote(sIdx, iIdx, note) {
+  const k = itemKey(sIdx, iIdx);
+  if (!state[k]) state[k] = { status: null, note: '' };
+  state[k].note = note;
+  save();
+}
+
+function chevron() {
+  return '<svg class="chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+function render() {
+  const container = document.getElementById('sections');
+  container.innerHTML = SECTIONS.map((sec, sIdx) => {
+    const itemsHtml = sec.items.map((item, iIdx) => {
+      const it = getItem(sIdx, iIdx);
+      const noteShown = it.note && it.note.length > 0;
+      const isCritical = CRITICAL_KEYS.has(itemKey(sIdx, iIdx));
+      const criticalBadge = isCritical ? '<span class="critical-flag" title="Critical: this item gates other access">Critical</span>' : '';
+      return `
+        <div class="item ${isCritical ? 'is-critical' : ''}" data-s="${sIdx}" data-i="${iIdx}">
+          <div class="item-text">${escapeHtml(item)}${criticalBadge}</div>
+          <div class="item-controls">
+            <button class="opt" data-val="done" aria-pressed="${it.status === 'done'}" onclick="setItemStatus(${sIdx}, ${iIdx}, 'done')">Done</button>
+            <button class="opt" data-val="needs" aria-pressed="${it.status === 'needs'}" onclick="setItemStatus(${sIdx}, ${iIdx}, 'needs')">Needs work</button>
+            <button class="opt" data-val="na" aria-pressed="${it.status === 'na'}" onclick="setItemStatus(${sIdx}, ${iIdx}, 'na')">N/A</button>
+          </div>
+          <button class="note-toggle" onclick="toggleNote(this)">${noteShown ? 'Hide note' : 'Add note'}</button>
+          <textarea class="note ${noteShown ? 'show' : ''}" placeholder="Optional note (do not paste passwords or full account numbers)" oninput="setItemNote(${sIdx}, ${iIdx}, this.value)">${escapeHtml(it.note || '')}</textarea>
+        </div>`;
+    }).join('');
+    return `
+      <details class="section" id="${sec.id}">
+        <summary>
+          <span class="sec-num">${String(sIdx + 1).padStart(2, '0')}</span>
+          <span class="sec-title">${escapeHtml(sec.title)}</span>
+          <span class="sec-score" id="${sec.id}-score">—</span>
+          ${chevron()}
+        </summary>
+        <div class="items">${itemsHtml}</div>
+      </details>`;
+  }).join('');
+  updateScores();
+}
+
+function toggleNote(btn) {
+  const ta = btn.nextElementSibling;
+  const isShown = ta.classList.toggle('show');
+  btn.textContent = isShown ? 'Hide note' : 'Add note';
+  if (isShown) setTimeout(() => ta.focus(), 50);
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function updateScores() {
+  let totalDone = 0, totalNeeds = 0, totalNA = 0, totalAnswered = 0;
+  let totalItems = 0;
+  let critDone = 0, critApplicable = 0, critAnswered = 0;
+
+  SECTIONS.forEach((sec, sIdx) => {
+    let sDone = 0, sApplicable = 0;
+    sec.items.forEach((_, iIdx) => {
+      const st = getItem(sIdx, iIdx).status;
+      const isCrit = CRITICAL_KEYS.has(itemKey(sIdx, iIdx));
+      totalItems++;
+      if (st === 'done') { totalDone++; sDone++; sApplicable++; if (isCrit) { critDone++; critApplicable++; critAnswered++; } }
+      else if (st === 'needs') { totalNeeds++; sApplicable++; if (isCrit) { critApplicable++; critAnswered++; } }
+      else if (st === 'na') { totalNA++; if (isCrit) critAnswered++; }
+      if (st) totalAnswered++;
+    });
+    const elScore = document.getElementById(sec.id + '-score');
+    if (elScore) {
+      if (sApplicable === 0) {
+        elScore.textContent = '—';
+        elScore.classList.remove('complete');
+      } else {
+        const pct = Math.round((sDone / sApplicable) * 100);
+        elScore.textContent = sDone + '/' + sApplicable + '  ·  ' + pct + '%';
+        elScore.classList.toggle('complete', pct === 100);
+      }
+    }
+  });
+
+  const totalApplicable = totalDone + totalNeeds;
+  const pct = totalApplicable === 0 ? 0 : Math.round((totalDone / totalApplicable) * 100);
+
+  document.getElementById('score-val').textContent = totalApplicable === 0 ? '0' : pct;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('done-count').textContent = totalDone;
+  document.getElementById('needs-count').textContent = totalNeeds;
+  document.getElementById('na-count').textContent = totalNA;
+  document.getElementById('applicable-count').textContent = totalApplicable;
+
+  // Critical score
+  const critPct = critApplicable === 0 ? 0 : Math.round((critDone / critApplicable) * 100);
+  document.getElementById('crit-val').textContent = critApplicable === 0 ? '0' : critPct;
+  const critFill = document.getElementById('crit-fill');
+  critFill.style.width = critPct + '%';
+  critFill.classList.toggle('good', critPct === 100 && critApplicable > 0);
+  const critDetail = document.getElementById('crit-detail');
+  if (critAnswered === 0) {
+    critDetail.textContent = 'Items that gate everything else';
+  } else if (critApplicable === 0) {
+    critDetail.textContent = 'All critical items marked N/A';
+  } else {
+    critDetail.textContent = critDone + ' of ' + critApplicable + ' critical items done';
+  }
+
+  const summary = document.getElementById('score-summary');
+  if (totalAnswered === 0) {
+    summary.textContent = 'Start checking items below to see your readiness';
+  } else if (totalApplicable === 0) {
+    summary.textContent = 'No applicable items selected yet';
+  } else {
+    summary.textContent = totalApplicable + ' applicable · ' + totalDone + ' of those done';
+  }
+
+  const pill = document.getElementById('risk-pill');
+  pill.className = 'risk-pill';
+  if (totalAnswered === 0) { pill.textContent = 'Not started'; }
+  else if (totalApplicable === 0) { pill.textContent = 'All N/A'; }
+  else if (pct >= 80) { pill.textContent = 'Good shape'; pill.classList.add('good'); }
+  else if (pct >= 60) { pill.textContent = 'Needs cleanup'; pill.classList.add('cleanup'); }
+  else if (pct >= 40) { pill.textContent = 'Access risk'; pill.classList.add('risk'); }
+  else { pill.textContent = 'High access risk'; pill.classList.add('high'); }
+
+  renderActionList();
+}
+
+function renderActionList() {
+  const ul = document.getElementById('action-list');
+  const needsWork = [];
+  SECTIONS.forEach((sec, sIdx) => {
+    sec.items.forEach((item, iIdx) => {
+      if (getItem(sIdx, iIdx).status === 'needs') {
+        needsWork.push({
+          sec: sec.title,
+          sIdx, iIdx,
+          item,
+          critical: CRITICAL_KEYS.has(itemKey(sIdx, iIdx))
+        });
+      }
+    });
+  });
+  // Critical first, then the rest
+  needsWork.sort((a, b) => (b.critical ? 1 : 0) - (a.critical ? 1 : 0));
+
+  if (needsWork.length === 0) {
+    const anyAnswered = Object.values(state).some(v => v.status);
+    ul.innerHTML = anyAnswered
+      ? '<div class="empty-state">No items marked "needs work" yet. Either you are in good shape, or there are still items to review.</div>'
+      : '<div class="empty-state">Mark items as "needs work" to see your top action list here.</div>';
+    return;
+  }
+  ul.innerHTML = needsWork.slice(0, 10).map(n => `
+    <li>
+      <span class="tag ${n.critical ? 'critical' : ''}">${n.critical ? 'Critical' : 'Fix'}</span>
+      <div>
+        <div>${escapeHtml(n.item)}</div>
+        <div class="sec-ref">${escapeHtml(n.sec)}</div>
+      </div>
+    </li>`).join('') + (needsWork.length > 10 ? `<li style="justify-content:center;color:var(--muted);font-size:13px;">+ ${needsWork.length - 10} more items need work</li>` : '');
+}
+
+// Exports
+function exportPDF() { window.print(); }
+
+function exportCSV() {
+  const rows = [['Section', 'Item', 'Critical', 'Status', 'Note']];
+  SECTIONS.forEach((sec, sIdx) => {
+    sec.items.forEach((item, iIdx) => {
+      const it = getItem(sIdx, iIdx);
+      const status = it.status === 'done' ? 'Done' : it.status === 'needs' ? 'Needs work' : it.status === 'na' ? 'N/A' : '';
+      const crit = CRITICAL_KEYS.has(itemKey(sIdx, iIdx)) ? 'Yes' : '';
+      rows.push([sec.title, item, crit, status, it.note || '']);
+    });
+  });
+  const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+  downloadFile('nri-money-access-checklist.csv', csv, 'text/csv');
+  showToast('CSV exported');
+}
+
+function exportJSON() {
+  const data = { version: 1, exported: new Date().toISOString(), state };
+  downloadFile('nri-money-access-checklist.json', JSON.stringify(data, null, 2), 'application/json');
+  showToast('JSON backup exported');
+}
+
+function importJSON(evt) {
+  const file = evt.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data && data.state && typeof data.state === 'object') {
+        state = data.state;
+        save();
+        render();
+        showToast('Checklist restored');
+      } else {
+        showToast('Invalid backup file');
+      }
+    } catch (err) { showToast('Could not read file'); }
+  };
+  reader.readAsText(file);
+  evt.target.value = '';
+}
+
+function downloadFile(name, content, mime) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function confirmReset() { document.getElementById('modal-bg').classList.add('show'); }
+function closeModal() { document.getElementById('modal-bg').classList.remove('show'); }
+function doReset() {
+  state = {};
+  save();
+  render();
+  closeModal();
+  showToast('Checklist reset');
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// View controls
+function expandAll() {
+  document.querySelectorAll('details.section').forEach(d => d.open = true);
+}
+function collapseAll() {
+  document.querySelectorAll('details.section').forEach(d => d.open = false);
+}
+function toggleCriticalOnly() {
+  const on = document.body.classList.toggle('critical-only');
+  document.getElementById('crit-toggle-label').textContent = on ? 'Show all items' : 'Show critical only';
+  document.getElementById('crit-toggle').classList.toggle('active', on);
+  if (on) {
+    // Auto-expand sections that contain critical items so user can see them
+    document.querySelectorAll('details.section').forEach(d => {
+      if (d.querySelector('.item.is-critical')) d.open = true;
+    });
+  }
+}
+
+// Print: open all sections before, restore after
+let printState = null;
+window.addEventListener('beforeprint', () => {
+  printState = [...document.querySelectorAll('details.section')].map(d => d.open);
+  document.querySelectorAll('details.section').forEach(d => d.open = true);
+});
+window.addEventListener('afterprint', () => {
+  if (printState) {
+    document.querySelectorAll('details.section').forEach((d, i) => d.open = printState[i]);
+    printState = null;
+  }
+});
+
+// Modal close on backdrop click
+document.getElementById('modal-bg').addEventListener('click', e => {
+  if (e.target.id === 'modal-bg') closeModal();
+});
+
+render();
+</script>
+
+</body>
+</html>
