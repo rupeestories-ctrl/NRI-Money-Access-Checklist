@@ -3,950 +3,134 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="A free browser-only checklist for NRIs. Find out whether your spouse, family, or trusted person can access your money, accounts, and documents if something happens tomorrow." />
-<title>NRI Money Access Checklist | RupeeStories</title>
+<meta name="description" content="A free browser-only NRI money access test. Check whether your spouse, family, or trusted person can find and act on key money, account, document, and contact information in an emergency." />
+<title>NRI Money Access Test | RupeeStories</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #0d1b2a;
-    --navy-2: #142536;
-    --navy-3: #1d3047;
-    --cream: #f4e9d3;
-    --cream-2: #faf3e0;
-    --cream-3: #ede1c6;
-    --gold: #d4a84b;
-    --gold-2: #b8902f;
-    --ink: #1a1410;
-    --ink-2: #3a322a;
-    --muted: #6b5f50;
-    --line: #d8c9a8;
-    --done: #4a7c4e;
-    --done-bg: #d9e8d4;
-    --needs: #c97d2e;
-    --needs-bg: #fae4ca;
-    --na: #6b6b6b;
-    --na-bg: #e3e0d8;
-    --danger: #a04035;
-    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 8px 24px rgba(13,27,42,0.06);
-    --radius: 14px;
-    --radius-sm: 8px;
-  }
-
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--navy);
-    color: var(--cream);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    font-size: 16px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    background-image:
-      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(212,168,75,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 30% at 90% 100%, rgba(212,168,75,0.04) 0%, transparent 60%);
-    background-attachment: fixed;
-  }
-
-  .wrap {
-    max-width: 880px;
-    margin: 0 auto;
-    padding: 28px 18px 80px;
-  }
-
-  /* Header */
-  header.hero {
-    text-align: left;
-    padding: 12px 0 24px;
-  }
-  .eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gold);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    margin-bottom: 14px;
-  }
-  h1 {
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(32px, 5vw, 46px);
-    line-height: 1.1;
-    margin: 0 0 14px;
-    color: var(--cream);
-    letter-spacing: -0.01em;
-  }
-  h1 .accent {
-    color: var(--gold);
-    font-style: italic;
-    font-weight: 500;
-  }
-  .lede {
-    font-size: clamp(16px, 2.2vw, 18px);
-    color: rgba(244, 233, 211, 0.78);
-    max-width: 640px;
-    margin: 0 0 22px;
-    line-height: 1.55;
-  }
-
-  .badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--cream);
-    background: rgba(244, 233, 211, 0.08);
-    border: 1px solid rgba(244, 233, 211, 0.18);
-    padding: 6px 11px;
-    border-radius: 100px;
-  }
-  .badge::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-  }
-
-  /* Score Card (sticky) */
-  .score-wrap {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    padding-top: 14px;
-    padding-bottom: 6px;
-    margin: 0 -18px;
-    padding-left: 18px;
-    padding-right: 18px;
-    background: linear-gradient(to bottom, var(--navy) 60%, rgba(13,27,42,0.85) 100%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .score-card {
-    background: var(--cream);
-    color: var(--ink);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 14px 18px;
-    align-items: center;
-  }
-  .score-main {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .score-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 42px;
-    line-height: 1;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-  }
-  .score-num .pct { font-size: 24px; color: var(--muted); margin-left: 2px; }
-  .score-meta {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-  .risk-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 600;
-    background: var(--na-bg);
-    color: var(--ink);
-    border: 1px solid var(--line);
-    white-space: nowrap;
-  }
-  .risk-pill.good { background: var(--done-bg); color: #2d5230; border-color: #b5d2af; }
-  .risk-pill.cleanup { background: #fbf0d5; color: #7a5a14; border-color: #e3cc88; }
-  .risk-pill.risk { background: var(--needs-bg); color: #7a4a12; border-color: #e8b97f; }
-  .risk-pill.high { background: #f4d4cf; color: #5e2b25; border-color: #d99b91; }
-  .risk-pill::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: currentColor;
-    opacity: 0.7;
-  }
-
-  .progress-bar {
-    grid-column: 1 / -1;
-    height: 8px;
-    background: var(--cream-3);
-    border-radius: 100px;
-    overflow: hidden;
-    position: relative;
-  }
-  .progress-bar .fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold-2), var(--gold));
-    width: 0;
-    transition: width 0.4s ease;
-    border-radius: 100px;
-  }
-  .score-counts {
-    grid-column: 1 / -1;
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    font-size: 13px;
-    color: var(--muted);
-  }
-  .score-counts span strong { color: var(--ink); font-weight: 600; }
-  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-  .dot.done { background: var(--done); }
-  .dot.needs { background: var(--needs); }
-  .dot.na { background: var(--na); }
-
-  .critical-row {
-    grid-column: 1 / -1;
-    margin-top: 4px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto auto;
-    gap: 6px 14px;
-    align-items: center;
-  }
-  .critical-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--danger);
-    grid-column: 1;
-    grid-row: 1;
-  }
-  .shield { width: 14px; height: 14px; flex-shrink: 0; }
-  .critical-meta {
-    grid-column: 2;
-    grid-row: 1;
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--muted);
-    justify-content: flex-end;
-    text-align: right;
-    flex-wrap: wrap;
-  }
-  .critical-meta strong {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    color: var(--ink);
-    font-weight: 600;
-  }
-  .critical-meta .pct { font-size: 13px; color: var(--muted); }
-  .critical-meta .crit-detail { color: var(--muted); }
-  .progress-bar.small {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    height: 5px;
-  }
-  .crit-fill {
-    background: linear-gradient(90deg, #a04035, #c97d2e);
-  }
-  .crit-fill.good { background: linear-gradient(90deg, #4a7c4e, #6ba36e); }
-
-  .critical-flag {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--danger);
-    background: #f4d4cf;
-    padding: 2px 7px;
-    border-radius: 100px;
-    margin-left: 8px;
-    vertical-align: middle;
-    border: 1px solid #e8b9b2;
-  }
-  .critical-flag::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    background: var(--danger);
-    border-radius: 50%;
-  }
-
-  /* Section accordion */
-  .sections {
-    margin-top: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  /* View controls */
-  .view-controls {
-    margin-top: 22px;
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .view-controls-right {
-    display: flex;
-    gap: 8px;
-  }
-  .chip-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 14px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    border: 1px solid rgba(244, 233, 211, 0.22);
-    background: rgba(244, 233, 211, 0.04);
-    color: var(--cream);
-    transition: all 0.15s;
-  }
-  .chip-btn:hover {
-    background: rgba(244, 233, 211, 0.12);
-    border-color: rgba(244, 233, 211, 0.4);
-  }
-  .chip-btn.active {
-    background: var(--gold);
-    color: var(--navy);
-    border-color: var(--gold);
-    font-weight: 600;
-  }
-  .shield-sm { width: 13px; height: 13px; }
-
-  /* Critical-only filter */
-  body.critical-only .item:not(.is-critical) { display: none; }
-  body.critical-only details.section .items:not(:has(.item.is-critical))::after {
-    content: 'No critical items in this section.';
-    display: block;
-    padding: 14px 0;
-    font-size: 13px;
-    color: var(--muted);
-    font-style: italic;
-  }
-  details.section {
-    background: var(--cream);
-    color: var(--ink);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
-    overflow: hidden;
-  }
-  details.section[open] {
-    border-color: var(--gold);
-  }
-  summary {
-    cursor: pointer;
-    padding: 18px 20px;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    user-select: none;
-    transition: background 0.15s;
-  }
-  summary:hover { background: var(--cream-2); }
-  summary::-webkit-details-marker { display: none; }
-  .sec-num {
-    font-family: 'Fraunces', serif;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--muted);
-    width: 26px;
-    flex-shrink: 0;
-  }
-  .sec-title {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 19px;
-    color: var(--ink);
-    flex: 1;
-    line-height: 1.25;
-  }
-  .sec-score {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 500;
-    white-space: nowrap;
-    padding: 4px 10px;
-    background: var(--cream-3);
-    border-radius: 100px;
-  }
-  .sec-score.complete { background: var(--done-bg); color: #2d5230; }
-  .chevron {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    color: var(--muted);
-    transition: transform 0.2s;
-  }
-  details[open] .chevron { transform: rotate(90deg); }
-
-  .items {
-    padding: 4px 20px 20px;
-    border-top: 1px solid var(--line);
-    background: var(--cream-2);
-  }
-  .item {
-    padding: 16px 0;
-    border-bottom: 1px dashed var(--line);
-  }
-  .item:last-child { border-bottom: none; }
-  .item-text {
-    font-size: 15px;
-    color: var(--ink-2);
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
-  .item-controls {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
-  .opt {
-    flex: 1;
-    min-width: 90px;
-    padding: 8px 10px;
-    border: 1px solid var(--line);
-    background: var(--cream);
-    color: var(--ink-2);
-    font-size: 13px;
-    font-weight: 500;
-    font-family: inherit;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.15s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-  .opt:hover { border-color: var(--muted); }
-  .opt[aria-pressed="true"][data-val="done"] {
-    background: var(--done);
-    border-color: var(--done);
-    color: white;
-  }
-  .opt[aria-pressed="true"][data-val="needs"] {
-    background: var(--needs);
-    border-color: var(--needs);
-    color: white;
-  }
-  .opt[aria-pressed="true"][data-val="na"] {
-    background: var(--na);
-    border-color: var(--na);
-    color: white;
-  }
-  .note-toggle {
-    background: none;
-    border: none;
-    color: var(--muted);
-    font-size: 12px;
-    cursor: pointer;
-    padding: 4px 0;
-    font-family: inherit;
-    text-decoration: underline;
-    text-decoration-color: var(--line);
-    text-underline-offset: 3px;
-  }
-  .note-toggle:hover { color: var(--ink-2); }
-  textarea.note {
-    width: 100%;
-    margin-top: 8px;
-    padding: 10px 12px;
-    border: 1px solid var(--line);
-    background: var(--cream);
-    color: var(--ink);
-    font-family: inherit;
-    font-size: 14px;
-    border-radius: var(--radius-sm);
-    resize: vertical;
-    min-height: 60px;
-    display: none;
-  }
-  textarea.note.show { display: block; }
-  textarea.note:focus { outline: 2px solid var(--gold); outline-offset: -1px; border-color: var(--gold); }
-
-
-
-  /* Tabbed workflow */
-  .tabs-shell {
-    margin-top: 22px;
-    padding: 10px;
-    border: 1px solid rgba(212,168,75,0.22);
-    border-radius: 999px;
-    background: rgba(244, 233, 211, 0.055);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-  }
-  .tab-list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .tab-btn {
-    appearance: none;
-    border: 1px solid transparent;
-    border-radius: 999px;
-    padding: 11px 14px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 650;
-    color: rgba(244, 233, 211, 0.82);
-    background: transparent;
-    cursor: pointer;
-    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
-  }
-  .tab-btn:hover {
-    background: rgba(244, 233, 211, 0.08);
-    color: var(--cream);
-  }
-  .tab-btn.active {
-    background: linear-gradient(135deg, var(--gold), var(--gold-2));
-    color: var(--navy);
-    border-color: rgba(255,255,255,0.18);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.35);
-  }
-  .tab-helper {
-    margin: 10px 4px 0;
-    font-size: 13px;
-    color: rgba(244, 233, 211, 0.66);
-    text-align: center;
-  }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
-
-  .start-hero-card {
-    background: linear-gradient(180deg, var(--cream), var(--cream-2));
-    color: var(--ink);
-    border-radius: var(--radius);
-    padding: 22px 24px;
-    margin-top: 22px;
-    border: 1px solid rgba(212,168,75,0.35);
-    box-shadow: var(--shadow);
-  }
-  .start-hero-card h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 24px;
-    line-height: 1.15;
-    margin: 0 0 8px;
-    letter-spacing: -0.01em;
-  }
-  .start-hero-card p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
-  }
-  .start-sections {
-    margin-top: 14px;
-    display: grid;
-    gap: 12px;
-  }
-  .start-group {
-    background: var(--cream);
-    color: var(--ink);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
-    overflow: hidden;
-  }
-  .start-group-head {
-    padding: 16px 20px 14px;
-    border-bottom: 1px solid var(--line);
-    background: linear-gradient(180deg, var(--cream), var(--cream-2));
-    display: flex;
-    justify-content: space-between;
-    gap: 14px;
-    align-items: center;
-  }
-  .start-group-title {
-    font-family: 'Fraunces', serif;
-    font-size: 19px;
-    font-weight: 650;
-    letter-spacing: -0.01em;
-  }
-  .start-group-note {
-    font-size: 12px;
-    color: var(--muted);
-    background: var(--cream-3);
-    border-radius: 999px;
-    padding: 4px 9px;
-    white-space: nowrap;
-  }
-  .start-group .items { border-top: none; }
-  .deep-dive-card {
-    background: rgba(244, 233, 211, 0.06);
-    border: 1px solid rgba(212,168,75,0.22);
-    color: rgba(244,233,211,0.82);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    margin-top: 18px;
-  }
-  .deep-dive-card strong { color: var(--cream); }
-  .deep-dive-card button {
-    margin-top: 12px;
-  }
-
-  /* Action list */
-  .panel {
-    background: var(--cream);
-    color: var(--ink);
-    border-radius: var(--radius);
-    padding: 22px 24px;
-    margin-top: 22px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--line);
-  }
-  .panel h2 {
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 22px;
-    margin: 0 0 6px;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-  }
-  .panel .sub {
-    font-size: 14px;
-    color: var(--muted);
-    margin: 0 0 16px;
-  }
-  .action-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-  }
-  .action-list li {
-    padding: 12px 0;
-    border-bottom: 1px dashed var(--line);
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    font-size: 14px;
-    color: var(--ink-2);
-  }
-  .action-list li:last-child { border-bottom: none; }
-  .action-list .tag {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--needs);
-    background: var(--needs-bg);
-    padding: 3px 8px;
-    border-radius: 4px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .action-list .tag.critical {
-    color: var(--danger);
-    background: #f4d4cf;
-  }
-  .action-list .tag.empty {
-    color: var(--muted);
-    background: var(--cream-3);
-  }
-  .action-list .sec-ref {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .empty-state {
-    padding: 18px;
-    background: var(--done-bg);
-    border-radius: var(--radius-sm);
-    color: #2d5230;
-    font-size: 14px;
-    text-align: center;
-  }
-
-  /* Export buttons */
-  .actions-bar {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 22px;
-  }
-  .btn {
-    padding: 11px 16px;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    font-family: inherit;
-    border: 1px solid rgba(244, 233, 211, 0.25);
-    background: rgba(244, 233, 211, 0.06);
-    color: var(--cream);
-    transition: all 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .btn:hover {
-    background: rgba(244, 233, 211, 0.12);
-    border-color: rgba(244, 233, 211, 0.4);
-  }
-  .btn.primary {
-    background: var(--gold);
-    color: var(--navy);
-    border-color: var(--gold);
-    font-weight: 600;
-  }
-  .btn.primary:hover { background: var(--gold-2); border-color: var(--gold-2); }
-  .btn.danger { color: #f4b0a8; border-color: rgba(244, 176, 168, 0.25); }
-  .btn.danger:hover { background: rgba(244, 176, 168, 0.08); color: #f4b0a8; }
-
-  /* Disclaimer */
-  .fine-print {
-    margin-top: 24px;
-    padding: 18px;
-    background: rgba(244, 233, 211, 0.04);
-    border-left: 3px solid var(--gold);
-    border-radius: 4px;
-    font-size: 13px;
-    color: rgba(244, 233, 211, 0.72);
-    line-height: 1.6;
-  }
-  .fine-print strong { color: var(--cream); font-weight: 600; }
-  .fine-print + .fine-print { margin-top: 10px; }
-
-  /* Footer */
-  footer {
-    margin-top: 36px;
-    padding-top: 22px;
-    border-top: 1px solid rgba(244, 233, 211, 0.12);
-    text-align: center;
-    font-size: 13px;
-    color: rgba(244, 233, 211, 0.55);
-    line-height: 1.6;
-  }
-  footer a { color: var(--gold); text-decoration: none; }
-  footer a:hover { text-decoration: underline; }
-
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: var(--ink);
-    color: var(--cream);
-    padding: 12px 20px;
-    border-radius: 100px;
-    font-size: 14px;
-    z-index: 100;
-    transition: transform 0.3s ease;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* Modal */
-  .modal-bg {
-    position: fixed;
-    inset: 0;
-    background: rgba(13, 27, 42, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 200;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .modal-bg.show { display: flex; }
-  .modal {
-    background: var(--cream);
-    color: var(--ink);
-    border-radius: var(--radius);
-    padding: 24px;
-    max-width: 420px;
-    width: 100%;
-    box-shadow: 0 24px 48px rgba(0,0,0,0.3);
-  }
-  .modal h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 20px;
-    margin: 0 0 8px;
-    color: var(--ink);
-  }
-  .modal p { font-size: 14px; color: var(--ink-2); margin: 0 0 18px; }
-  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
-  .modal .btn { color: var(--ink); background: var(--cream-3); border-color: var(--line); }
-  .modal .btn:hover { background: var(--cream-2); }
-  .modal .btn.danger { background: var(--danger); color: white; border-color: var(--danger); }
-  .modal .btn.danger:hover { background: #8a352c; border-color: #8a352c; }
-
-  /* Mobile */
-  @media (max-width: 600px) {
-    .score-wrap { position: static; padding-top: 6px; }
-    .score-card { padding: 14px; grid-template-columns: 1fr; }
-    .score-num { font-size: 36px; }
-    summary { padding: 14px 16px; gap: 10px; }
-    .sec-num { width: 22px; font-size: 13px; }
-    .sec-title { font-size: 17px; }
-    .items { padding: 4px 16px 16px; }
-    .opt { font-size: 12px; padding: 9px 6px; min-width: 0; }
-    .panel { padding: 18px; }
-    .panel h2 { font-size: 19px; }
-    .btn { font-size: 13px; padding: 10px 14px; }
-    .tabs-shell { border-radius: 18px; padding: 8px; }
-    .tab-list { grid-template-columns: 1fr; gap: 6px; }
-    .tab-btn { width: 100%; }
-    .view-controls { align-items: stretch; }
-    .view-controls-right { width: 100%; }
-    .view-controls-right .chip-btn { flex: 1; justify-content: center; }
-    .start-hero-card { padding: 18px; }
-    .start-group-head { align-items: flex-start; flex-direction: column; gap: 8px; }
-  }
-
-  /* Print */
-  @media print {
-    body { background: white; color: black; background-image: none; }
-    .wrap { max-width: 100%; padding: 0; }
-    .score-wrap { position: static; background: white; padding: 0; margin: 0; backdrop-filter: none; }
-    .score-card, .panel { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; background: white; }
-    details.section {
-      box-shadow: none;
-      border: 1px solid #ccc;
-      page-break-inside: avoid;
-      background: white;
-      margin-bottom: 8px;
-    }
-    details.section[open] { border-color: #ccc; }
-    details.section .items { display: block !important; background: white; border-top: 1px solid #eee; }
-    .chevron { display: none; }
-    .actions-bar, .badges, .note-toggle, .fine-print, footer, .toast, .modal-bg { display: none !important; }
-    .opt[aria-pressed="false"] { display: none !important; }
-    .opt[aria-pressed="true"] { background: white !important; color: black !important; border: 1.5px solid black !important; }
-    textarea.note { display: block !important; border: 1px solid #ccc; background: white; color: black; }
-    textarea.note:empty, textarea.note:placeholder-shown { display: none !important; }
-    .lede, h1, .sec-title, .sec-num, .item-text, .panel h2 { color: black !important; }
-    .h1 .accent { color: #888 !important; }
-    .badge { color: black; border-color: #ccc; background: white; }
-    .badge::before { background: black; }
-    .eyebrow { color: #888 !important; }
-    .item { padding: 8px 0; }
-    summary { padding: 12px 16px; }
-    .items { padding: 4px 16px 12px; }
-  }
+    --navy:#0d1b2a; --navy2:#13263a; --cream:#f6ead4; --cream2:#fff7e8; --cream3:#eadcc0;
+    --gold:#d4a84b; --gold2:#b8902f; --ink:#1b1712; --ink2:#40372d; --muted:#716552;
+    --line:#d9c7a4; --green:#47764b; --greenBg:#dbead7; --orange:#c7792b; --orangeBg:#fae4c8;
+    --red:#a23c32; --redBg:#f3d1cb; --gray:#6d6a64; --grayBg:#e7e1d5;
+    --shadow:0 2px 4px rgba(0,0,0,.08),0 14px 34px rgba(0,0,0,.12); --radius:18px; --radiusSm:10px;
+  }
+  *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--navy);color:var(--cream);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;background-image:radial-gradient(ellipse 70% 38% at 50% 0%,rgba(212,168,75,.09),transparent 62%),radial-gradient(ellipse 55% 32% at 90% 100%,rgba(212,168,75,.05),transparent 58%);background-attachment:fixed}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 18px 90px}
+  .hero{padding:12px 0 22px} .eyebrow{font-size:12px;font-weight:800;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:Fraunces,Georgia,serif;font-size:clamp(34px,6vw,56px);line-height:1.03;margin:0 0 14px;font-weight:650;letter-spacing:-.02em} h1 em{color:var(--gold);font-style:italic;font-weight:500}
+  .lede{max-width:720px;color:rgba(246,234,212,.82);font-size:clamp(16px,2.2vw,19px);margin:0 0 16px}
+  .badges,.quick-actions{display:flex;gap:8px;flex-wrap:wrap} .badge{font-size:12px;font-weight:650;border:1px solid rgba(246,234,212,.18);background:rgba(246,234,212,.075);border-radius:999px;padding:7px 11px;color:var(--cream)}
+  .grid{display:grid;gap:14px} .top-grid{grid-template-columns:1.2fr .8fr;align-items:stretch;margin-top:18px} .card{background:linear-gradient(180deg,var(--cream),var(--cream2));color:var(--ink);border:1px solid rgba(212,168,75,.32);border-radius:var(--radius);box-shadow:var(--shadow)}
+  .score-card{padding:18px 20px;position:sticky;top:0;z-index:20} .score-main{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center} .score-num{font-family:Fraunces,serif;font-size:48px;line-height:1;font-weight:650} .score-num span{font-size:24px;color:var(--muted)} .small-label{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.08em} .score-text{font-size:14px;color:var(--muted)}
+  .pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:7px 12px;font-size:13px;font-weight:750;background:var(--grayBg);border:1px solid var(--line);white-space:nowrap} .pill:before{content:'';width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.7} .pill.good{background:var(--greenBg);color:#2e5532} .pill.warn{background:#fbefd3;color:#76550e} .pill.risk{background:var(--orangeBg);color:#7d480c} .pill.high{background:var(--redBg);color:#62261f}
+  .bar{height:9px;border-radius:999px;background:var(--cream3);overflow:hidden;margin-top:13px} .bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:999px;transition:.25s} .critical-line{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:14px;margin-top:14px} .critical-line strong{color:var(--red)} .crit-fill.good{background:linear-gradient(90deg,var(--green),#75a875)}
+  .snapshot{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 0} .snap{padding:12px;border-radius:14px;background:rgba(255,255,255,.48);border:1px solid rgba(217,199,164,.75)} .snap b{display:block;font-size:18px;line-height:1.1} .snap span{font-size:12px;color:var(--muted)}
+  .verified{padding:18px 20px} .verified label{display:block;font-weight:750;margin-bottom:8px} .verified input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--cream2);font:inherit;color:var(--ink)} .hint{font-size:13px;color:var(--muted);margin-top:8px}
+  .audience{margin-top:16px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px} .audience .mini{border:1px solid rgba(246,234,212,.16);background:rgba(246,234,212,.06);border-radius:14px;padding:12px;color:rgba(246,234,212,.83)} .mini b{display:block;color:var(--cream);font-size:14px;margin-bottom:4px} .mini span{font-size:12px;color:rgba(246,234,212,.65)}
+  .tabs-shell{margin-top:22px;padding:10px;border:1px solid rgba(212,168,75,.25);border-radius:999px;background:rgba(246,234,212,.065)} .tab-list{display:grid;grid-template-columns:repeat(4,1fr);gap:8px} .tab-btn{border:1px solid transparent;border-radius:999px;padding:11px 12px;background:transparent;color:rgba(246,234,212,.82);font:inherit;font-weight:750;cursor:pointer} .tab-btn:hover{background:rgba(246,234,212,.09);color:var(--cream)} .tab-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);box-shadow:0 8px 22px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.35)} .tab-helper{margin:10px 4px 0;text-align:center;font-size:13px;color:rgba(246,234,212,.65)} .tab-panel{display:none} .tab-panel.active{display:block}
+  .intro-card{padding:22px 24px;margin-top:22px} h2{font-family:Fraunces,Georgia,serif;font-size:26px;line-height:1.12;margin:0 0 8px;letter-spacing:-.01em} h3{font-family:Fraunces,Georgia,serif;font-size:20px;margin:0 0 8px} .sub{color:var(--muted);font-size:14px;margin:0}
+  .step{margin-top:12px;overflow:hidden} .step-head{padding:16px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(180deg,var(--cream),var(--cream2))} .step-title{font-family:Fraunces,Georgia,serif;font-size:20px;font-weight:650} .step-count{font-size:12px;font-weight:750;color:var(--muted);background:var(--cream3);border-radius:999px;padding:5px 9px;white-space:nowrap}
+  .items{padding:6px 20px 18px;background:var(--cream2)} .item{padding:15px 0;border-bottom:1px dashed var(--line)} .item:last-child{border-bottom:0} .item-row{display:flex;align-items:flex-start;gap:10px;justify-content:space-between} .item-text{font-size:15px;color:var(--ink2);line-height:1.45;flex:1} .flag{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:850;border-radius:999px;padding:3px 7px;white-space:nowrap} .flag.critical{color:var(--red);background:var(--redBg);border:1px solid #e2a39b} .flag.soon{color:#75510b;background:#fbefd3;border:1px solid #e3ca80} .flag.later{color:var(--muted);background:var(--grayBg);border:1px solid var(--line)}
+  .controls{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px} .opt{flex:1;min-width:86px;padding:9px 10px;border:1px solid var(--line);background:var(--cream);color:var(--ink2);font:inherit;font-size:13px;font-weight:700;border-radius:10px;cursor:pointer} .opt:hover{border-color:var(--muted)} .opt[aria-pressed=true][data-val=done]{background:var(--green);border-color:var(--green);color:white} .opt[aria-pressed=true][data-val=needs]{background:var(--orange);border-color:var(--orange);color:white} .opt[aria-pressed=true][data-val=na]{background:var(--gray);border-color:var(--gray);color:white}
+  .note-toggle{margin-top:6px;background:none;border:0;color:var(--muted);font-size:12px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px 0;font:inherit} textarea.note{display:none;width:100%;margin-top:8px;min-height:58px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--cream);font:inherit;color:var(--ink)} textarea.note.show{display:block}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-top:22px} .toolbar-right{display:flex;gap:8px;flex-wrap:wrap} .chip,.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:999px;border:1px solid rgba(246,234,212,.22);background:rgba(246,234,212,.06);color:var(--cream);padding:10px 14px;font:inherit;font-size:13px;font-weight:750;cursor:pointer} .chip:hover,.btn:hover{background:rgba(246,234,212,.12)} .chip.active,.btn.primary{background:var(--gold);color:var(--navy);border-color:var(--gold)} .btn.danger{color:#ffc0b8;border-color:rgba(255,192,184,.35)} .search{flex:1;min-width:240px;padding:11px 13px;border-radius:999px;border:1px solid rgba(246,234,212,.22);background:rgba(246,234,212,.06);color:var(--cream);font:inherit} .search::placeholder{color:rgba(246,234,212,.5)}
+  details.section{margin-top:12px;overflow:hidden} summary{list-style:none;cursor:pointer;padding:17px 20px;display:flex;align-items:center;gap:12px} summary::-webkit-details-marker{display:none} .sec-num{font-family:Fraunces,serif;color:var(--muted);font-size:14px;width:28px} .sec-title{font-family:Fraunces,serif;font-size:20px;font-weight:650;flex:1} .sec-score{font-size:12px;font-weight:750;color:var(--muted);background:var(--cream3);border-radius:999px;padding:5px 10px;white-space:nowrap} .sec-score.complete{background:var(--greenBg);color:#2e5532} .chev{transition:.2s;color:var(--muted)} details[open] .chev{transform:rotate(90deg)}
+  .action-list{list-style:none;margin:0;padding:0} .action-list li{display:flex;gap:12px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:14px;color:var(--ink2)} .action-list li:last-child{border-bottom:0} .tag{font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.05em;border-radius:6px;padding:4px 8px;align-self:flex-start;white-space:nowrap} .tag.critical{background:var(--redBg);color:var(--red)} .tag.soon{background:#fbefd3;color:#75510b} .tag.later{background:var(--grayBg);color:var(--muted)} .sec-ref{font-size:12px;color:var(--muted);margin-top:2px} .empty-state{background:var(--greenBg);color:#2e5532;border-radius:12px;padding:16px;text-align:center;font-size:14px}
+  .summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px} .summary-box{padding:16px;border-radius:14px;background:rgba(255,255,255,.5);border:1px solid var(--line)} .summary-box ul{margin:8px 0 0;padding-left:19px;color:var(--ink2);font-size:14px} .summary-box li{margin:5px 0} .print-card{padding:22px 24px;margin-top:22px} .warning{padding:14px 16px;border-left:4px solid var(--gold);background:rgba(212,168,75,.13);border-radius:8px;color:var(--ink2);font-size:14px}
+  .failure-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px} .failure{padding:13px;border-radius:13px;background:rgba(246,234,212,.06);border:1px solid rgba(246,234,212,.15);font-size:13px;color:rgba(246,234,212,.78)} .failure b{color:var(--cream);display:block;margin-bottom:3px}
+  .actions-bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px} .fine-print{margin-top:18px;padding:17px;border-left:3px solid var(--gold);background:rgba(246,234,212,.045);border-radius:8px;color:rgba(246,234,212,.72);font-size:13px} footer{margin-top:34px;padding-top:22px;border-top:1px solid rgba(246,234,212,.14);text-align:center;color:rgba(246,234,212,.6);font-size:13px} footer a{color:var(--gold);text-decoration:none}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(90px);background:var(--ink);color:var(--cream);padding:12px 18px;border-radius:999px;box-shadow:0 10px 28px rgba(0,0,0,.3);transition:.25s;z-index:100} .toast.show{transform:translateX(-50%) translateY(0)} .modal-bg{position:fixed;inset:0;background:rgba(13,27,42,.72);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:18px;z-index:200} .modal-bg.show{display:flex} .modal{max-width:430px;width:100%;padding:24px} .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px} .modal .btn{color:var(--ink);background:var(--cream3);border-color:var(--line)} .modal .btn.danger{background:var(--red);color:white;border-color:var(--red)}
+  body.critical-only .item:not(.is-critical){display:none} body.searching .item.hidden-by-search{display:none} body.searching details.section.no-match{display:none}
+  @media(max-width:760px){.top-grid,.summary-grid,.failure-grid{grid-template-columns:1fr} .snapshot{grid-template-columns:repeat(2,1fr)} .audience{grid-template-columns:1fr 1fr} .tabs-shell{border-radius:20px} .tab-list{grid-template-columns:1fr} .score-card{position:static} .score-main{grid-template-columns:1fr} .toolbar{align-items:stretch} .toolbar-right,.search{width:100%} .toolbar-right .chip{flex:1} .item-row{display:block} .flag{display:inline-block;margin-top:8px}}
+  @media print{body{background:white;color:black;background-image:none} .wrap{max-width:100%;padding:0} .hero,.tabs-shell,.toolbar,.actions-bar,.fine-print,footer,.toast,.modal-bg,.audience,.failure-grid{display:none!important} .card,details.section{box-shadow:none;border:1px solid #bbb;background:white;color:black;break-inside:avoid} .score-card{position:static} .tab-panel{display:block!important} #tab-start,#tab-full,#tab-actions{display:none!important} .items{background:white} .opt[aria-pressed=false],.note-toggle{display:none!important} .opt[aria-pressed=true]{background:white!important;color:black!important;border:1.5px solid black!important} textarea.note{display:block;background:white;color:black} details.section{display:block} details.section .items{display:block}}
 </style>
 </head>
 <body>
 <div class="wrap">
-
 <header class="hero">
   <div class="eyebrow">RupeeStories · Free Tool</div>
-  <h1>NRI Money Access <span class="accent">Checklist</span></h1>
-  <p class="lede">Can your spouse or family access the money, accounts, documents, and contacts if something happens tomorrow? Most NRI money problems are not about money. They are about access. Find the weak spots before life forces you to.</p>
-  <div class="badges">
-    <span class="badge">No login</span>
-    <span class="badge">No data collected</span>
-    <span class="badge">Private browser-only</span>
-    <span class="badge">Not legal or tax advice</span>
-  </div>
+  <h1>The NRI Money Access <em>Test</em></h1>
+  <p class="lede">If something happens tomorrow, can your spouse or trusted person reach the money, documents, and right people fast enough? This tool finds the access problem your family would otherwise discover too late.</p>
+  <div class="badges"><span class="badge">No login</span><span class="badge">No data collected</span><span class="badge">Private browser-only</span><span class="badge">Do not enter secrets</span><span class="badge">Not legal or tax advice</span></div>
 </header>
 
-<div class="score-wrap">
-  <div class="score-card">
+<div class="grid top-grid">
+  <div class="card score-card">
     <div class="score-main">
-      <div class="score-num"><span id="score-val">0</span><span class="pct">%</span></div>
-      <div class="score-meta">
-        <div><strong id="applicable-count">0</strong> applicable items</div>
-        <div id="score-summary">Start checking items below to see your readiness</div>
-      </div>
+      <div class="score-num"><span id="score-val">0</span><span>%</span></div>
+      <div><div class="small-label">Overall access score</div><div class="score-text" id="score-summary">Start with the 10-minute test.</div></div>
+      <div class="pill" id="risk-pill">Not started</div>
     </div>
-    <div class="risk-pill" id="risk-pill">Not started</div>
-    <div class="progress-bar"><div class="fill" id="progress-fill"></div></div>
-    <div class="score-counts">
-      <span><span class="dot done"></span><strong id="done-count">0</strong> done</span>
-      <span><span class="dot needs"></span><strong id="needs-count">0</strong> needs work</span>
-      <span><span class="dot na"></span><strong id="na-count">0</strong> not applicable</span>
-    </div>
-    <div class="critical-row">
-      <div class="critical-label">
-        <svg class="shield" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5l5.5 2v4.5c0 3.5-2.5 6-5.5 6.5-3-.5-5.5-3-5.5-6.5V3.5L8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.5 8l2 2 3-3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Critical access
-      </div>
-      <div class="critical-meta">
-        <strong id="crit-val">0</strong><span class="pct">%</span>
-        <span class="crit-detail" id="crit-detail">Items that gate everything else</span>
-      </div>
-      <div class="progress-bar small"><div class="fill crit-fill" id="crit-fill"></div></div>
+    <div class="bar"><div id="progress-fill"></div></div>
+    <div class="critical-line"><div><strong>Critical access:</strong> <span id="crit-detail">Items that block everything else</span></div><div><b id="crit-val">0</b>%</div></div>
+    <div class="bar"><div class="crit-fill" id="crit-fill"></div></div>
+    <div class="snapshot">
+      <div class="snap"><b id="done-count">0</b><span>Done</span></div>
+      <div class="snap"><b id="needs-count">0</b><span>Needs work</span></div>
+      <div class="snap"><b id="biggest-risk">None yet</b><span>Biggest weak spot</span></div>
+      <div class="snap"><b id="next-step">Start test</b><span>Next step</span></div>
     </div>
   </div>
+  <div class="card verified">
+    <label for="last-verified">Last tested</label>
+    <input type="date" id="last-verified" onchange="saveMeta('lastVerified', this.value)">
+    <div class="hint">Access goes stale. OTPs, phones, passwords, nominees, and bank rules change. Retest once or twice a year.</div>
+    <div class="quick-actions" style="margin-top:14px"><button class="chip" onclick="switchTab('summary')">Create family summary</button><button class="chip" onclick="copyAnonymousSummary()">Copy anonymous result</button></div>
+  </div>
+</div>
+
+<div class="audience">
+  <div class="mini"><b>Aging parents</b><span>Bank, pension, property papers, local contacts.</span></div>
+  <div class="mini"><b>NRI couples</b><span>Spouse access, insurance, beneficiaries.</span></div>
+  <div class="mini"><b>India assets</b><span>NRE/NRO, demat, PAN, Aadhaar.</span></div>
+  <div class="mini"><b>Return planning</b><span>Tax contacts, documents, money movement.</span></div>
+  <div class="mini"><b>Single NRIs</b><span>Trusted person, emergency folder, nominees.</span></div>
 </div>
 
 <div class="tabs-shell" role="tablist" aria-label="Checklist views">
   <div class="tab-list">
-    <button class="tab-btn active" id="tab-btn-start" role="tab" aria-selected="true" onclick="switchTab('start')">Start Here</button>
-    <button class="tab-btn" id="tab-btn-full" role="tab" aria-selected="false" onclick="switchTab('full')">Full Checklist</button>
-    <button class="tab-btn" id="tab-btn-actions" role="tab" aria-selected="false" onclick="switchTab('actions')">Action List</button>
+    <button class="tab-btn active" id="tab-btn-start" role="tab" onclick="switchTab('start')">10-Minute Test</button>
+    <button class="tab-btn" id="tab-btn-actions" role="tab" onclick="switchTab('actions')">Fix-First List</button>
+    <button class="tab-btn" id="tab-btn-full" role="tab" onclick="switchTab('full')">Full NRI Audit</button>
+    <button class="tab-btn" id="tab-btn-summary" role="tab" onclick="switchTab('summary')">Family Summary</button>
   </div>
-  <p class="tab-helper">Start with the critical list. The full checklist is there when you want to go deeper.</p>
+  <p class="tab-helper">Start small. Fix what blocks access first. Use the full audit only when you are ready.</p>
 </div>
 
-<section class="tab-panel active" id="tab-start" role="tabpanel" aria-labelledby="tab-btn-start">
-  <div class="start-hero-card">
-    <h2>Start Here: Critical Access Check</h2>
-    <p>These are the items that can block your spouse or family first. Fix these before the rest.</p>
+<section class="tab-panel active" id="tab-start">
+  <div class="card intro-card">
+    <h2>Start here: the 10-minute NRI access test</h2>
+    <p class="sub">These 15 checks answer the real question: can someone act without you during the first week of a crisis?</p>
   </div>
-  <div class="start-sections" id="start-sections"></div>
-  <div class="deep-dive-card">
-    <strong>Want to go deeper?</strong><br>
-    Open the Full Checklist for property details, kids, immigration, medical info, repatriation, subscriptions, and detailed India cleanup items.
-    <br><button class="chip-btn" onclick="switchTab('full')">Open Full Checklist</button>
+  <div id="start-sections"></div>
+  <div class="failure-grid">
+    <div class="failure"><b>Common NRI failure</b>OTP still goes to an old Indian SIM or a parent’s phone.</div>
+    <div class="failure"><b>Common NRI failure</b>Spouse knows accounts exist but cannot log in.</div>
+    <div class="failure"><b>Common NRI failure</b>Property papers are in India, but nobody knows where.</div>
+    <div class="failure"><b>Common NRI failure</b>401k, IRA, demat, and insurance nominees are old or missing.</div>
   </div>
 </section>
 
-<section class="tab-panel" id="tab-full" role="tabpanel" aria-labelledby="tab-btn-full">
-  <div class="view-controls">
-    <button class="chip-btn" onclick="toggleCriticalOnly()" id="crit-toggle">
-      <svg class="shield-sm" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5l5.5 2v4.5c0 3.5-2.5 6-5.5 6.5-3-.5-5.5-3-5.5-6.5V3.5L8 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
-      <span id="crit-toggle-label">Show critical only</span>
-    </button>
-    <div class="view-controls-right">
-      <button class="chip-btn" onclick="expandAll()">Expand all</button>
-      <button class="chip-btn" onclick="collapseAll()">Collapse all</button>
-    </div>
-  </div>
-  <div class="sections" id="sections"></div>
+<section class="tab-panel" id="tab-actions">
+  <div class="card intro-card"><h2>My fix-first list</h2><p class="sub">Critical items come first. Then quick cleanup. This is the part you can actually act on.</p><ul class="action-list" id="action-list"></ul></div>
 </section>
 
-<section class="tab-panel" id="tab-actions" role="tabpanel" aria-labelledby="tab-btn-actions">
-  <div class="panel">
-    <h2>Action list</h2>
-    <p class="sub">Fix critical items first. Then work through the rest.</p>
-    <ul class="action-list" id="action-list"></ul>
+<section class="tab-panel" id="tab-full">
+  <div class="toolbar">
+    <input class="search" id="audit-search" placeholder="Search full audit, for example OTP, nominee, demat, property" oninput="filterAudit(this.value)">
+    <div class="toolbar-right"><button class="chip" onclick="toggleCriticalOnly()" id="crit-toggle">Show critical only</button><button class="chip" onclick="expandAll()">Expand all</button><button class="chip" onclick="collapseAll()">Collapse all</button></div>
+  </div>
+  <div id="sections"></div>
+</section>
+
+<section class="tab-panel" id="tab-summary">
+  <div class="card print-card">
+    <h2>Family access summary</h2>
+    <p class="sub">Print or save this as a PDF. Do not put passwords, full account numbers, SSN, Aadhaar, PAN, or secret codes here. This is only a map.</p>
+    <div class="warning" style="margin-top:14px">Store the real passwords, recovery codes, and account numbers in a safer place. This page should only tell your family where to start and who to call.</div>
+    <div class="summary-grid" id="family-summary"></div>
   </div>
 </section>
 
@@ -959,32 +143,12 @@
   <button class="btn danger" onclick="confirmReset()">Reset checklist</button>
 </div>
 
-<div class="fine-print">
-  <strong>Privacy.</strong> This checklist runs entirely in your browser. Nothing is uploaded. Your answers and notes are saved only in this browser's local storage. Do not enter full account numbers, passwords, Social Security numbers, Aadhaar numbers, PAN numbers, or other sensitive identifiers in the notes. <strong>Use notes for reminders only, not secrets.</strong>
+<div class="fine-print"><strong>Privacy.</strong> This runs in your browser. Your answers and notes stay in local storage on this device. Do not paste passwords, account numbers, SSN, Aadhaar, PAN, or private IDs into notes.</div>
+<div class="fine-print"><strong>Disclaimer.</strong> This is not legal, tax, financial, immigration, or estate advice. It is a starting point for family readiness. Talk to the right professional for your situation.</div>
+<footer>Built by <a href="https://rupeestories.substack.com" target="_blank" rel="noopener">RupeeStories</a> · Free tool · No login · No data collected<br><small>For NRIs living between two systems, two families, and too many passwords.</small></footer>
 </div>
-<div class="fine-print">
-  <strong>Disclaimer.</strong> This is not legal, tax, financial, or estate advice. Use this as a starting point and talk to the right professionals for your situation. Rules around NRE/NRO accounts, repatriation, beneficiaries, and inheritance differ by country and change over time.
-</div>
-
-<footer>
-  Built by <a href="https://rupeestories.substack.com" target="_blank" rel="noopener">RupeeStories</a> · Free tool · No login · No data collected<br>
-  <small style="opacity:0.7">A practical checklist made by another NRI who has seen these problems.</small>
-</footer>
-
-</div>
-
 <div class="toast" id="toast">Saved</div>
-
-<div class="modal-bg" id="modal-bg">
-  <div class="modal">
-    <h3>Reset checklist?</h3>
-    <p>This will clear all your answers and notes. This cannot be undone.</p>
-    <div class="modal-actions">
-      <button class="btn" onclick="closeModal()">Cancel</button>
-      <button class="btn danger" onclick="doReset()">Reset everything</button>
-    </div>
-  </div>
-</div>
+<div class="modal-bg" id="modal-bg"><div class="modal card"><h3>Reset checklist?</h3><p class="sub">This clears all answers, notes, and last-tested date on this device.</p><div class="modal-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn danger" onclick="doReset()">Reset everything</button></div></div></div>
 
 <script>
 const SECTIONS = [
@@ -1310,8 +474,8 @@ const SECTIONS = [
   ]}
 ];
 
-// Items flagged as critical: the ones that gate everything else.
-// Failing any of these means the rest of the plan can't be executed in emergency.
+
+
 const CRITICAL_KEYS = new Set([
   // Logins and access
   's1-0',    // Indian bank login works
@@ -1354,389 +518,106 @@ const CRITICAL_KEYS = new Set([
   's24-6'    // Bank branch contact for repatriation saved
 ]);
 
+const STORAGE_KEY = 'nri_money_access_v2';
+let state = { items: {}, meta: {} };
+try { const saved = localStorage.getItem(STORAGE_KEY); if (saved) state = JSON.parse(saved); } catch(e) { state = { items: {}, meta: {} }; }
+if (!state.items) state.items = {}; if (!state.meta) state.meta = {};
 
-const START_GROUPS = [
-  { title: 'Bank and money access', keys: ['s1-0','s1-1','s7-0','s1-9','s1-8'] },
-  { title: 'OTP and phone access', keys: ['s2-0','s2-5','s2-6','s2-7','s14-3'] },
-  { title: 'Password and email access', keys: ['s14-2','s22-2','s22-3','s14-0','s14-1','s22-5'] },
-  { title: 'Nominees and beneficiaries', keys: ['s6-0','s6-1','s6-2','s9-8','s6-10'] },
-  { title: 'Documents', keys: ['s13-11','s13-12','s8-12','s16-0','s16-1','s17-7'] },
-  { title: 'Contacts', keys: ['s11-4','s11-5','s17-9','s19-8','s7-7'] },
-  { title: 'Emergency basics', keys: ['s9-10','s23-0','s16-9','s25-8','s15-0'] }
+const START_STEPS = [
+  { title:'Step 1 of 4: Can money be reached?', keys:['s1-0','s1-1','s7-0','s1-9'] },
+  { title:'Step 2 of 4: Will OTP, phone, and email work?', keys:['s2-0','s2-5','s14-3','s14-2'] },
+  { title:'Step 3 of 4: Can someone act without you?', keys:['s14-1','s22-5','s6-10','s25-8'] },
+  { title:'Step 4 of 4: Can papers and people be found?', keys:['s13-11','s16-0','s16-1','s11-4'] }
 ];
+const SOON_KEYS = new Set(['s1-8','s2-6','s2-7','s3-0','s3-1','s4-2','s5-3','s5-7','s6-1','s6-2','s8-12','s10-0','s11-6','s12-0','s12-1','s13-12','s15-0','s17-0','s17-1','s18-6','s19-0','s20-2','s21-0','s22-8','s23-8','s24-4','s24-5','s25-1']);
 
-function keyToIndices(key) {
-  const parts = key.split('-');
-  const sectionId = parts[0];
-  const iIdx = Number(parts[1]);
-  const sIdx = SECTIONS.findIndex(s => s.id === sectionId);
-  return { sIdx, iIdx };
-}
+function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function saveMeta(k,v) { state.meta[k]=v; save(); showToast('Saved'); }
+function itemKey(sIdx,iIdx) { return SECTIONS[sIdx].id + '-' + iIdx; }
+function keyToIndices(key) { const [sid, ii] = key.split('-'); return { sIdx: SECTIONS.findIndex(s=>s.id===sid), iIdx: Number(ii) }; }
+function itemTextFromKey(key) { const {sIdx,iIdx}=keyToIndices(key); return SECTIONS[sIdx]?.items[iIdx] || ''; }
+function getItem(sIdx,iIdx) { return state.items[itemKey(sIdx,iIdx)] || { status:null, note:'' }; }
+function priority(key) { if (CRITICAL_KEYS.has(key)) return 'critical'; if (SOON_KEYS.has(key)) return 'soon'; return 'later'; }
+function priorityLabel(key) { const p=priority(key); return p==='critical'?'Must fix now':p==='soon'?'Fix soon':'Nice to clean up'; }
+function esc(s) { return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function chev() { return '<svg class="chev" width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
 
-function itemTextFromKey(key) {
-  const { sIdx, iIdx } = keyToIndices(key);
-  if (sIdx < 0 || !SECTIONS[sIdx] || !SECTIONS[sIdx].items[iIdx]) return '';
-  return SECTIONS[sIdx].items[iIdx];
+function setItemStatus(sIdx,iIdx,status) {
+  const k=itemKey(sIdx,iIdx); if(!state.items[k]) state.items[k]={status:null,note:''};
+  state.items[k].status = state.items[k].status === status ? null : status;
+  save(); syncItemUI(k); updateScores();
 }
+function setItemNote(sIdx,iIdx,note) { const k=itemKey(sIdx,iIdx); if(!state.items[k]) state.items[k]={status:null,note:''}; state.items[k].note=note; save(); updateFamilySummary(); }
+function syncItemUI(key) { const {sIdx,iIdx}=keyToIndices(key); const st=getItem(sIdx,iIdx).status; document.querySelectorAll(`.item[data-key="${key}"] .opt`).forEach(b=>b.setAttribute('aria-pressed', b.dataset.val===st ? 'true':'false')); }
+function toggleNote(btn) { const ta=btn.nextElementSibling; const show=ta.classList.toggle('show'); btn.textContent=show?'Hide note':'Add note'; if(show) setTimeout(()=>ta.focus(),40); }
 
-const STORAGE_KEY = 'nri_money_access_v1';
-let state = {};
-
-// Load saved state
-try {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) state = JSON.parse(saved);
-} catch (e) { state = {}; }
-
-function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+function renderItem(sIdx,iIdx,item,forcedPriority=null) {
+  const k=itemKey(sIdx,iIdx), it=getItem(sIdx,iIdx), p=forcedPriority || priority(k);
+  return `<div class="item is-${p} ${CRITICAL_KEYS.has(k)?'is-critical':''}" data-key="${k}" data-s="${sIdx}" data-i="${iIdx}">
+    <div class="item-row"><div class="item-text">${esc(item)}</div><span class="flag ${p}">${priorityLabel(k)}</span></div>
+    <div class="controls"><button class="opt" data-val="done" aria-pressed="${it.status==='done'}" onclick="setItemStatus(${sIdx},${iIdx},'done')">Done</button><button class="opt" data-val="needs" aria-pressed="${it.status==='needs'}" onclick="setItemStatus(${sIdx},${iIdx},'needs')">Needs work</button><button class="opt" data-val="na" aria-pressed="${it.status==='na'}" onclick="setItemStatus(${sIdx},${iIdx},'na')">N/A</button></div>
+    <button class="note-toggle" onclick="toggleNote(this)">${it.note?'Hide note':'Add note'}</button><textarea class="note ${it.note?'show':''}" placeholder="Reminder only. Do not paste secrets." oninput="setItemNote(${sIdx},${iIdx},this.value)">${esc(it.note||'')}</textarea></div>`;
 }
-
-function itemKey(sIdx, iIdx) { return SECTIONS[sIdx].id + '-' + iIdx; }
-function getItem(sIdx, iIdx) {
-  const k = itemKey(sIdx, iIdx);
-  return state[k] || { status: null, note: '' };
+function renderStart() {
+  document.getElementById('start-sections').innerHTML = START_STEPS.map(step=>`<div class="card step"><div class="step-head"><div class="step-title">${esc(step.title)}</div><div class="step-count">${step.keys.length} checks</div></div><div class="items">${step.keys.map(k=>{const {sIdx,iIdx}=keyToIndices(k); return renderItem(sIdx,iIdx,itemTextFromKey(k),'critical');}).join('')}</div></div>`).join('');
 }
-function setItemStatus(sIdx, iIdx, status) {
-  const k = itemKey(sIdx, iIdx);
-  if (!state[k]) state[k] = { status: null, note: '' };
-  state[k].status = state[k].status === status ? null : status;
-  save();
-  syncItemUI(k);
-  updateScores();
+function renderFull() {
+  document.getElementById('sections').innerHTML = SECTIONS.map((sec,sIdx)=>`<details class="section card" id="${sec.id}"><summary><span class="sec-num">${String(sIdx+1).padStart(2,'0')}</span><span class="sec-title">${esc(sec.title)}</span><span class="sec-score" id="${sec.id}-score">—</span>${chev()}</summary><div class="items">${sec.items.map((item,iIdx)=>renderItem(sIdx,iIdx,item)).join('')}</div></details>`).join('');
 }
-function setItemNote(sIdx, iIdx, note) {
-  const k = itemKey(sIdx, iIdx);
-  if (!state[k]) state[k] = { status: null, note: '' };
-  state[k].note = note;
-  save();
-}
-
-function chevron() {
-  return '<svg class="chevron" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-}
-
-function renderItemHtml(sIdx, iIdx, item, forceCritical = null) {
-  const it = getItem(sIdx, iIdx);
-  const noteShown = it.note && it.note.length > 0;
-  const key = itemKey(sIdx, iIdx);
-  const isCritical = forceCritical === null ? CRITICAL_KEYS.has(key) : forceCritical;
-  const criticalBadge = isCritical ? '<span class="critical-flag" title="Critical: this item gates other access">Critical</span>' : '';
-  return `
-    <div class="item ${isCritical ? 'is-critical' : ''}" data-key="${key}" data-s="${sIdx}" data-i="${iIdx}">
-      <div class="item-text">${escapeHtml(item)}${criticalBadge}</div>
-      <div class="item-controls">
-        <button class="opt" data-val="done" aria-pressed="${it.status === 'done'}" onclick="setItemStatus(${sIdx}, ${iIdx}, 'done')">Done</button>
-        <button class="opt" data-val="needs" aria-pressed="${it.status === 'needs'}" onclick="setItemStatus(${sIdx}, ${iIdx}, 'needs')">Needs work</button>
-        <button class="opt" data-val="na" aria-pressed="${it.status === 'na'}" onclick="setItemStatus(${sIdx}, ${iIdx}, 'na')">N/A</button>
-      </div>
-      <button class="note-toggle" onclick="toggleNote(this)">${noteShown ? 'Hide note' : 'Add note'}</button>
-      <textarea class="note ${noteShown ? 'show' : ''}" placeholder="Optional note (do not paste passwords or full account numbers)" oninput="setItemNote(${sIdx}, ${iIdx}, this.value)">${escapeHtml(it.note || '')}</textarea>
-    </div>`;
-}
-
-function renderStartHere() {
-  const container = document.getElementById('start-sections');
-  if (!container) return;
-  container.innerHTML = START_GROUPS.map(group => {
-    const items = group.keys.map(key => {
-      const { sIdx, iIdx } = keyToIndices(key);
-      const item = itemTextFromKey(key);
-      if (sIdx < 0 || !item) return '';
-      return renderItemHtml(sIdx, iIdx, item, true);
-    }).join('');
-    return `
-      <div class="start-group">
-        <div class="start-group-head">
-          <div class="start-group-title">${escapeHtml(group.title)}</div>
-          <div class="start-group-note">${group.keys.length} checks</div>
-        </div>
-        <div class="items">${items}</div>
-      </div>`;
-  }).join('');
-}
-
-function renderFullChecklist() {
-  const container = document.getElementById('sections');
-  if (!container) return;
-  container.innerHTML = SECTIONS.map((sec, sIdx) => {
-    const itemsHtml = sec.items.map((item, iIdx) => renderItemHtml(sIdx, iIdx, item)).join('');
-    return `
-      <details class="section" id="${sec.id}">
-        <summary>
-          <span class="sec-num">${String(sIdx + 1).padStart(2, '0')}</span>
-          <span class="sec-title">${escapeHtml(sec.title)}</span>
-          <span class="sec-score" id="${sec.id}-score">—</span>
-          ${chevron()}
-        </summary>
-        <div class="items">${itemsHtml}</div>
-      </details>`;
-  }).join('');
-}
-
-function renderAll() {
-  renderStartHere();
-  renderFullChecklist();
-  updateScores();
-}
-
-function syncItemUI(key) {
-  const { sIdx, iIdx } = keyToIndices(key);
-  const st = getItem(sIdx, iIdx).status;
-  document.querySelectorAll(`.item[data-key="${key}"] .opt`).forEach(btn => {
-    btn.setAttribute('aria-pressed', btn.dataset.val === st ? 'true' : 'false');
-  });
-}
-
-function toggleNote(btn) {
-  const ta = btn.nextElementSibling;
-  const isShown = ta.classList.toggle('show');
-  btn.textContent = isShown ? 'Hide note' : 'Add note';
-  if (isShown) setTimeout(() => ta.focus(), 50);
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
+function renderAll() { renderStart(); renderFull(); document.getElementById('last-verified').value = state.meta.lastVerified || ''; updateScores(); }
 
 function updateScores() {
-  let totalDone = 0, totalNeeds = 0, totalNA = 0, totalAnswered = 0;
-  let totalItems = 0;
-  let critDone = 0, critApplicable = 0, critAnswered = 0;
-
-  SECTIONS.forEach((sec, sIdx) => {
-    let sDone = 0, sApplicable = 0;
-    sec.items.forEach((_, iIdx) => {
-      const st = getItem(sIdx, iIdx).status;
-      const isCrit = CRITICAL_KEYS.has(itemKey(sIdx, iIdx));
-      totalItems++;
-      if (st === 'done') { totalDone++; sDone++; sApplicable++; if (isCrit) { critDone++; critApplicable++; critAnswered++; } }
-      else if (st === 'needs') { totalNeeds++; sApplicable++; if (isCrit) { critApplicable++; critAnswered++; } }
-      else if (st === 'na') { totalNA++; if (isCrit) critAnswered++; }
-      if (st) totalAnswered++;
-    });
-    const elScore = document.getElementById(sec.id + '-score');
-    if (elScore) {
-      if (sApplicable === 0) {
-        elScore.textContent = '—';
-        elScore.classList.remove('complete');
-      } else {
-        const pct = Math.round((sDone / sApplicable) * 100);
-        elScore.textContent = sDone + '/' + sApplicable + '  ·  ' + pct + '%';
-        elScore.classList.toggle('complete', pct === 100);
-      }
-    }
-  });
-
-  const totalApplicable = totalDone + totalNeeds;
-  const pct = totalApplicable === 0 ? 0 : Math.round((totalDone / totalApplicable) * 100);
-
-  document.getElementById('score-val').textContent = totalApplicable === 0 ? '0' : pct;
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('done-count').textContent = totalDone;
-  document.getElementById('needs-count').textContent = totalNeeds;
-  document.getElementById('na-count').textContent = totalNA;
-  document.getElementById('applicable-count').textContent = totalApplicable;
-
-  // Critical score
-  const critPct = critApplicable === 0 ? 0 : Math.round((critDone / critApplicable) * 100);
-  document.getElementById('crit-val').textContent = critApplicable === 0 ? '0' : critPct;
-  const critFill = document.getElementById('crit-fill');
-  critFill.style.width = critPct + '%';
-  critFill.classList.toggle('good', critPct === 100 && critApplicable > 0);
-  const critDetail = document.getElementById('crit-detail');
-  if (critAnswered === 0) {
-    critDetail.textContent = 'Items that gate everything else';
-  } else if (critApplicable === 0) {
-    critDetail.textContent = 'All critical items marked N/A';
-  } else {
-    critDetail.textContent = critDone + ' of ' + critApplicable + ' critical items done';
-  }
-
-  const summary = document.getElementById('score-summary');
-  if (totalAnswered === 0) {
-    summary.textContent = 'Start checking items below to see your readiness';
-  } else if (totalApplicable === 0) {
-    summary.textContent = 'No applicable items selected yet';
-  } else {
-    summary.textContent = totalApplicable + ' applicable · ' + totalDone + ' of those done';
-  }
-
-  const pill = document.getElementById('risk-pill');
-  pill.className = 'risk-pill';
-  if (totalAnswered === 0) { pill.textContent = 'Not started'; }
-  else if (totalApplicable === 0) { pill.textContent = 'All N/A'; }
-  else if (pct >= 80) { pill.textContent = 'Good shape'; pill.classList.add('good'); }
-  else if (pct >= 60) { pill.textContent = 'Needs cleanup'; pill.classList.add('cleanup'); }
-  else if (pct >= 40) { pill.textContent = 'Access risk'; pill.classList.add('risk'); }
-  else { pill.textContent = 'High access risk'; pill.classList.add('high'); }
-
-  renderActionList();
+  let done=0, needs=0, na=0, answered=0, critDone=0, critApplicable=0; const needBySection={};
+  SECTIONS.forEach((sec,sIdx)=>{ let sd=0, sapp=0; sec.items.forEach((_,iIdx)=>{ const k=itemKey(sIdx,iIdx), st=getItem(sIdx,iIdx).status; if(st) answered++; if(st==='done'){done++; sd++; sapp++; if(CRITICAL_KEYS.has(k)){critDone++;critApplicable++;}} else if(st==='needs'){needs++; sapp++; needBySection[sec.title]=(needBySection[sec.title]||0)+1; if(CRITICAL_KEYS.has(k))critApplicable++;} else if(st==='na'){na++;} }); const el=document.getElementById(sec.id+'-score'); if(el){ if(!sapp){el.textContent='—'; el.classList.remove('complete');} else { const pct=Math.round(sd/sapp*100); el.textContent=`${sd}/${sapp} · ${pct}%`; el.classList.toggle('complete',pct===100); } } });
+  const applicable=done+needs, pct=applicable?Math.round(done/applicable*100):0, critPct=critApplicable?Math.round(critDone/critApplicable*100):0;
+  document.getElementById('score-val').textContent=pct; document.getElementById('progress-fill').style.width=pct+'%'; document.getElementById('crit-val').textContent=critPct; const cf=document.getElementById('crit-fill'); cf.style.width=critPct+'%'; cf.classList.toggle('good',critPct===100&&critApplicable>0);
+  document.getElementById('done-count').textContent=done; document.getElementById('needs-count').textContent=needs;
+  const biggest = Object.entries(needBySection).sort((a,b)=>b[1]-a[1])[0]; document.getElementById('biggest-risk').textContent = biggest ? biggest[0].replace(' and ',' + ') : 'None yet';
+  document.getElementById('next-step').textContent = needs ? 'Fix top item' : answered ? 'Review full audit' : 'Start test';
+  const summary=document.getElementById('score-summary'); const pill=document.getElementById('risk-pill'); pill.className='pill';
+  if(!answered){summary.textContent='Start with the 10-minute test.'; pill.textContent='Not started';}
+  else if(!applicable){summary.textContent='No applicable items selected yet.'; pill.textContent='All N/A';}
+  else if(pct>=85){summary.textContent='Good shape. Review once or twice a year.'; pill.textContent='Good shape'; pill.classList.add('good');}
+  else if(pct>=65){summary.textContent='Better than most, but some access gaps remain.'; pill.textContent='Needs cleanup'; pill.classList.add('warn');}
+  else if(pct>=40){summary.textContent='Your family may hit delays in an emergency.'; pill.textContent='Access risk'; pill.classList.add('risk');}
+  else {summary.textContent='Your family may know what exists but still be unable to act.'; pill.textContent='High access risk'; pill.classList.add('high');}
+  document.getElementById('crit-detail').textContent = critApplicable ? `${critDone} of ${critApplicable} must-fix items done` : 'Items that block everything else';
+  renderActionList(); updateFamilySummary();
 }
-
 function renderActionList() {
-  const ul = document.getElementById('action-list');
-  const needsWork = [];
-  SECTIONS.forEach((sec, sIdx) => {
-    sec.items.forEach((item, iIdx) => {
-      if (getItem(sIdx, iIdx).status === 'needs') {
-        needsWork.push({
-          sec: sec.title,
-          sIdx, iIdx,
-          item,
-          critical: CRITICAL_KEYS.has(itemKey(sIdx, iIdx))
-        });
-      }
-    });
-  });
-  // Critical first, then the rest
-  needsWork.sort((a, b) => (b.critical ? 1 : 0) - (a.critical ? 1 : 0));
-
-  if (needsWork.length === 0) {
-    const anyAnswered = Object.values(state).some(v => v.status);
-    ul.innerHTML = anyAnswered
-      ? '<div class="empty-state">No items marked "needs work" yet. Either you are in good shape, or there are still items to review.</div>'
-      : '<div class="empty-state">Mark items as "needs work" to see your top action list here.</div>';
-    return;
-  }
-  ul.innerHTML = needsWork.slice(0, 10).map(n => `
-    <li>
-      <span class="tag ${n.critical ? 'critical' : ''}">${n.critical ? 'Critical' : 'Fix'}</span>
-      <div>
-        <div>${escapeHtml(n.item)}</div>
-        <div class="sec-ref">${escapeHtml(n.sec)}</div>
-      </div>
-    </li>`).join('') + (needsWork.length > 10 ? `<li style="justify-content:center;color:var(--muted);font-size:13px;">+ ${needsWork.length - 10} more items need work</li>` : '');
+  const list=[]; SECTIONS.forEach((sec,sIdx)=>sec.items.forEach((item,iIdx)=>{ const st=getItem(sIdx,iIdx).status; if(st==='needs'){ const k=itemKey(sIdx,iIdx); list.push({sec:sec.title,item,k,p:priority(k)}); } }));
+  const rank={critical:0,soon:1,later:2}; list.sort((a,b)=>rank[a.p]-rank[b.p]); const ul=document.getElementById('action-list');
+  if(!list.length){ ul.innerHTML = Object.values(state.items).some(v=>v.status) ? '<div class="empty-state">No items marked needs work. Either you are in good shape, or there are still items to review.</div>' : '<div class="empty-state">Mark items as needs work to build your fix-first list.</div>'; return; }
+  ul.innerHTML=list.slice(0,15).map(x=>`<li><span class="tag ${x.p}">${priorityLabel(x.k)}</span><div><div>${esc(x.item)}</div><div class="sec-ref">${esc(x.sec)}</div></div></li>`).join('') + (list.length>15?`<li style="justify-content:center;color:var(--muted)">+ ${list.length-15} more items need work</li>`:'');
 }
-
-// Exports
-function exportPDF() { window.print(); }
-
-function exportCSV() {
-  const rows = [['Section', 'Item', 'Critical', 'Status', 'Note']];
-  SECTIONS.forEach((sec, sIdx) => {
-    sec.items.forEach((item, iIdx) => {
-      const it = getItem(sIdx, iIdx);
-      const status = it.status === 'done' ? 'Done' : it.status === 'needs' ? 'Needs work' : it.status === 'na' ? 'N/A' : '';
-      const crit = CRITICAL_KEYS.has(itemKey(sIdx, iIdx)) ? 'Yes' : '';
-      rows.push([sec.title, item, crit, status, it.note || '']);
-    });
-  });
-  const csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
-  downloadFile('nri-money-access-checklist.csv', csv, 'text/csv');
-  showToast('CSV exported');
+function updateFamilySummary() {
+  const must = []; const contacts=[]; const docs=[]; const notes=[];
+  SECTIONS.forEach((sec,sIdx)=>sec.items.forEach((item,iIdx)=>{ const k=itemKey(sIdx,iIdx), it=getItem(sIdx,iIdx); if(it.status==='needs' && CRITICAL_KEYS.has(k)) must.push(item); if(it.note) notes.push({sec:sec.title,item,note:it.note}); }));
+  ['s11-4','s11-5','s17-9','s19-8','s16-9'].forEach(k=>{ const t=itemTextFromKey(k); if(t) contacts.push(t); });
+  ['s13-11','s13-12','s17-7','s19-9','s8-12'].forEach(k=>{ const t=itemTextFromKey(k); if(t) docs.push(t); });
+  const box=(title,items,empty)=>`<div class="summary-box"><h3>${esc(title)}</h3><ul>${(items.length?items:[empty]).slice(0,8).map(i=>`<li>${esc(i)}</li>`).join('')}</ul></div>`;
+  document.getElementById('family-summary').innerHTML = box('Fix these first', must, 'No critical needs-work items marked yet.') + box('People to identify', contacts, 'Add CA, CPA, lawyer, insurance, and immigration contacts.') + box('Documents to locate', docs, 'Add document locations, not document numbers.') + `<div class="summary-box"><h3>Reminder notes</h3><ul>${notes.length?notes.slice(0,8).map(n=>`<li><b>${esc(n.sec)}:</b> ${esc(n.note)}</li>`).join(''):'<li>No notes added yet. Use notes for reminders only, not secrets.</li>'}</ul></div>`;
 }
+function switchTab(tab) { document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active')); document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.getElementById('tab-'+tab).classList.add('active'); document.getElementById('tab-btn-'+tab).classList.add('active'); if(tab==='summary') updateFamilySummary(); }
+function expandAll(){document.querySelectorAll('details.section').forEach(d=>d.open=true)} function collapseAll(){document.querySelectorAll('details.section').forEach(d=>d.open=false)}
+function toggleCriticalOnly(){ const on=document.body.classList.toggle('critical-only'); const btn=document.getElementById('crit-toggle'); btn.textContent=on?'Show all items':'Show critical only'; btn.classList.toggle('active',on); if(on) document.querySelectorAll('details.section').forEach(d=>{ if(d.querySelector('.item.is-critical')) d.open=true; }); }
+function filterAudit(q){ q=q.trim().toLowerCase(); document.body.classList.toggle('searching',!!q); document.querySelectorAll('details.section').forEach(sec=>{ let match=false; sec.querySelectorAll('.item').forEach(item=>{ const ok=!q || item.textContent.toLowerCase().includes(q); item.classList.toggle('hidden-by-search',!ok); if(ok) match=true; }); sec.classList.toggle('no-match',!match); if(q&&match) sec.open=true; }); }
+function exportPDF(){ if(document.getElementById('tab-summary').classList.contains('active')) updateFamilySummary(); window.print(); }
+function downloadFile(name, content, type){ const blob=new Blob([content],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),300); }
+function exportCSV(){ const rows=[['Section','Item','Priority','Status','Note']]; SECTIONS.forEach((sec,sIdx)=>sec.items.forEach((item,iIdx)=>{ const k=itemKey(sIdx,iIdx), it=getItem(sIdx,iIdx); rows.push([sec.title,item,priorityLabel(k),it.status||'',it.note||'']); })); const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('
+'); downloadFile('nri-money-access-test.csv',csv,'text/csv'); showToast('CSV exported'); }
+function exportJSON(){ downloadFile('nri-money-access-test-backup.json', JSON.stringify(state,null,2), 'application/json'); showToast('Backup exported'); }
+function importJSON(e){ const f=e.target.files[0]; if(!f) return; const r=new FileReader(); r.onload=()=>{ try{ state=JSON.parse(r.result); if(!state.items) state.items={}; if(!state.meta) state.meta={}; save(); renderAll(); showToast('Backup restored'); }catch(err){ alert('Could not read this JSON file.'); } }; r.readAsText(f); e.target.value=''; }
+function copyAnonymousSummary(){ const text=`My NRI access score: ${document.getElementById('score-val').textContent}%
+Critical access score: ${document.getElementById('crit-val').textContent}%
+Biggest weak spot: ${document.getElementById('biggest-risk').textContent}
+Next step: ${document.getElementById('next-step').textContent}
 
-function exportJSON() {
-  const data = { version: 1, exported: new Date().toISOString(), state };
-  downloadFile('nri-money-access-checklist.json', JSON.stringify(data, null, 2), 'application/json');
-  showToast('JSON backup exported');
-}
-
-function importJSON(evt) {
-  const file = evt.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const data = JSON.parse(e.target.result);
-      if (data && data.state && typeof data.state === 'object') {
-        state = data.state;
-        save();
-        render();
-        showToast('Checklist restored');
-      } else {
-        showToast('Invalid backup file');
-      }
-    } catch (err) { showToast('Could not read file'); }
-  };
-  reader.readAsText(file);
-  evt.target.value = '';
-}
-
-function downloadFile(name, content, mime) {
-  const blob = new Blob([content], { type: mime });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = name;
-  document.body.appendChild(a); a.click();
-  document.body.removeChild(a); URL.revokeObjectURL(url);
-}
-
-function confirmReset() { document.getElementById('modal-bg').classList.add('show'); }
-function closeModal() { document.getElementById('modal-bg').classList.remove('show'); }
-function doReset() {
-  state = {};
-  save();
-  render();
-  closeModal();
-  showToast('Checklist reset');
-}
-
-let toastTimer;
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
-}
-
-// View controls
-
-function switchTab(name) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    b.classList.remove('active');
-    b.setAttribute('aria-selected', 'false');
-  });
-  const panel = document.getElementById('tab-' + name);
-  const btn = document.getElementById('tab-btn-' + name);
-  if (panel) panel.classList.add('active');
-  if (btn) {
-    btn.classList.add('active');
-    btn.setAttribute('aria-selected', 'true');
-  }
-  if (name === 'actions') renderActionList();
-}
-function expandAll() {
-  document.querySelectorAll('details.section').forEach(d => d.open = true);
-}
-function collapseAll() {
-  document.querySelectorAll('details.section').forEach(d => d.open = false);
-}
-function toggleCriticalOnly() {
-  const on = document.body.classList.toggle('critical-only');
-  document.getElementById('crit-toggle-label').textContent = on ? 'Show all items' : 'Show critical only';
-  document.getElementById('crit-toggle').classList.toggle('active', on);
-  if (on) {
-    // Auto-expand sections that contain critical items so user can see them
-    document.querySelectorAll('details.section').forEach(d => {
-      if (d.querySelector('.item.is-critical')) d.open = true;
-    });
-  }
-}
-
-// Print: open all sections before, restore after
-let printState = null;
-window.addEventListener('beforeprint', () => {
-  printState = [...document.querySelectorAll('details.section')].map(d => d.open);
-  document.querySelectorAll('details.section').forEach(d => d.open = true);
-});
-window.addEventListener('afterprint', () => {
-  if (printState) {
-    document.querySelectorAll('details.section').forEach((d, i) => d.open = printState[i]);
-    printState = null;
-  }
-});
-
-// Modal close on backdrop click
-document.getElementById('modal-bg').addEventListener('click', e => {
-  if (e.target.id === 'modal-bg') closeModal();
-});
-
+I realized this is less about net worth and more about whether my family can actually access things when needed.`; navigator.clipboard?.writeText(text).then(()=>showToast('Anonymous summary copied')).catch(()=>alert(text)); }
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
+function confirmReset(){document.getElementById('modal-bg').classList.add('show')} function closeModal(){document.getElementById('modal-bg').classList.remove('show')} function doReset(){state={items:{},meta:{}}; save(); closeModal(); renderAll(); showToast('Reset complete');}
+window.addEventListener('beforeprint',()=>document.querySelectorAll('details.section').forEach(d=>d.open=true)); document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target.id==='modal-bg')closeModal();});
 renderAll();
 </script>
-
 </body>
 </html>
