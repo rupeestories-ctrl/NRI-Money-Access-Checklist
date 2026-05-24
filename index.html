@@ -3,588 +3,197 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="A free browser-only NRI emergency access system. Check whether your family can access money, documents, contacts, and accounts if something happens tomorrow." />
-<title>NRI Emergency Access System | RupeeStories</title>
+<meta name="description" content="A free browser-only NRI emergency access planner from RupeeStories. Build a family handoff, document vault map, emergency steps, and fix-first list without entering secrets." />
+<title>NRI Emergency Access Planner v4 | RupeeStories</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0d1b2a;--navy2:#142536;--cream:#f6ead4;--cream2:#fff8ea;--cream3:#eadbbd;--gold:#d4a84b;--gold2:#b78b2f;--ink:#1d1711;--muted:#6f6252;--line:#d9c8a3;--green:#4b7d50;--greenbg:#dcebd8;--orange:#c97d2e;--orangebg:#fae4ca;--red:#a33b32;--redbg:#f2d2cd;--gray:#696969;--graybg:#e6e1d7;--shadow:0 1px 3px rgba(0,0,0,.08),0 12px 30px rgba(13,27,42,.10);--r:16px;--rs:10px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);color:var(--cream);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.5;background-image:radial-gradient(ellipse 75% 45% at 50% 0%,rgba(212,168,75,.08),transparent 60%),radial-gradient(ellipse 50% 30% at 95% 100%,rgba(212,168,75,.05),transparent 65%);background-attachment:fixed}.wrap{max-width:1040px;margin:0 auto;padding:28px 18px 80px}.hero{padding:10px 0 18px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}h1{font-family:Fraunces,Georgia,serif;font-size:clamp(35px,5vw,58px);line-height:1.02;margin:0 0 14px;letter-spacing:-.03em}.accent{color:var(--gold);font-style:italic}.lede{max-width:760px;color:rgba(246,234,212,.82);font-size:18px;margin:0 0 18px}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{font-size:12px;font-weight:700;border:1px solid rgba(246,234,212,.18);background:rgba(246,234,212,.07);padding:6px 11px;border-radius:999px}.badge:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:7px}.card{background:var(--cream);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}.score-card{position:sticky;top:0;z-index:30;padding:16px 18px;margin:12px 0 18px;background:linear-gradient(180deg,var(--cream),var(--cream2));display:grid;gap:14px}.score-main{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}.score-num{font-family:Fraunces,serif;font-size:48px;line-height:1;font-weight:700}.pct{font-size:23px;color:var(--muted);margin-left:2px}.score-meta{font-size:14px;color:var(--muted)}.score-meta strong{color:var(--ink)}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--graybg);color:var(--ink);border-radius:999px;padding:7px 12px;font-size:13px;font-weight:800;white-space:nowrap}.pill:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.65}.pill.good{background:var(--greenbg);color:#2d5230}.pill.warn{background:#fbf0d5;color:#765414}.pill.risk{background:var(--orangebg);color:#74420e}.pill.high{background:var(--redbg);color:#65302a}.bar{height:8px;background:var(--cream3);border-radius:999px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold2),var(--gold));border-radius:999px;transition:width .25s}.crit-fill{background:linear-gradient(90deg,var(--red),var(--orange))}.crit-fill.good{background:linear-gradient(90deg,var(--green),#6ba36e)}.score-foot{display:grid;grid-template-columns:1fr 1fr;gap:12px}.metric{border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(255,248,234,.7)}.metric .label{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em}.metric .value{font-size:18px;font-weight:800}.setup{padding:18px;margin:18px 0;display:grid;gap:16px}.setup h2,.panel h2{font-family:Fraunces,serif;margin:0 0 6px;font-size:25px;line-height:1.15}.setup p,.sub{color:var(--muted);font-size:14px;margin:0 0 12px}.profile-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.profile-btn,.chip,.btn{font-family:inherit;cursor:pointer;border-radius:999px;border:1px solid var(--line);background:var(--cream2);color:var(--ink);padding:10px 12px;font-size:13px;font-weight:800}.profile-btn.active,.chip.active{background:var(--gold);border-color:var(--gold);color:var(--navy)}.toggle-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.toggle{display:flex;gap:8px;align-items:center;background:var(--cream2);border:1px solid var(--line);padding:10px;border-radius:12px;font-size:13px;font-weight:700}.toggle input{accent-color:var(--gold2)}.date-row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end}.field label{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:4px}input,select,textarea{font-family:inherit;border:1px solid var(--line);border-radius:10px;background:var(--cream2);color:var(--ink);padding:10px;width:100%}.stale{display:none;border-left:4px solid var(--orange);padding:10px 12px;background:#fff3df;color:#71420f;border-radius:8px;font-size:14px}.stale.show{display:block}.tabs-shell{margin-top:18px;padding:10px;border:1px solid rgba(212,168,75,.25);border-radius:24px;background:rgba(246,234,212,.065)}.tab-list{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.tab-btn{border:1px solid transparent;border-radius:999px;padding:11px 10px;background:transparent;color:rgba(246,234,212,.84);font:inherit;font-size:13px;font-weight:800;cursor:pointer}.tab-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);box-shadow:0 8px 22px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.35)}.tab-helper{text-align:center;color:rgba(246,234,212,.68);font-size:13px;margin:10px 0 0}.tab-panel{display:none}.tab-panel.active{display:block}.panel{padding:20px;margin-top:18px}.start-grid,.emergency-grid,.summary-grid,.vault-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.step-head{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:15px 17px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,var(--cream),var(--cream2))}.step-title{font-family:Fraunces,serif;font-size:20px;font-weight:700}.step-count{font-size:12px;color:var(--muted);background:var(--cream3);border-radius:999px;padding:4px 9px;font-weight:800}.items{background:var(--cream2);padding:4px 17px 16px}.item{border-bottom:1px dashed var(--line);padding:14px 0}.item:last-child{border-bottom:0}.item-top{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:start}.item-text{font-size:15px;color:var(--ink)}.why{font-size:12px;color:var(--muted);margin:5px 0 0}.dependency{display:none;margin-top:7px;background:#fff1dc;border-left:3px solid var(--orange);border-radius:7px;padding:8px 10px;font-size:12px;color:#70400d}.dependency.show{display:block}.flag{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.05em;border-radius:999px;padding:4px 8px;white-space:nowrap}.flag.critical{background:var(--redbg);color:#682b25}.flag.soon{background:var(--orangebg);color:#74420e}.flag.later{background:var(--graybg);color:#555}.controls{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}.opt{flex:1;min-width:82px;border:1px solid var(--line);border-radius:9px;background:var(--cream);padding:8px 8px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;color:var(--ink)}.opt[aria-pressed=true][data-val=done]{background:var(--green);border-color:var(--green);color:white}.opt[aria-pressed=true][data-val=needs]{background:var(--orange);border-color:var(--orange);color:white}.opt[aria-pressed=true][data-val=na]{background:var(--gray);border-color:var(--gray);color:white}.mini-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.mini-fields select,.mini-fields input{font-size:12px;padding:7px;border-radius:8px}.note-toggle{background:none;border:0;color:var(--muted);font:inherit;font-size:12px;padding:7px 0 0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.note{display:none;min-height:58px;margin-top:7px;font-size:13px}.note.show{display:block}details.section{margin:12px 0;overflow:hidden}summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:16px 18px}summary::-webkit-details-marker{display:none}.sec-num{font-family:Fraunces,serif;color:var(--muted);width:28px}.sec-title{font-family:Fraunces,serif;font-weight:700;font-size:19px;flex:1}.sec-score{font-size:12px;color:var(--muted);background:var(--cream3);border-radius:999px;padding:5px 10px;font-weight:800}.sec-score.complete{background:var(--greenbg);color:#2d5230}.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}.toolbar-right{display:flex;gap:8px}.search{max-width:320px}.chip{color:var(--cream);background:rgba(246,234,212,.06);border-color:rgba(246,234,212,.22)}.chip:hover{background:rgba(246,234,212,.12)}body.critical-only .item:not(.is-critical){display:none}.item.hidden-by-search,details.no-match{display:none}.action-list{list-style:none;margin:0;padding:0}.action-list li{display:grid;grid-template-columns:auto 1fr;gap:11px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px}.tag{font-size:10px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:4px 8px;height:max-content}.tag.critical{background:var(--redbg);color:#682b25}.tag.soon{background:var(--orangebg);color:#74420e}.tag.later{background:var(--graybg);color:#555}.sec-ref,.next-text{font-size:12px;color:var(--muted);margin-top:2px}.empty-state{padding:15px;background:var(--greenbg);color:#2d5230;border-radius:10px;text-align:center}.emergency-card{padding:18px}.emergency-card h3,.summary-box h3{font-family:Fraunces,serif;font-size:20px;margin:0 0 10px}.emergency-card ol,.summary-box ul{margin:0;padding-left:20px;color:var(--ink);font-size:14px}.summary-box{background:var(--cream2);border:1px solid var(--line);border-radius:14px;padding:16px}.handoff-form,.vault-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}.handoff-note{grid-column:1/-1;background:#fff3df;border-left:4px solid var(--gold);border-radius:8px;padding:10px 12px;color:#6c4610;font-size:13px}.actions-bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.btn{border-radius:10px;color:var(--cream);background:rgba(246,234,212,.07);border-color:rgba(246,234,212,.24)}.btn.primary{background:var(--gold);border-color:var(--gold);color:var(--navy)}.btn.danger{color:#ffc0ba;border-color:rgba(255,192,186,.28)}.fine-print{margin-top:18px;padding:15px 16px;background:rgba(246,234,212,.05);border-left:3px solid var(--gold);border-radius:6px;color:rgba(246,234,212,.75);font-size:13px}.fine-print strong{color:var(--cream)}footer{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid rgba(246,234,212,.13);color:rgba(246,234,212,.58);font-size:13px}footer a{color:var(--gold);text-decoration:none}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(90px);background:var(--ink);color:var(--cream);padding:12px 20px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.3);transition:.25s;z-index:100}.toast.show{transform:translateX(-50%) translateY(0)}.modal-bg{position:fixed;inset:0;background:rgba(13,27,42,.72);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}.modal-bg.show{display:flex}.modal{max-width:430px;width:100%;padding:22px}.modal h3{font-family:Fraunces,serif;margin:0 0 8px}.modal p{color:var(--muted)}.modal-actions{display:flex;justify-content:flex-end;gap:8px}@media(max-width:900px){.tab-list{grid-template-columns:repeat(3,1fr)}.profile-grid,.toggle-grid{grid-template-columns:1fr 1fr}.score-main,.score-foot,.start-grid,.emergency-grid,.summary-grid,.vault-grid,.handoff-form,.vault-form,.date-row{grid-template-columns:1fr}.score-card{position:static}}@media(max-width:560px){.wrap{padding:22px 14px 70px}.tab-list,.profile-grid,.toggle-grid,.mini-fields{grid-template-columns:1fr}.score-num{font-size:40px}summary{padding:14px}.items{padding:4px 14px 14px}.item-top{grid-template-columns:1fr}.controls .opt{min-width:0}}@media print{body{background:white;color:black;background-image:none}.wrap{max-width:100%;padding:0}.hero,.setup,.tabs-shell,.toolbar,.actions-bar,.fine-print,footer,.toast,.modal-bg{display:none!important}.tab-panel{display:block!important}#tab-start,#tab-actions,#tab-full,#tab-vault{display:none!important}.card,details.section,.summary-box,.emergency-card{box-shadow:none;border:1px solid #bbb;background:white;color:black;break-inside:avoid}.score-card{position:static}.items{background:white}.opt[aria-pressed=false],.note-toggle,.mini-fields{display:none!important}.opt[aria-pressed=true]{background:white!important;color:black!important;border:1.5px solid #111!important}.note{display:block;background:white;color:black}.badge,.chip,.btn{color:black}}
+:root{
+  --navy:#0d1b2a; --navy2:#142536; --cream:#f6ead4; --cream2:#fff8ea; --cream3:#eadbbd;
+  --gold:#d4a84b; --gold2:#b78b2f; --ink:#1d1711; --ink2:#342a20; --muted:#6f6252; --line:#d9c8a3;
+  --green:#4b7d50; --greenbg:#dcebd8; --amber:#c97d2e; --amberbg:#fae4ca; --red:#a33b32; --redbg:#f2d2cd;
+  --gray:#696969; --graybg:#e6e1d7; --shadow:0 8px 30px rgba(0,0,0,.12); --radius:18px; --radius2:12px;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:var(--navy);color:var(--cream);font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.55;background-image:radial-gradient(ellipse 70% 36% at 20% 0%,rgba(212,168,75,.12),transparent 60%),radial-gradient(ellipse 50% 30% at 90% 20%,rgba(255,248,234,.05),transparent 60%);}
+.wrap{max-width:1040px;margin:auto;padding:30px 18px 80px}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:end;margin-bottom:24px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}h1{font-family:Fraunces,Georgia,serif;font-size:clamp(36px,6vw,64px);line-height:1.02;margin:0 0 14px;letter-spacing:-.02em}.lede{max-width:720px;color:rgba(246,234,212,.82);font-size:18px;margin:0}.hero-card{background:rgba(246,234,212,.07);border:1px solid rgba(246,234,212,.16);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}.hero-card strong{color:var(--gold)}.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.badge{font-size:12px;padding:7px 11px;border:1px solid rgba(246,234,212,.18);border-radius:999px;background:rgba(246,234,212,.07)}
+.card{background:var(--cream);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.setup{padding:20px;margin-bottom:20px}.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.setup h2,.panel h2{font-family:Fraunces,Georgia,serif;margin:0 0 8px;font-size:25px;line-height:1.15}.sub{color:var(--muted);font-size:14px;margin:0 0 14px}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{border:1px solid var(--line);background:var(--cream2);border-radius:999px;padding:9px 12px;font-family:inherit;cursor:pointer;font-size:13px;color:var(--ink2)}.chip.active{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:800}.chip.soft{background:rgba(246,234,212,.08);color:var(--cream);border-color:rgba(246,234,212,.24)}.chip.soft.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.snapshot{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0 20px}.metric{padding:16px}.metric .label{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em}.metric .num{font-family:Fraunces,serif;font-size:34px;line-height:1;margin-top:7px}.metric .hint{font-size:13px;color:var(--muted);margin-top:6px}.bar{height:8px;background:var(--cream3);border-radius:999px;overflow:hidden;margin-top:10px}.fill{height:100%;width:0;background:var(--gold);border-radius:999px;transition:.25s}.fill.warn{background:var(--amber)}.fill.risk{background:var(--red)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab{padding:11px 14px;border-radius:999px;border:1px solid rgba(246,234,212,.24);background:rgba(246,234,212,.06);color:var(--cream);font-weight:800;font-family:inherit;cursor:pointer}.tab.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}.panel{display:none;padding:22px;margin-top:14px}.panel.active{display:block}.section-title{display:flex;align-items:center;gap:10px;margin:10px 0 12px}.icon{width:34px;height:34px;border-radius:12px;background:var(--cream3);display:inline-grid;place-items:center;color:var(--navy);font-weight:800}.story{background:linear-gradient(180deg,var(--cream),var(--cream2));padding:20px;border-radius:var(--radius2);border:1px solid var(--line);margin-bottom:18px}.story h3{font-family:Fraunces,serif;margin:0 0 8px;font-size:24px}.story p{margin:0;color:var(--muted)}
+.mode-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.mode-card{padding:16px;border:1px solid var(--line);border-radius:var(--radius2);background:var(--cream2)}.mode-card h3{margin:0 0 6px;font-size:17px}.mode-card p{font-size:13px;color:var(--muted);margin:0}.steps{display:grid;gap:12px}.step{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;border:1px solid var(--line);background:var(--cream2);border-radius:var(--radius2);padding:14px}.step .time{font-weight:800;color:var(--red)}.step ul{margin:0;padding-left:18px;color:var(--ink2)}
+.controls{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:10px 0 16px}.search{flex:1;min-width:220px;padding:11px 13px;border-radius:999px;border:1px solid var(--line);background:var(--cream2);font-family:inherit;color:var(--ink)}.mini-filters{display:flex;gap:8px;flex-wrap:wrap}.item-list{display:grid;gap:10px}.item{border:1px solid var(--line);background:var(--cream2);border-radius:var(--radius2);padding:14px}.item.hide{display:none}.item-head{display:flex;gap:10px;justify-content:space-between;align-items:flex-start}.item-title{font-weight:800;color:var(--ink2)}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.tag{font-size:11px;font-weight:800;border-radius:999px;padding:3px 8px;background:var(--graybg);color:var(--ink2)}.tag.must{background:var(--redbg);color:var(--red)}.tag.soon{background:var(--amberbg);color:var(--amber)}.tag.nice{background:var(--greenbg);color:var(--green)}.why{font-size:13px;color:var(--muted);margin:8px 0}.next{font-size:13px;background:#fff4d4;border-left:3px solid var(--gold);padding:8px 10px;border-radius:8px;margin:9px 0;color:var(--ink2)}.item-actions{display:grid;grid-template-columns:1.2fr .9fr .9fr;gap:8px;margin-top:10px}.status-btns{display:flex;gap:6px}.status-btn,.select,.date{border:1px solid var(--line);background:var(--cream);border-radius:10px;padding:9px;font-family:inherit;font-size:13px;color:var(--ink2)}.status-btn{cursor:pointer;flex:1}.status-btn.active[data-status=done]{background:var(--green);color:white;border-color:var(--green)}.status-btn.active[data-status=needs]{background:var(--amber);color:white;border-color:var(--amber)}.status-btn.active[data-status=na]{background:var(--gray);color:white;border-color:var(--gray)}
+.notice{border-radius:var(--radius2);padding:14px;background:rgba(212,168,75,.14);border:1px solid rgba(212,168,75,.35);color:var(--cream);margin:14px 0}.notice.dark{background:var(--cream2);color:var(--ink2);border-color:var(--line)}.success{background:var(--greenbg);border-color:#afd0a8;color:#254d29}.dangerbox{background:var(--redbg);border-color:#deb0aa;color:#61241f}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;font-size:12px;font-weight:800;color:var(--muted);margin:0 0 5px}.field input,.field textarea{width:100%;border:1px solid var(--line);background:var(--cream2);border-radius:10px;padding:10px;font-family:inherit;color:var(--ink)}.field textarea{min-height:70px;resize:vertical}.packet{background:white;color:#17120d;border:1px solid #ddd;border-radius:var(--radius);padding:24px}.packet h2{font-family:Fraunces,serif;font-size:28px;margin:0 0 8px}.packet h3{font-size:16px;border-bottom:1px solid #ddd;padding-bottom:6px;margin:18px 0 8px}.packet-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.packet .line{padding:8px 0;border-bottom:1px dashed #ddd;font-size:14px}.copybar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.btn{border:1px solid rgba(246,234,212,.25);background:rgba(246,234,212,.07);color:var(--cream);padding:11px 14px;border-radius:12px;font-family:inherit;font-weight:800;cursor:pointer}.btn.primary{background:var(--gold);border-color:var(--gold);color:var(--navy)}.btn.cream{background:var(--cream);color:var(--ink);border-color:var(--line)}.btn.red{background:var(--red);color:white;border-color:var(--red)}.glossary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.term{background:var(--cream2);border:1px solid var(--line);border-radius:var(--radius2);padding:14px}.term b{display:block;margin-bottom:5px}.term p{margin:0;color:var(--muted);font-size:13px}.footer{margin-top:32px;color:rgba(246,234,212,.68);font-size:13px;text-align:center;border-top:1px solid rgba(246,234,212,.16);padding-top:18px}.footer a{color:var(--gold)}.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(90px);background:#17120d;color:var(--cream);padding:12px 18px;border-radius:999px;box-shadow:var(--shadow);transition:.25s;z-index:99}.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:760px){.wrap{padding:18px 12px 64px}.hero{grid-template-columns:1fr}.setup-grid,.snapshot,.mode-cards,.grid2,.packet-grid,.formgrid,.glossary{grid-template-columns:1fr}.snapshot{gap:10px}.item-actions{grid-template-columns:1fr}.step{grid-template-columns:1fr}.tabs{position:sticky;top:0;background:var(--navy);padding:8px 0;z-index:20}.tab{font-size:13px;padding:9px 10px}.panel{padding:16px}.hero-card{padding:16px}.item-head{display:block}.packet{padding:16px}.copybar .btn{flex:1}.status-btns{display:grid;grid-template-columns:repeat(3,1fr)}}
+@media print{body{background:white;color:black}.wrap{max-width:none;padding:0}.hero,.setup,.tabs,.snapshot,.controls,.copybar,.btn,.footer,.toast,.notice:not(.printme){display:none!important}.panel{display:none!important;box-shadow:none}.panel.printing,.packet{display:block!important;box-shadow:none;border:none}.packet{font-size:12px;padding:0}.packet h2{font-size:22px}.packet h3{margin-top:12px}.packet-grid{grid-template-columns:1fr 1fr}.line{break-inside:avoid}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header class="hero">
-  <div class="eyebrow">RupeeStories · Free Tool</div>
-  <h1>NRI Emergency Access <span class="accent">System</span></h1>
-  <p class="lede">If something happens tomorrow, can your spouse or trusted person find the right accounts, receive OTPs, call the right people, and move fast? This tool helps you find what would break first.</p>
-  <div class="badges"><span class="badge">No login</span><span class="badge">No data collected</span><span class="badge">Browser-only</span><span class="badge">No secrets in notes</span><span class="badge">Not legal or tax advice</span></div>
-</header>
+  <header class="hero">
+    <div>
+      <div class="eyebrow">RupeeStories · Free browser-only tool</div>
+      <h1>NRI Emergency Access Planner</h1>
+      <p class="lede">If something happens tomorrow, can your family find the money, unlock the accounts, call the right people, and move through the first week without guessing?</p>
+      <div class="badges"><span class="badge">No login</span><span class="badge">No data collected</span><span class="badge">Private browser-only</span><span class="badge">Do not enter secrets</span></div>
+    </div>
+    <div class="hero-card"><strong>The point is simple.</strong><br>Money existing is not the same as money being reachable. This tool helps you spot what would break first.</div>
+  </header>
 
-<section class="score-card card" aria-label="Readiness score">
-  <div class="score-main">
-    <div class="score-num"><span id="score-val">0</span><span class="pct">%</span></div>
-    <div class="score-meta"><strong id="readiness-stage">Not started</strong><br><span id="score-summary">Start with the 10-minute test.</span></div>
-    <div class="pill" id="risk-pill">Not started</div>
-  </div>
-  <div class="bar"><div class="fill" id="progress-fill"></div></div>
-  <div class="score-foot">
-    <div class="metric"><div class="label">Critical access</div><div class="value"><span id="crit-val">0</span>%</div><div class="bar"><div class="fill crit-fill" id="crit-fill"></div></div><small id="crit-detail">Items that block everything else</small></div>
-    <div class="metric"><div class="label">Biggest weak spot</div><div class="value" id="biggest-risk">None yet</div><small>Based on items marked needs work</small></div>
-    <div class="metric"><div class="label">Next step</div><div class="value" id="next-step">Start test</div><small>Fix must-fix items before deep cleanup</small></div>
-    <div class="metric"><div class="label">Review status</div><div class="value" id="review-status">No date</div><small id="review-small">Set a last-tested date</small></div>
-  </div>
-</section>
+  <section class="card setup">
+    <h2>Set your situation</h2>
+    <p class="sub">Pick what applies. Lite mode hides lower-priority items so the first pass feels easier.</p>
+    <div class="setup-grid">
+      <div><p class="sub"><b>Profile</b></p><div class="chips" id="profileChips"></div></div>
+      <div><p class="sub"><b>Country path</b></p><div class="chips" id="countryChips"></div></div>
+    </div>
+    <div style="margin-top:14px" class="chips"><button class="chip" id="liteBtn" onclick="toggleLite()">Beginner mode: off</button><button class="chip" onclick="applyProfileDefaults()">Mark irrelevant items N/A</button><button class="chip" onclick="setReviewToday()">Set last reviewed today</button></div>
+  </section>
 
-<section class="setup card">
-  <div><h2>Make this fit your life</h2><p>Pick your situation, then apply defaults. The tool will mark obvious irrelevant sections as N/A, without changing anything you already answered.</p></div>
-  <div class="profile-grid" id="profile-grid">
-    <button class="profile-btn active" data-profile="couple" onclick="setProfile('couple')">Married couple</button>
-    <button class="profile-btn" data-profile="single" onclick="setProfile('single')">Single NRI</button>
-    <button class="profile-btn" data-profile="parents" onclick="setProfile('parents')">Parents with kids</button>
-    <button class="profile-btn" data-profile="caregiver" onclick="setProfile('caregiver')">Caregiver for parents</button>
-  </div>
-  <div class="toggle-grid">
-    <label class="toggle"><input type="checkbox" id="hasKids"> Kids or dependents</label>
-    <label class="toggle"><input type="checkbox" id="hasProperty" checked> India property</label>
-    <label class="toggle"><input type="checkbox" id="hasDemat" checked> India demat / MF</label>
-    <label class="toggle"><input type="checkbox" id="hasParents" checked> Parent access planning</label>
-    <label class="toggle"><input type="checkbox" id="hasRetirement" checked> US / foreign retirement</label>
-    <label class="toggle"><input type="checkbox" id="isReturning"> Return-to-India planning</label>
-  </div>
-  <div class="date-row">
-    <div class="field"><label>Last tested</label><input type="date" id="last-verified" onchange="setLastVerified(this.value)"></div>
-    <div class="field"><label>Next review due</label><input type="date" id="next-review" onchange="setNextReview(this.value)"></div>
-    <button class="profile-btn" onclick="applyProfileDefaults()">Apply profile defaults</button>
-  </div>
-  <div class="stale" id="stale-warning">Some access checks may be stale. Review OTP, password manager, nominees, and document locations again.</div>
-</section>
+  <section class="snapshot">
+    <div class="card metric"><div class="label">Readiness</div><div class="num"><span id="score">0</span>%</div><div class="bar"><div id="scoreFill" class="fill"></div></div><div class="hint" id="scoreText">Start with the 10-minute test.</div></div>
+    <div class="card metric"><div class="label">Must-fix access</div><div class="num"><span id="mustScore">0</span>%</div><div class="bar"><div id="mustFill" class="fill risk"></div></div><div class="hint" id="mustText">These items block everything else.</div></div>
+    <div class="card metric"><div class="label">Biggest weak spot</div><div class="num" style="font-size:23px" id="weakSpot">Not started</div><div class="hint">Based on items marked needs work.</div></div>
+    <div class="card metric"><div class="label">Review status</div><div class="num" style="font-size:23px" id="reviewStatus">No date</div><div class="hint" id="reviewHint">Set a review date every 6 months.</div></div>
+  </section>
 
-<div class="tabs-shell" role="tablist" aria-label="Tool sections">
-  <div class="tab-list">
-    <button class="tab-btn active" id="tab-btn-start" onclick="switchTab('start')">10-Minute Test</button>
-    <button class="tab-btn" id="tab-btn-emergency" onclick="switchTab('emergency')">48-Hour Plan</button>
-    <button class="tab-btn" id="tab-btn-actions" onclick="switchTab('actions')">Fix-First List</button>
-    <button class="tab-btn" id="tab-btn-full" onclick="switchTab('full')">Full Audit</button>
-    <button class="tab-btn" id="tab-btn-handoff" onclick="switchTab('handoff')">Family Handoff</button>
-    <button class="tab-btn" id="tab-btn-vault" onclick="switchTab('vault')">Vault Map</button>
-  </div>
-  <p class="tab-helper">Start small. Build the emergency plan. Then use the full audit only when you are ready.</p>
-</div>
+  <nav class="tabs" aria-label="Tool modes">
+    <button class="tab active" onclick="showTab('start')" id="tab-start">Start</button>
+    <button class="tab" onclick="showTab('emergency')" id="tab-emergency">48-hour plan</button>
+    <button class="tab" onclick="showTab('checklist')" id="tab-checklist">Full audit</button>
+    <button class="tab" onclick="showTab('packet')" id="tab-packet">Family packet</button>
+    <button class="tab" onclick="showTab('glossary')" id="tab-glossary">Glossary</button>
+  </nav>
 
-<section class="tab-panel active" id="tab-start">
-  <div class="panel card"><h2>The 10-minute NRI access test</h2><p class="sub">Only the items that usually block a family first. Fix these before the deep audit.</p><div class="start-grid" id="start-sections"></div></div>
-</section>
+  <section id="panel-start" class="card panel active">
+    <div class="story"><h3>The 10-minute access test</h3><p>Start here. These are the items that usually block families first: phone, email, banks, passwords, nominees, documents, and contacts.</p></div>
+    <div class="notice dark" id="successNotice" style="display:none"><b>You are in good shape on the must-fix list.</b><br>Print the family packet, share it with the right person, and review it every 6 months.</div>
+    <div id="starterList" class="item-list"></div>
+  </section>
 
-<section class="tab-panel" id="tab-emergency">
-  <div class="panel card"><h2>48-hour emergency plan</h2><p class="sub">A simple sequence for a spouse or trusted person. This is not legal advice. It is a starting map.</p><div class="emergency-grid" id="emergency-grid"></div></div>
-</section>
+  <section id="panel-emergency" class="card panel">
+    <div class="section-title"><span class="icon">!</span><div><h2>Emergency modes</h2><p class="sub">These are plain-English plans for the situations NRIs fear most.</p></div></div>
+    <div class="mode-cards">
+      <div class="mode-card"><h3>If I die tomorrow</h3><p>Who to call, where to start, and what documents matter first.</p></div>
+      <div class="mode-card"><h3>If I lose my phone</h3><p>OTP, email recovery, SIM, banking, and password manager recovery.</p></div>
+      <div class="mode-card"><h3>If I return to India</h3><p>Account cleanup, NRE/NRO, tax contacts, documents, and money movement.</p></div>
+    </div>
+    <div class="steps" style="margin-top:16px">
+      <div class="step"><div class="time">First 2 hours</div><ul><li>Find the emergency folder or family packet.</li><li>Confirm access to the main phone, main email, and password manager.</li><li>Call spouse, sibling, trusted friend, CA or CPA, and employer HR if needed.</li></ul></div>
+      <div class="step"><div class="time">First 24 hours</div><ul><li>Locate main bank accounts, insurance cards, property documents, and immigration files.</li><li>Check which payments cannot stop, such as mortgage, rent, insurance, and utilities.</li><li>If phone is lost, start SIM replacement and email recovery before banking recovery.</li></ul></div>
+      <div class="step"><div class="time">First week</div><ul><li>Order certified copies of key documents if needed.</li><li>Contact insurance, retirement account providers, banks, brokers, and lawyers.</li><li>For India assets, ask the CA about nominee claims, NRO/NRE movement, and required forms.</li></ul></div>
+    </div>
+    <div class="notice dark"><b>Lost phone recovery order:</b> email recovery first, phone/SIM next, password manager next, then banks and brokers. Do not start with the most painful bank app if email and OTP access are broken.</div>
+  </section>
 
-<section class="tab-panel" id="tab-actions">
-  <div class="panel card"><h2>Fix-first list</h2><p class="sub">Must-fix items come first. Each item includes a suggested next move.</p><ul class="action-list" id="action-list"></ul></div>
-</section>
+  <section id="panel-checklist" class="card panel">
+    <div class="section-title"><span class="icon">✓</span><div><h2>Full NRI audit</h2><p class="sub">Search, filter, assign work, and set target dates. Beginner mode hides nice-to-clean-up items.</p></div></div>
+    <div class="controls"><input class="search" id="searchBox" oninput="renderChecklist()" placeholder="Search banks, OTP, property, nominee, phone..."/><div class="mini-filters"><button class="chip" id="filterNeeds" onclick="toggleFilter('needs')">Needs work</button><button class="chip" id="filterMust" onclick="toggleFilter('must')">Must fix</button><button class="chip" id="filterCountry" onclick="toggleFilter('country')">Country path</button></div></div>
+    <div id="checklistList" class="item-list"></div>
+  </section>
 
-<section class="tab-panel" id="tab-full">
-  <div class="toolbar"><input class="search" type="search" id="audit-search" placeholder="Search the full audit" oninput="filterAudit(this.value)"><div class="toolbar-right"><button class="chip" id="crit-toggle" onclick="toggleCriticalOnly()">Show critical only</button><button class="chip" onclick="expandAll()">Expand all</button><button class="chip" onclick="collapseAll()">Collapse all</button></div></div><div id="sections"></div>
-</section>
+  <section id="panel-packet" class="card panel">
+    <div class="section-title"><span class="icon">☰</span><div><h2>Family packet</h2><p class="sub">A clean output for spouse or trusted contact. No passwords. No full account numbers. Just the map.</p></div></div>
+    <div class="grid2">
+      <div>
+        <h2 style="font-size:22px">Fill the safe details</h2>
+        <p class="sub">Use locations and contact names. Keep secrets in your password manager or legal documents, not here.</p>
+        <div class="formgrid" id="packetForm"></div>
+      </div>
+      <div>
+        <div class="copybar"><button class="btn primary" onclick="copyPacket()">Copy family packet</button><button class="btn cream" onclick="copyShareSummary()">Copy Reddit/Substack summary</button><button class="btn cream" onclick="printPacket()">Print packet</button></div>
+        <div id="packetPreview" class="packet"></div>
+      </div>
+    </div>
+  </section>
 
-<section class="tab-panel" id="tab-handoff">
-  <div class="panel card"><h2>Family handoff sheet</h2><p class="sub">Print or save this page. Do not enter account numbers, passwords, SSN, Aadhaar, PAN, or full identifiers.</p><div class="handoff-note">Use locations and contacts, not secrets. Example: “Password manager emergency access,” not the master password.</div><div class="handoff-form" id="handoff-form"></div><div class="summary-grid" id="family-summary"></div></div>
-</section>
+  <section id="panel-glossary" class="card panel">
+    <div class="section-title"><span class="icon">?</span><div><h2>Plain-English glossary</h2><p class="sub">For family members who do not live inside NRI paperwork all day.</p></div></div>
+    <div class="glossary" id="glossaryList"></div>
+  </section>
 
-<section class="tab-panel" id="tab-vault">
-  <div class="panel card"><h2>Document vault map</h2><p class="sub">Tell your family where documents live. Keep actual documents in your secure storage, not inside this page.</p><div class="vault-form" id="vault-form"></div></div>
-</section>
+  <div class="copybar"><button class="btn primary" onclick="exportJSON()">Backup JSON</button><button class="btn" onclick="document.getElementById('importFile').click()">Restore JSON</button><input id="importFile" type="file" accept=".json" style="display:none" onchange="importJSON(event)"><button class="btn red" onclick="resetAll()">Reset</button></div>
 
-<div class="actions-bar">
-  <button class="btn primary" onclick="exportPDF()">Print or save PDF</button>
-  <button class="btn" onclick="copyAnonymousSummary()">Copy Reddit summary</button>
-  <button class="btn" onclick="exportCSV()">Export CSV</button>
-  <button class="btn" onclick="exportJSON()">Backup JSON</button>
-  <button class="btn" onclick="document.getElementById('import-file').click()">Restore JSON</button>
-  <input type="file" id="import-file" accept=".json" style="display:none" onchange="importJSON(event)">
-  <button class="btn danger" onclick="confirmReset()">Reset</button>
-</div>
-
-<div class="fine-print"><strong>Privacy.</strong> This tool runs in your browser. Answers are saved only in this browser's local storage. Do not enter passwords, full account numbers, Social Security numbers, Aadhaar numbers, PAN numbers, passport numbers, or other sensitive identifiers.</div>
-<div class="fine-print"><strong>Disclaimer.</strong> This is a preparedness tool, not legal, tax, financial, estate, immigration, or medical advice. Talk to the right professionals for your situation.</div>
-<footer>Built by <a href="https://rupeestories.substack.com" target="_blank" rel="noopener">RupeeStories</a> · Free tool · No login · No data collected<br><small>Save this, share it with one person, and complete the must-fix items first.</small></footer>
+  <div class="footer">Built by <a href="https://rupeestories.substack.com" target="_blank" rel="noopener">RupeeStories</a>. This is a preparedness tool, not legal, tax, financial, immigration, or medical advice. Talk to the right professional for your situation.</div>
 </div>
 <div class="toast" id="toast">Saved</div>
-<div class="modal-bg" id="modal-bg"><div class="modal card"><h3>Reset everything?</h3><p>This clears answers, assignments, dates, handoff details, vault map, and notes in this browser.</p><div class="modal-actions"><button class="profile-btn" onclick="closeModal()">Cancel</button><button class="profile-btn" onclick="doReset()">Reset everything</button></div></div></div>
 <script>
-const SECTIONS = [
-  { id: 's1', title: 'Bank logins', items: [
-    'I can log in to all Indian bank accounts',
-    'I can log in to all US or foreign bank accounts',
-    'Transaction passwords are known or stored safely',
-    'MPIN or app PIN is working',
-    'Registered email is current',
-    'Registered mobile number is current',
-    'Debit cards are active if needed',
-    'Beneficiaries or transfer limits are checked',
-    'Dormant or inactive accounts are identified',
-    'Family knows the main bank accounts'
-  ]},
-  { id: 's2', title: 'Mobile numbers and OTP access', items: [
-    'I know which mobile number is linked to each Indian bank account',
-    'I know which number is linked to PAN',
-    'I know which number is linked to Aadhaar',
-    'I know which number is linked to demat',
-    'I know which number is linked to mutual funds',
-    'I can receive OTPs outside India',
-    'My old Indian SIM is not the only access point',
-    'My parent\u2019s phone number is not controlling my accounts',
-    'I have a backup plan if the SIM is lost'
-  ]},
-  { id: 's3', title: 'Aadhaar and PAN', items: [
-    'PAN and Aadhaar are linked if required',
-    'Aadhaar mobile number is current',
-    'PAN name and Aadhaar name match',
-    'Date of birth is consistent',
-    'Address details are known',
-    'I can access Aadhaar OTP',
-    'I can log in to the income tax portal'
-  ]},
-  { id: 's4', title: 'NRE and NRO accounts', items: [
-    'I can log in to NRE account',
-    'I can log in to NRO account',
-    'Nominees are added',
-    'Current mobile number is linked',
-    'Email is updated',
-    'FATCA status is updated',
-    'Passport details are current',
-    'OCI details are updated if needed',
-    'Old resident accounts were converted if needed',
-    'I know how NRO repatriation works',
-    'I know what forms the bank asks for'
-  ]},
-  { id: 's5', title: 'Demat and investments in India', items: [
-    'Broker login works',
-    'CDSL or NSDL login works',
-    'TPIN is known or resettable',
-    'Nominee is added',
-    'Linked bank account is correct',
-    'Registered email is current',
-    'Registered mobile is current',
-    'KYC status is valid',
-    'NRI or resident status is correct',
-    'I can sell holdings from outside India',
-    'Proceeds go to the right account'
-  ]},
-  { id: 's6', title: 'Nominees and beneficiaries', items: [
-    'Indian bank nominees are added',
-    'NRE/NRO nominees are added',
-    'Demat nominees are added',
-    'Mutual fund nominees are added',
-    'Insurance nominees are added',
-    'PPF, EPF, or NPS nominees are checked if applicable',
-    '401k beneficiaries are updated',
-    'IRA or Roth IRA beneficiaries are updated',
-    'HSA beneficiaries are updated',
-    '529 account successor or owner info is known',
-    'Spouse or trusted family knows where nominee info is stored'
-  ]},
-  { id: 's7', title: 'Joint access', items: [
-    'Spouse can access main bank info',
-    'Spouse knows where passwords are stored',
-    'Spouse can unlock emergency files if needed',
-    'Spouse knows main investment accounts',
-    'Spouse knows insurance details',
-    'Spouse knows auto-pay list',
-    'Spouse knows mortgage or rent details',
-    'Trusted person knows who to call in India',
-    'Trusted person knows who to call in the US or current country'
-  ]},
-  { id: 's8', title: 'Parents\u2019 documents in India', items: [
-    'Aadhaar copies are available',
-    'PAN copies are available',
-    'Passport or ID copies are available',
-    'Pension documents are known',
-    'Bank account list is known',
-    'FD details are known',
-    'Property documents location is known',
-    'Will location is known if available',
-    'Medical insurance card is available',
-    'Life insurance policies are known',
-    'Locker details are known',
-    'Utility bills or property tax receipts are available',
-    'Someone in India can physically access the documents'
-  ]},
-  { id: 's9', title: 'US or foreign retirement accounts', items: [
-    '401k login works',
-    'Roth 401k login works if applicable',
-    'Traditional IRA login works if applicable',
-    'Roth IRA login works if applicable',
-    'HSA login works if applicable',
-    '529 login works if applicable',
-    'Old employer plans are listed',
-    'Pension login is listed if applicable',
-    'Beneficiaries are updated',
-    'Trusted contact is added if available',
-    'Spouse knows these accounts exist',
-    'Two-factor authentication is not locked to one lost device'
-  ]},
-  { id: 's10', title: 'India tax login', items: [
-    'Income tax portal login works',
-    'Linked mobile is current',
-    'Linked email is current',
-    'Bank account is validated',
-    'Past returns can be accessed',
-    'Form 26AS can be accessed',
-    'AIS can be accessed',
-    'CA contact is saved',
-    'Pending notices are checked',
-    'Foreign asset reporting is reviewed if applicable'
-  ]},
-  { id: 's11', title: 'Emergency contact list', items: [
-    'Spouse contact is listed',
-    'Sibling or close family contact is listed',
-    'Close friend in current country is listed',
-    'Close friend or relative in India is listed',
-    'India CA is listed',
-    'US CPA or local tax person is listed',
-    'Immigration lawyer is listed if applicable',
-    'Estate lawyer is listed if applicable',
-    'Bank contact is listed',
-    'Insurance contact is listed',
-    'Property contact is listed',
-    'Employer HR contact is listed'
-  ]},
-  { id: 's12', title: 'CA and lawyer contacts', items: [
-    'India CA name and contact saved',
-    'US CPA or local tax contact saved',
-    'India property lawyer contact saved',
-    'Estate lawyer contact saved',
-    'Immigration lawyer contact saved',
-    'Bank relationship manager saved if any',
-    'I wrote what each person helps with'
-  ]},
-  { id: 's13', title: 'Property documents', items: [
-    'Property list is written down',
-    'Owner names are written down',
-    'Sale deed location is known',
-    'Link documents are available if applicable',
-    'Encumbrance certificate is available if applicable',
-    'Property tax receipts are available',
-    'Utility bills are available',
-    'Loan documents are available if applicable',
-    'Rental agreement is available if rented',
-    'Tenant contact is saved if rented',
-    'Property manager contact is saved',
-    'Original document location is known',
-    'Scanned copies are stored safely',
-    'Someone knows the sale or transfer process',
-    'Property tax payment login works',
-    'Electricity bill login works',
-    'Water bill login works',
-    'Society or HOA contact is saved',
-    'Tenant police verification is stored if applicable',
-    'Rental deposit details are known',
-    'Local caretaker contact is saved',
-    'Property keys location is known',
-    'Property photos or inventory are stored',
-    'Any pending litigation or dispute is noted'
-  ]},
-  { id: 's14', title: 'Passwords and access system', items: [
-    'Password manager is used or a safe backup exists',
-    'Trusted person knows how to access emergency info',
-    'Main financial email is identified',
-    'Main OTP phone is identified',
-    'Backup email is identified',
-    'Phone unlock process is documented if appropriate',
-    'Laptop or document folder access is documented if appropriate',
-    'High priority accounts are marked'
-  ]},
-  { id: 's15', title: 'One-page NRI money access sheet', items: [
-    'Main Indian bank listed',
-    'Main foreign bank listed',
-    'NRE bank listed',
-    'NRO bank listed',
-    'Demat broker listed',
-    'US or foreign brokerage listed',
-    'Retirement account providers listed',
-    'Insurance providers listed',
-    'CA and CPA listed',
-    'Lawyers listed',
-    'Property list added',
-    'Parent document location added',
-    'Emergency contacts added',
-    'Main OTP phone added',
-    'Main finance email added',
-    'Password storage location added'
-  ]},
-  { id: 's16', title: 'Insurance access', items: [
-    'Term life insurance policy details are listed',
-    'Health insurance policy details are listed',
-    'India health insurance details are listed',
-    'US or foreign health insurance details are listed',
-    'Employer life insurance is listed if applicable',
-    'Disability insurance is listed if applicable',
-    'Umbrella insurance is listed if applicable',
-    'Policy numbers are stored safely outside this tool',
-    'Nominees or beneficiaries are checked',
-    'Claim contact or agent contact is saved'
-  ]},
-  { id: 's17', title: 'Will, POA, and estate documents', items: [
-    'US will or trust status is known',
-    'India will status is known if applicable',
-    'Healthcare proxy is listed',
-    'Financial power of attorney is listed',
-    'India POA is prepared or reviewed if needed',
-    'Guardianship instructions for minor children are documented',
-    'Executor or trusted person is identified',
-    'Document location is known',
-    'Spouse or trusted person knows who to call',
-    'Estate lawyer contact is saved'
-  ]},
-  { id: 's18', title: 'Kids and dependent planning', items: [
-    'Kids\u2019 passports are current',
-    'OCI cards are current if applicable',
-    'Birth certificates are stored',
-    'School emergency contacts are current',
-    '529 account access is known',
-    'UTMA or custodial account access is known',
-    'Guardian information is documented',
-    'Medical insurance cards are available',
-    'Pediatrician or doctor contact is saved',
-    'Travel consent documents are available if one parent travels alone with kids'
-  ]},
-  { id: 's19', title: 'Immigration documents', items: [
-    'Passport copies are stored',
-    'Visa copies are stored if applicable',
-    'I-797 copies are stored if applicable',
-    'Green card copies are stored if applicable',
-    'OCI copies are stored if applicable',
-    'Naturalization certificate is stored if applicable',
-    'I-94 history is accessible if applicable',
-    'Immigration lawyer contact is saved',
-    'Employer immigration contact is saved',
-    'Family knows where immigration documents are stored'
-  ]},
-  { id: 's20', title: 'Credit cards, loans, and liabilities', items: [
-    'US or foreign credit card list is written down',
-    'India credit card list is written down',
-    'Auto-pay list is known',
-    'Mortgage login is known',
-    'Car loan login is known',
-    'Personal loan details are listed if any',
-    'Student loan details are listed if any',
-    'India home loan details are listed if any',
-    'Credit card annual fees are known',
-    'Spouse knows which cards to close or keep if needed'
-  ]},
-  { id: 's21', title: 'Recurring payments and subscriptions', items: [
-    'Main auto-pay accounts are listed',
-    'Utility payments are listed',
-    'Insurance premiums are listed',
-    'SIPs or automatic investments are listed',
-    'Mortgage or rent payment is listed',
-    'Credit card autopay is listed',
-    'Subscriptions are listed',
-    'Charitable recurring payments are listed',
-    'Family knows which payments are critical',
-    'Family knows which payments can be paused'
-  ]},
-  { id: 's22', title: 'Digital life and email recovery', items: [
-    'Main financial email is identified',
-    'Backup email is identified',
-    'Recovery email is current',
-    'Recovery phone is current',
-    'Google or Apple account recovery is tested',
-    'Password manager recovery process is known',
-    'Cloud storage location is known',
-    'Important scanned documents folder is known',
-    'Two-factor backup codes are stored safely',
-    'Trusted person knows how to access emergency folder'
-  ]},
-  { id: 's23', title: 'Medical emergency information', items: [
-    'Health insurance card is available',
-    'Primary doctor contact is saved',
-    'Specialist contacts are saved',
-    'Medication list is saved',
-    'Allergy list is saved',
-    'Blood group is known',
-    'Emergency hospital preference is known',
-    'Medical power of attorney is listed if available',
-    'Parents\u2019 doctor contact in India is saved',
-    'Recent medical reports location is known'
-  ]},
-  { id: 's24', title: 'Repatriation and money movement', items: [
-    'I know which money is in NRE',
-    'I know which money is in NRO',
-    'I know which money is in resident accounts if any',
-    'I know which accounts can send money abroad',
-    'CA certificate process is understood',
-    'Form 15CA/15CB process is understood if applicable',
-    'Bank branch contact for repatriation is saved',
-    'Source of funds documents are stored',
-    'Old property sale documents are stored',
-    'Family knows which money may be harder to move'
-  ]},
-  { id: 's25', title: 'Death certificate and claims process', items: [
-    'Family knows how to get death certificates in current country',
-    'Family knows how many certified copies may be needed',
-    'Family knows who to notify first',
-    'Employer benefits contact is saved',
-    'Life insurance claim process is known',
-    'Bank claim process is roughly understood',
-    'Brokerage or retirement account claim process is roughly understood',
-    'India document attestation or apostille need is understood if applicable',
-    'Spouse or trusted person knows where to start',
-    'A simple first-week checklist is written down'
-  ]}
+const STORAGE_KEY='rs_nri_access_v4';
+const profiles=['Single NRI','Married couple','Dual-income couple','Parents with kids','India property owner','Parent-care planner','Retired NRI','Returning to India'];
+const countries=['US','Canada','UK','UAE','Singapore','Australia','Europe','Other'];
+const glossary=[
+ ['Nominee','A person named on an Indian account or investment to receive or claim the asset after death. It may not always override legal inheritance rules.'],
+ ['Beneficiary','A person listed to receive money from insurance, retirement accounts, or similar assets. Common in US and other foreign accounts.'],
+ ['NRE','An Indian account for foreign income. Money is usually easier to send back abroad, subject to rules.'],
+ ['NRO','An Indian account for Indian income such as rent, dividends, or sale proceeds. Moving money abroad may need paperwork.'],
+ ['Repatriation','Moving money from India to another country. NRO transfers often need CA paperwork and bank review.'],
+ ['POA','Power of attorney. A legal document allowing someone else to act for you. It must be done carefully.'],
+ ['KYC','Know Your Customer. Bank or broker identity checks that can block access if stale or mismatched.'],
+ ['Aadhaar and PAN','Core Indian identity and tax identifiers. Name, date of birth, and phone mismatches can break access.'],
+ ['2FA or OTP','Second-factor access through code, app, email, or phone. This is where many NRI accounts fail.'],
+ ['Document vault','A simple map showing where important papers are stored. It should not contain passwords.']
 ];
-
-
-
-
-const CRITICAL_KEYS = new Set([
-  // Logins and access
-  's1-0',    // Indian bank login works
-  's1-1',    // US or foreign bank login works
-  's2-0',    // Know mobile linked to Indian bank accounts
-  's2-5',    // Can receive OTPs outside India
-  's3-6',    // Can log in to income tax portal
-  's4-0',    // Can log in to NRE account
-  's4-1',    // Can log in to NRO account
-  's5-0',    // Broker login works
-  's5-10',   // Proceeds go to the right account
-  // Beneficiaries and joint access
-  's6-0',    // Indian bank nominees added
-  's6-10',   // Family knows where nominee info is stored
-  's7-0',    // Spouse can access main bank info
-  's7-1',    // Spouse knows where passwords are stored
-  's9-10',   // Spouse knows retirement accounts exist
-  // Contacts
-  's11-4',   // India CA is listed
-  's11-5',   // US CPA or local tax person is listed
-  // Documents
-  's13-11',  // Original property document location is known
-  's17-7',   // Estate document location is known
-  's17-9',   // Estate lawyer contact saved
-  's19-9',   // Family knows where immigration docs are stored
-  // Master keys
-  's14-1',   // Trusted person knows how to access emergency info
-  's14-2',   // Main financial email identified
-  's14-3',   // Main OTP phone identified
-  's22-2',   // Recovery email is current
-  's22-5',   // Password manager recovery process is known
-  's22-9',   // Trusted person knows how to access emergency folder
-  // Insurance and payments
-  's16-0',   // Term life insurance listed
-  's16-1',   // Health insurance listed
-  's20-2',   // Auto-pay list is known
-  's21-8',   // Family knows which payments are critical
-  // Medical and repatriation
-  's23-0',   // Health insurance card is available
-  's24-6'    // Bank branch contact for repatriation saved
-]);
-
-const START_STEPS = [
- {title:'Money access', keys:['s1-0','s1-1','s7-0','s1-9']},
- {title:'OTP and identity', keys:['s2-0','s2-5','s14-3','s3-6']},
- {title:'Passwords and email', keys:['s14-0','s14-1','s14-2','s22-2']},
- {title:'People and papers', keys:['s6-10','s11-4','s11-5','s13-11','s17-7']}
+const items=[
+ {id:'phone-main',cat:'Phone and OTP',title:'Main OTP phone is identified and working outside India',why:'Many NRI accounts fail because OTPs still go to an old Indian SIM or a parent phone.',next:'Write the active OTP phone in the family packet and test it from your current country.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'email-main',cat:'Email and passwords',title:'Main financial email is known and recoverable',why:'Most account recovery starts with email. If email is locked, everything slows down.',next:'Confirm recovery email and phone. Store recovery notes in your password manager.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'password-manager',cat:'Email and passwords',title:'Spouse or trusted person knows how to reach the password manager or emergency folder',why:'Knowing the accounts exist is not enough if nobody can reach the access map.',next:'Use emergency access features or keep a sealed instruction sheet in a safe place.',priority:'must',starter:true,profiles:['Married couple','Dual-income couple','Parents with kids'],countries:[]},
+ {id:'india-bank',cat:'Banking',title:'Main Indian bank login works',why:'Indian bank access often depends on phone, email, KYC, and app status all working together.',next:'Test login, transfer limits, and OTP flow. Do not save passwords in this tool.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'foreign-bank',cat:'Banking',title:'Main foreign bank login works',why:'Cash access matters in the first week, especially for mortgage, rent, bills, and travel.',next:'Confirm login, recovery phone, and backup user access if allowed.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'nre-nro',cat:'Banking',title:'NRE and NRO accounts are listed with purpose',why:'Family may not know which account holds foreign income, Indian income, rent, or sale proceeds.',next:'List bank names, account type, branch contact, and which one can move money abroad.',priority:'soon',starter:false,profiles:['Returning to India','Retired NRI','India property owner'],countries:[]},
+ {id:'demat',cat:'Investments India',title:'Demat and mutual fund access is known',why:'Investments can be visible on statements but hard to sell or claim without login and nominee details.',next:'Check broker login, CDSL or NSDL access, nominee, linked bank, and NRI status.',priority:'soon',starter:false,profiles:['India property owner','Returning to India','Retired NRI'],countries:[]},
+ {id:'nominee-india',cat:'Nominee and beneficiary',title:'Indian bank, demat, and mutual fund nominees are added',why:'Missing nominees can turn a simple claim into paperwork for the family.',next:'Check each account and update nominees where missing.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'beneficiary-retirement',cat:'Nominee and beneficiary',title:'Foreign retirement and brokerage beneficiaries are updated',why:'Old beneficiaries from early career years are common and can create family problems.',next:'Check 401k, IRA, Roth, pension, HSA, brokerage, insurance, and similar accounts.',priority:'must',starter:true,profiles:['US','Married couple','Dual-income couple','Parents with kids','Retired NRI'],countries:['US','Canada','UK','Australia','Singapore']},
+ {id:'insurance-life',cat:'Insurance',title:'Life and health insurance details are listed',why:'In a crisis, family needs policy names, claim contacts, and employer benefit contacts fast.',next:'Add provider names and claim contacts to the family packet. Keep policy numbers elsewhere.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'ca-cpa',cat:'Contacts',title:'CA, CPA, lawyer, and key advisor contacts are saved',why:'The person who knows the paperwork is useless if family does not know who they are.',next:'Add names, phone/email, country, and what each person helps with.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'property-docs',cat:'Property India',title:'Original India property documents location is known',why:'Property is often the biggest India asset, but documents may be in a locker, parent home, or unknown folder.',next:'Add storage location, scanned copy location, caretaker, tenant, and local lawyer contact.',priority:'must',starter:true,profiles:['India property owner','Parent-care planner','Returning to India'],countries:[]},
+ {id:'parent-docs',cat:'Parents India',title:'Parent bank, medical, pension, and property document map exists',why:'Many NRIs become the support system for parents but do not have the paperwork map.',next:'Create a parent folder map with bank list, doctor contact, insurance, pension, property, and local helper.',priority:'soon',starter:false,profiles:['Parent-care planner'],countries:[]},
+ {id:'immigration',cat:'Immigration',title:'Passport, visa, green card, OCI, and immigration files are stored in one known place',why:'Travel, benefits, and emergency decisions can depend on these documents.',next:'Add folder location and lawyer or employer contact.',priority:'must',starter:true,profiles:['US','Canada','UK','Australia','Singapore','UAE','Europe'],countries:['US','Canada','UK','UAE','Singapore','Australia','Europe']},
+ {id:'kids-guardian',cat:'Kids and dependents',title:'Kids documents and guardian instructions are documented',why:'If both parents are unavailable, family needs passports, school contacts, medical info, and guardian names.',next:'Add school, doctor, passports, OCI, birth certificates, and guardian notes.',priority:'must',starter:false,profiles:['Parents with kids'],countries:[]},
+ {id:'vault-map',cat:'Document vault',title:'Document vault map exists',why:'Scanned files help only if family knows which cloud, folder, drive, locker, or safe to check.',next:'Fill the vault map in the family packet.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'autopay',cat:'Bills and debt',title:'Auto-pay, mortgage, rent, and major bills are listed',why:'The first month can get messy if nobody knows what must keep getting paid.',next:'List only payment categories and providers, not full numbers.',priority:'soon',starter:false,profiles:['Married couple','Dual-income couple','Parents with kids','Retired NRI'],countries:[]},
+ {id:'country-tax',cat:'Tax and country path',title:'Country-specific tax and estate contact is identified',why:'US, Canada, UK, UAE, Singapore, Australia, and Europe have different rules for tax, estate, and account recovery.',next:'Add a local tax person or lawyer contact for your country path.',priority:'soon',starter:false,profiles:[],countries:['US','Canada','UK','UAE','Singapore','Australia','Europe']},
+ {id:'return-india',cat:'Return to India',title:'Return-to-India account cleanup list exists',why:'Moving back changes banking status, tax residency, insurance, phone, and document needs.',next:'List items for NRE/NRO, demat status, PAN/Aadhaar phone, tax contacts, insurance, and repatriation.',priority:'soon',starter:false,profiles:['Returning to India','Retired NRI'],countries:[]},
+ {id:'lost-phone',cat:'Recovery plan',title:'Lost phone recovery steps are written down',why:'A dead or lost phone can block email, bank, broker, Aadhaar, PAN, and tax access.',next:'Write the order: email recovery, SIM replacement, password manager, then financial accounts.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'review-date',cat:'Review rhythm',title:'Last reviewed date and next review date are set',why:'Access goes stale. Phones, employers, KYC, beneficiaries, and documents change quietly.',next:'Review every 6 months and after marriage, divorce, new child, home purchase, country move, job change, passport renewal, or parent health change.',priority:'soon',starter:true,profiles:[],countries:[]},
+ {id:'subscriptions',cat:'Bills and debt',title:'Subscriptions and optional recurring payments are listed',why:'This is useful cleanup, but not the first emergency priority.',next:'List what can be paused or cancelled.',priority:'nice',starter:false,profiles:[],countries:[]},
+ {id:'property-utility',cat:'Property India',title:'India property utility, tax, tenant, and caretaker details are listed',why:'Useful for property owners, especially if parents or tenants handle things locally.',next:'Add society, electricity, water, property tax, tenant, and caretaker contacts.',priority:'nice',starter:false,profiles:['India property owner','Parent-care planner'],countries:[]},
+ {id:'medical',cat:'Medical',title:'Medical cards, doctors, medications, and allergies are documented',why:'Family may need health details before they need financial details.',next:'Add insurance card location, doctor, hospital, medications, allergies, and blood group.',priority:'soon',starter:false,profiles:['Retired NRI','Parent-care planner','Parents with kids'],countries:[]}
 ];
-const PRIORITY_SOON = new Set(['s1-5','s1-8','s2-1','s2-2','s2-6','s2-7','s3-0','s4-2','s4-9','s5-3','s5-9','s6-1','s6-2','s6-7','s6-8','s7-7','s8-12','s10-7','s11-6','s11-7','s13-12','s15-0','s15-1','s15-13','s16-9','s17-6','s18-6','s20-2','s21-8','s22-3','s22-8','s23-8','s24-5','s25-8','s25-9']);
-const WHY = {
- 's1-0':'If this fails, India-side money access may stop immediately.',
- 's1-1':'Your family may need cash fast before claims or transfers settle.',
- 's2-0':'Most India access failures start with the wrong phone number.',
- 's2-5':'Many NRIs cannot act because OTPs still go to an old SIM.',
- 's3-6':'Tax portal access helps with notices, refunds, 26AS, AIS, and bank validation.',
- 's4-0':'NRE access can matter when money needs to move cleanly.',
- 's4-1':'NRO money often needs paperwork, so account access matters early.',
- 's5-0':'Your family may know investments exist but be unable to sell or claim them.',
- 's6-10':'Nominees help only if family knows where the nominee details are.',
- 's7-0':'The real test is whether someone else can act without you.',
- 's7-1':'A password manager helps only if emergency access is understood.',
- 's11-4':'A known CA can reduce panic around India paperwork.',
- 's11-5':'A CPA or tax contact can help avoid wrong tax moves.',
- 's13-11':'Property ownership is hard to prove if original papers are missing.',
- 's17-7':'Estate documents are useless if nobody can find them.',
- 's22-5':'Password recovery can become the master bottleneck.',
- 's23-0':'Medical care moves faster when insurance details are easy to find.',
- 's24-6':'NRO repatriation often depends on branch process and paperwork.'
-};
-const DEPENDS = {
- 's2-5':['Indian bank login','demat and mutual funds','income tax portal','Aadhaar/PAN workflows'],
- 's14-1':['bank access','brokerage access','insurance claims','emergency document access'],
- 's14-2':['password resets','broker alerts','tax portal recovery','cloud document access'],
- 's22-5':['password manager','2FA backup codes','email recovery','cloud vault'],
- 's13-11':['property sale','inheritance paperwork','rental disputes','loan closure']
-};
-const NEXT = {
- 's2-5':'Test OTP from outside India this week. If it fails, update the registered mobile or add a reliable backup path.',
- 's14-1':'Write down the emergency access process. Store it somewhere safe. Do not store the master password here.',
- 's6-10':'Open each bank, demat, retirement, and insurance account and confirm the nominee or beneficiary page.',
- 's13-11':'Create a document location note: original location, scanned copy location, and who can physically access it.',
- 's17-7':'Ask your estate lawyer where originals are stored and what your spouse should do first.',
- 's11-4':'Save the CA name, phone, email, and what they handle. Share the contact with your spouse or trusted person.',
- 's11-5':'Save the CPA or local tax contact and list what they handle.',
- 's23-0':'Put health insurance cards in your phone wallet and emergency folder.'
-};
-const HANDOFF_FIELDS = [
- ['mainBank','Main Indian bank','Example: ICICI NRE/NRO, branch/contact location'],['foreignBank','Main US/foreign bank','Example: Chase checking, login handled by password manager'],['otpPhone','Main OTP phone','Example: US number ending 1234 or India SIM location'],['financeEmail','Main finance email','Example: Gmail account used for banks'],['passwordAccess','Password manager access','Example: 1Password emergency kit in safe'],['caContact','India CA contact','Name, phone, email, what they handle'],['cpaContact','CPA / local tax contact','Name, phone, email, what they handle'],['lawyerContact','Estate / property lawyer','Name, phone, email, what they handle'],['insuranceContact','Insurance contact','Life, health, employer benefits'],['trustedPerson','Trusted India contact','Sibling, cousin, close friend, or local helper'],['firstCall','First person to call','Who should be contacted first'],['doNotForget','One thing not to miss','Example: employer benefits, locker, old 401k']
+const packetFields=[
+ ['owner','Prepared by'],['lastReviewed','Last reviewed'],['nextReview','Next review due'],['mainPhone','Main OTP phone location'],['mainEmail','Main financial email'],['passwordMap','Password manager or emergency folder location'],['indiaBank','Main Indian bank name'],['foreignBank','Main foreign bank name'],['nreNro','NRE/NRO banks'],['ca','India CA contact'],['taxPro','Foreign tax contact'],['lawyer','Lawyer or estate contact'],['insurance','Insurance contacts'],['property','Property document location'],['vault','Document vault location'],['immigration','Immigration file location'],['parentDocs','Parent document location'],['trusted','Trusted contact'],['firstStep','First person to call'],['notes','Safe notes, no secrets']
 ];
-const VAULT_FIELDS = [
- ['passports','Passports / OCI / immigration','Location only'],['property','Property papers','Original and scanned copy locations'],['tax','Tax returns / PAN / Aadhaar','Folder or CA location'],['insurance','Insurance policies','Folder or policy portal'],['estate','Will / POA / trust','Lawyer or secure storage location'],['medical','Medical records','Folder, hospital portal, doctor contact'],['parents','Parents documents','Locker, file cabinet, sibling, or folder'],['loans','Loans and liabilities','Mortgage, cards, auto-pay map'],['brokerage','Brokerage / retirement','Provider list location'],['backup','Backup copy','Second safe location']
-];
-const EMERGENCY = [
- {title:'First 2 hours', items:['Find the emergency folder or password manager instructions.','Confirm main OTP phone and main finance email.','Contact spouse, sibling, or trusted person listed in the handoff sheet.','Do not start closing accounts until you know what each account is used for.']},
- {title:'First 24 hours', items:['Identify main bank accounts, insurance, employer benefits, and medical details.','Call CA, CPA, estate lawyer, or immigration contact if relevant.','Check which payments are time-sensitive: mortgage, rent, insurance, school, utilities.','Locate property papers, immigration papers, and policy documents.']},
- {title:'First week', items:['Get certified documents needed for claims or bank paperwork.','Start insurance, beneficiary, and employer benefits claims only after reading requirements.','For India accounts, ask the bank or CA what forms are needed before moving money.','Keep a written log of calls, dates, contacts, and documents submitted.']}
-];
-const PROFILE_DEFAULTS = {
- single:{na:['s7','s18'], checks:{hasKids:false}},
- couple:{na:[], checks:{}},
- parents:{na:[], checks:{hasKids:true}},
- caregiver:{na:[], checks:{hasParents:true}}
-};
-const STORAGE_KEY='nri_emergency_access_v3';
-let state={items:{},meta:{profile:'couple',checks:{hasKids:false,hasProperty:true,hasDemat:true,hasParents:true,hasRetirement:true,isReturning:false},handoff:{},vault:{}}};
-try{const saved=localStorage.getItem(STORAGE_KEY); if(saved) state=Object.assign(state,JSON.parse(saved)); if(!state.items)state.items={}; if(!state.meta)state.meta={}; if(!state.meta.checks)state.meta.checks={}; if(!state.meta.handoff)state.meta.handoff={}; if(!state.meta.vault)state.meta.vault={};}catch(e){}
-function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function itemKey(sIdx,iIdx){return SECTIONS[sIdx].id+'-'+iIdx;} function keyToIndices(k){const [sid,i]=k.split('-'); return {sIdx:SECTIONS.findIndex(s=>s.id===sid),iIdx:Number(i)}} function itemTextFromKey(k){const {sIdx,iIdx}=keyToIndices(k); return SECTIONS[sIdx]?.items[iIdx]||'';}
-function getItem(sIdx,iIdx){const k=itemKey(sIdx,iIdx); return state.items[k]||{status:null,note:'',owner:'',due:''};}
-function setItemStatus(sIdx,iIdx,status){const k=itemKey(sIdx,iIdx); if(!state.items[k])state.items[k]={status:null,note:'',owner:'',due:''}; state.items[k].status=state.items[k].status===status?null:status; save(); syncItemUI(k); updateScores();}
-function setItemNote(sIdx,iIdx,note){const k=itemKey(sIdx,iIdx); if(!state.items[k])state.items[k]={status:null,note:'',owner:'',due:''}; state.items[k].note=note; save(); updateFamilySummary();}
-function setItemMeta(sIdx,iIdx,field,val){const k=itemKey(sIdx,iIdx); if(!state.items[k])state.items[k]={status:null,note:'',owner:'',due:''}; state.items[k][field]=val; save(); renderActionList();}
-function priority(k){return CRITICAL_KEYS.has(k)?'critical':PRIORITY_SOON.has(k)?'soon':'later'} function priorityLabel(k){const p=priority(k); return p==='critical'?'Must fix now':p==='soon'?'Fix soon':'Nice to clean up'}
-function renderItem(sIdx,iIdx,item,forceCritical=false){const k=itemKey(sIdx,iIdx), it=getItem(sIdx,iIdx), p=forceCritical?'critical':priority(k); const why=WHY[k]?`<div class="why">Why it matters: ${esc(WHY[k])}</div>`:''; const deps=DEPENDS[k]?`<div class="dependency" id="dep-${k}">May block: ${DEPENDS[k].map(esc).join(', ')}</div>`:''; return `<div class="item is-${p} ${CRITICAL_KEYS.has(k)||forceCritical?'is-critical':''}" data-key="${k}" data-s="${sIdx}" data-i="${iIdx}"><div class="item-top"><div><div class="item-text">${esc(item)}</div>${why}${deps}</div><span class="flag ${p}">${p==='critical'?'Must fix':p==='soon'?'Fix soon':'Later'}</span></div><div class="controls"><button class="opt" data-val="done" aria-pressed="${it.status==='done'}" onclick="setItemStatus(${sIdx},${iIdx},'done')">Done</button><button class="opt" data-val="needs" aria-pressed="${it.status==='needs'}" onclick="setItemStatus(${sIdx},${iIdx},'needs')">Needs work</button><button class="opt" data-val="na" aria-pressed="${it.status==='na'}" onclick="setItemStatus(${sIdx},${iIdx},'na')">N/A</button></div><div class="mini-fields"><select onchange="setItemMeta(${sIdx},${iIdx},'owner',this.value)"><option value="">Assign to</option>${['Self','Spouse','Parent','Sibling','CA','CPA','Lawyer','Trusted person'].map(x=>`<option ${it.owner===x?'selected':''}>${x}</option>`).join('')}</select><input type="date" value="${esc(it.due||'')}" onchange="setItemMeta(${sIdx},${iIdx},'due',this.value)" title="Target date"></div><button class="note-toggle" onclick="toggleNote(this)">${it.note?'Hide note':'Add note'}</button><textarea class="note ${it.note?'show':''}" placeholder="Reminder only. Do not paste passwords, full account numbers, Aadhaar, PAN, SSN, or passport numbers." oninput="setItemNote(${sIdx},${iIdx},this.value)">${esc(it.note||'')}</textarea></div>`;}
-function syncItemUI(k){const {sIdx,iIdx}=keyToIndices(k); const st=getItem(sIdx,iIdx).status; document.querySelectorAll(`.item[data-key="${k}"] .opt`).forEach(b=>b.setAttribute('aria-pressed',b.dataset.val===st?'true':'false')); document.querySelectorAll(`#dep-${CSS.escape(k)}`).forEach(d=>d.classList.toggle('show',st==='needs'));}
-function toggleNote(btn){const ta=btn.nextElementSibling; const show=ta.classList.toggle('show'); btn.textContent=show?'Hide note':'Add note'; if(show)setTimeout(()=>ta.focus(),30)}
-function renderStart(){document.getElementById('start-sections').innerHTML=START_STEPS.map(step=>`<div class="card"><div class="step-head"><div class="step-title">${esc(step.title)}</div><div class="step-count">${step.keys.length} checks</div></div><div class="items">${step.keys.map(k=>{const {sIdx,iIdx}=keyToIndices(k); return renderItem(sIdx,iIdx,itemTextFromKey(k),true)}).join('')}</div></div>`).join('');}
-function renderFull(){document.getElementById('sections').innerHTML=SECTIONS.map((sec,sIdx)=>`<details class="section card" id="${sec.id}"><summary><span class="sec-num">${String(sIdx+1).padStart(2,'0')}</span><span class="sec-title">${esc(sec.title)}</span><span class="sec-score" id="${sec.id}-score">—</span><span>›</span></summary><div class="items">${sec.items.map((item,iIdx)=>renderItem(sIdx,iIdx,item)).join('')}</div></details>`).join('');}
-function renderEmergency(){document.getElementById('emergency-grid').innerHTML=EMERGENCY.map(g=>`<div class="emergency-card card"><h3>${esc(g.title)}</h3><ol>${g.items.map(i=>`<li>${esc(i)}</li>`).join('')}</ol></div>`).join('');}
-function renderForms(){document.getElementById('handoff-form').innerHTML=HANDOFF_FIELDS.map(([id,label,ph])=>`<div class="field"><label>${esc(label)}</label><input value="${esc(state.meta.handoff[id]||'')}" placeholder="${esc(ph)}" oninput="setHandoff('${id}',this.value)"></div>`).join(''); document.getElementById('vault-form').innerHTML=VAULT_FIELDS.map(([id,label,ph])=>`<div class="field"><label>${esc(label)}</label><input value="${esc(state.meta.vault[id]||'')}" placeholder="${esc(ph)}" oninput="setVault('${id}',this.value)"></div>`).join('');}
-function setHandoff(id,val){state.meta.handoff[id]=val; save(); updateFamilySummary()} function setVault(id,val){state.meta.vault[id]=val; save(); updateFamilySummary()}
-function loadSetup(){document.querySelectorAll('.profile-btn[data-profile]').forEach(b=>b.classList.toggle('active',b.dataset.profile===(state.meta.profile||'couple'))); ['hasKids','hasProperty','hasDemat','hasParents','hasRetirement','isReturning'].forEach(id=>{const el=document.getElementById(id); if(el){el.checked=!!state.meta.checks[id]; el.onchange=()=>{state.meta.checks[id]=el.checked; save();}}}); document.getElementById('last-verified').value=state.meta.lastVerified||''; document.getElementById('next-review').value=state.meta.nextReview||''; updateReviewStatus();}
-function setProfile(p){state.meta.profile=p; if(PROFILE_DEFAULTS[p]?.checks) Object.assign(state.meta.checks,PROFILE_DEFAULTS[p].checks); save(); loadSetup();}
-function sectionNA(sectionId){const sec=SECTIONS.find(s=>s.id===sectionId); if(!sec)return; const sIdx=SECTIONS.indexOf(sec); sec.items.forEach((_,iIdx)=>{const k=itemKey(sIdx,iIdx); if(!state.items[k]||!state.items[k].status) state.items[k]={...(state.items[k]||{}),status:'na'};});}
-function applyProfileDefaults(){const c=state.meta.checks; if(state.meta.profile==='single'){sectionNA('s7');} if(!c.hasKids)sectionNA('s18'); if(!c.hasProperty)sectionNA('s13'); if(!c.hasDemat)sectionNA('s5'); if(!c.hasParents)sectionNA('s8'); if(!c.hasRetirement)sectionNA('s9'); if(!c.isReturning)sectionNA('s24'); save(); renderAll(); showToast('Profile defaults applied');}
-function setLastVerified(v){state.meta.lastVerified=v; if(v&&!state.meta.nextReview){const d=new Date(v+'T00:00:00'); d.setMonth(d.getMonth()+6); state.meta.nextReview=d.toISOString().slice(0,10); document.getElementById('next-review').value=state.meta.nextReview;} save(); updateReviewStatus();}
-function setNextReview(v){state.meta.nextReview=v; save(); updateReviewStatus();}
-function updateReviewStatus(){const lv=state.meta.lastVerified,nr=state.meta.nextReview; const el=document.getElementById('review-status'), small=document.getElementById('review-small'), warn=document.getElementById('stale-warning'); warn.classList.remove('show'); if(!lv){el.textContent='No date'; small.textContent='Set a last-tested date'; return;} const today=new Date(); const last=new Date(lv+'T00:00:00'); const days=Math.floor((today-last)/86400000); el.textContent=days<0?'Future date':days+' days old'; small.textContent=nr?'Next review: '+nr:'Set next review due'; const due=nr?new Date(nr+'T00:00:00'):null; if(days>180 || (due && today>due)) warn.classList.add('show');}
-function updateScores(){let done=0,needs=0,na=0,answered=0,critDone=0,critApplicable=0; const needBySection={}; SECTIONS.forEach((sec,sIdx)=>{let sd=0,sapp=0; sec.items.forEach((_,iIdx)=>{const k=itemKey(sIdx,iIdx), st=getItem(sIdx,iIdx).status; if(st)answered++; if(st==='done'){done++;sd++;sapp++; if(CRITICAL_KEYS.has(k)){critDone++;critApplicable++;}} else if(st==='needs'){needs++;sapp++; needBySection[sec.title]=(needBySection[sec.title]||0)+1; if(CRITICAL_KEYS.has(k))critApplicable++;} else if(st==='na'){na++;}}); const se=document.getElementById(sec.id+'-score'); if(se){if(!sapp){se.textContent='—';se.classList.remove('complete')}else{const pct=Math.round(sd/sapp*100);se.textContent=`${sd}/${sapp} · ${pct}%`;se.classList.toggle('complete',pct===100)}}}); const applicable=done+needs,pct=applicable?Math.round(done/applicable*100):0,critPct=critApplicable?Math.round(critDone/critApplicable*100):0; document.getElementById('score-val').textContent=pct; document.getElementById('progress-fill').style.width=pct+'%'; document.getElementById('crit-val').textContent=critPct; const cf=document.getElementById('crit-fill'); cf.style.width=critPct+'%'; cf.classList.toggle('good',critPct===100&&critApplicable>0); const biggest=Object.entries(needBySection).sort((a,b)=>b[1]-a[1])[0]; document.getElementById('biggest-risk').textContent=biggest?biggest[0]:'None yet'; document.getElementById('next-step').textContent=needs?'Fix top item':answered?'Review handoff':'Start test'; const pill=document.getElementById('risk-pill'), summary=document.getElementById('score-summary'), stage=document.getElementById('readiness-stage'); pill.className='pill'; if(!answered){stage.textContent='Not started'; summary.textContent='Start with the 10-minute test.'; pill.textContent='Not started';} else if(pct>=85){stage.textContent='Prepared'; summary.textContent='Family can likely act. Review twice a year.'; pill.textContent='Good shape'; pill.classList.add('good');} else if(pct>=65){stage.textContent='Stable'; summary.textContent='Most basics are in place, but weak spots remain.'; pill.textContent='Needs cleanup'; pill.classList.add('warn');} else if(pct>=40){stage.textContent='Exposed'; summary.textContent='Your family may hit delays in an emergency.'; pill.textContent='Access risk'; pill.classList.add('risk');} else {stage.textContent='Fragile'; summary.textContent='One missing phone, email, or password path can block access.'; pill.textContent='High access risk'; pill.classList.add('high');} document.getElementById('crit-detail').textContent=critApplicable?`${critDone} of ${critApplicable} must-fix items done`:'Items that block everything else'; Object.keys(DEPENDS).forEach(syncItemUI); renderActionList(); updateFamilySummary(); updateReviewStatus();}
-function renderActionList(){const list=[]; SECTIONS.forEach((sec,sIdx)=>sec.items.forEach((item,iIdx)=>{const k=itemKey(sIdx,iIdx), it=getItem(sIdx,iIdx); if(it.status==='needs') list.push({sec:sec.title,item,k,p:priority(k),owner:it.owner,due:it.due,next:NEXT[k]||'Write the exact next action, assign an owner, and set a target date.'});})); const rank={critical:0,soon:1,later:2}; list.sort((a,b)=>rank[a.p]-rank[b.p]||String(a.due||'9999').localeCompare(String(b.due||'9999'))); const ul=document.getElementById('action-list'); if(!list.length){ul.innerHTML=Object.values(state.items).some(v=>v.status)?'<div class="empty-state">No items marked needs work. Review the family handoff next.</div>':'<div class="empty-state">Mark items as needs work to build your fix-first list.</div>'; return;} ul.innerHTML=list.slice(0,20).map(x=>`<li><span class="tag ${x.p}">${priorityLabel(x.k)}</span><div><div>${esc(x.item)}</div><div class="sec-ref">${esc(x.sec)}${x.owner?' · Owner: '+esc(x.owner):''}${x.due?' · Due: '+esc(x.due):''}</div><div class="next-text">Next: ${esc(x.next)}</div></div></li>`).join('')+(list.length>20?`<li style="display:block;text-align:center;color:var(--muted)">+ ${list.length-20} more items need work</li>`:'');}
-function updateFamilySummary(){const must=[], notes=[]; SECTIONS.forEach((sec,sIdx)=>sec.items.forEach((item,iIdx)=>{const k=itemKey(sIdx,iIdx), it=getItem(sIdx,iIdx); if(it.status==='needs'&&CRITICAL_KEYS.has(k))must.push(item); if(it.note)notes.push(`${sec.title}: ${it.note}`);})); const h=state.meta.handoff||{}, v=state.meta.vault||{}; const people=['caContact','cpaContact','lawyerContact','insuranceContact','trustedPerson','firstCall'].map(id=>h[id]).filter(Boolean); const essentials=['mainBank','foreignBank','otpPhone','financeEmail','passwordAccess'].map(id=>h[id]).filter(Boolean); const vaults=Object.entries(v).filter(([_,val])=>val).map(([id,val])=>VAULT_FIELDS.find(x=>x[0]===id)?.[1]+': '+val); const box=(title,arr,empty)=>`<div class="summary-box"><h3>${esc(title)}</h3><ul>${(arr.length?arr:[empty]).slice(0,9).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`; document.getElementById('family-summary').innerHTML=box('Fix first',must,'No must-fix needs-work items marked yet.')+box('Access map',essentials,'Add main bank, OTP phone, finance email, and password manager location.')+box('People to call',people,'Add CA, CPA, lawyer, insurance, and trusted contact.')+box('Document vaults',vaults,'Add folder or physical storage locations.')+box('Reminder notes',notes,'No reminder notes added yet.');}
-function switchTab(tab){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active')); document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active')); document.getElementById('tab-'+tab).classList.add('active'); document.getElementById('tab-btn-'+tab).classList.add('active'); if(tab==='handoff')updateFamilySummary();}
-function expandAll(){document.querySelectorAll('details.section').forEach(d=>d.open=true)} function collapseAll(){document.querySelectorAll('details.section').forEach(d=>d.open=false)}
-function toggleCriticalOnly(){const on=document.body.classList.toggle('critical-only'); const b=document.getElementById('crit-toggle'); b.textContent=on?'Show all items':'Show critical only'; b.classList.toggle('active',on); if(on)document.querySelectorAll('details.section').forEach(d=>{if(d.querySelector('.is-critical'))d.open=true})}
-function filterAudit(q){q=q.trim().toLowerCase(); document.querySelectorAll('details.section').forEach(sec=>{let match=false; sec.querySelectorAll('.item').forEach(item=>{const ok=!q||item.textContent.toLowerCase().includes(q); item.classList.toggle('hidden-by-search',!ok); if(ok)match=true}); sec.classList.toggle('no-match',!match); if(q&&match)sec.open=true;});}
-function exportPDF(){if(document.getElementById('tab-handoff').classList.contains('active'))updateFamilySummary(); window.print();}
-function downloadFile(name,content,type){const blob=new Blob([content],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),300);}
-function exportCSV(){const rows=[['Section','Item','Priority','Status','Owner','Target date','Note']]; SECTIONS.forEach((sec,sIdx)=>sec.items.forEach((item,iIdx)=>{const k=itemKey(sIdx,iIdx), it=getItem(sIdx,iIdx); rows.push([sec.title,item,priorityLabel(k),it.status||'',it.owner||'',it.due||'',it.note||'']);})); const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(',')).join('\n'); downloadFile('nri-emergency-access-system.csv',csv,'text/csv'); showToast('CSV exported');}
-function exportJSON(){downloadFile('nri-emergency-access-system-backup.json',JSON.stringify(state,null,2),'application/json'); showToast('Backup exported');}
-function importJSON(e){const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{try{const obj=JSON.parse(r.result); state=Object.assign({items:{},meta:{}},obj); if(!state.items)state.items={}; if(!state.meta)state.meta={}; if(!state.meta.handoff)state.meta.handoff={}; if(!state.meta.vault)state.meta.vault={}; save(); renderAll(); showToast('Backup restored');}catch(err){alert('Could not read this JSON file.')}}; r.readAsText(f); e.target.value='';}
-function copyAnonymousSummary(){const text=`My NRI access score: ${document.getElementById('score-val').textContent}%\nCritical access score: ${document.getElementById('crit-val').textContent}%\nReadiness stage: ${document.getElementById('readiness-stage').textContent}\nBiggest weak spot: ${document.getElementById('biggest-risk').textContent}\nNext step: ${document.getElementById('next-step').textContent}\n\nI realized this is less about net worth and more about whether my family can actually access things when needed.`; navigator.clipboard?.writeText(text).then(()=>showToast('Anonymous summary copied')).catch(()=>alert(text));}
-function showToast(msg){const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600)}
-function confirmReset(){document.getElementById('modal-bg').classList.add('show')} function closeModal(){document.getElementById('modal-bg').classList.remove('show')} function doReset(){state={items:{},meta:{profile:'couple',checks:{hasKids:false,hasProperty:true,hasDemat:true,hasParents:true,hasRetirement:true,isReturning:false},handoff:{},vault:{}}}; save(); closeModal(); renderAll(); showToast('Reset complete')}
-function renderAll(){loadSetup(); renderStart(); renderEmergency(); renderFull(); renderForms(); updateScores();}
-window.addEventListener('beforeprint',()=>document.querySelectorAll('details.section').forEach(d=>d.open=true)); document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target.id==='modal-bg')closeModal()}); renderAll();
+let state={profile:'Married couple',country:'US',lite:false,filterNeeds:false,filterMust:false,filterCountry:false,answers:{},packet:{}};
+try{state={...state,...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}}catch(e){}
+function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function renderChips(){document.getElementById('profileChips').innerHTML=profiles.map(p=>`<button class="chip ${state.profile===p?'active':''}" onclick="setProfile('${p}')">${p}</button>`).join('');document.getElementById('countryChips').innerHTML=countries.map(c=>`<button class="chip ${state.country===c?'active':''}" onclick="setCountry('${c}')">${c}</button>`).join('');document.getElementById('liteBtn').textContent='Beginner mode: '+(state.lite?'on':'off');document.getElementById('liteBtn').classList.toggle('active',state.lite)}
+function setProfile(p){state.profile=p;save();renderAll()} function setCountry(c){state.country=c;save();renderAll()} function toggleLite(){state.lite=!state.lite;save();renderAll()}
+function applies(item){let profOk=!item.profiles.length||item.profiles.includes(state.profile)||item.profiles.includes(state.country);let countryOk=!item.countries.length||item.countries.includes(state.country);return profOk&&countryOk}
+function visibleItems(){return items.filter(i=>applies(i)||!state.lite)}
+function answer(id){return state.answers[id]||{status:null,assign:'Self',date:''}}
+function setStatus(id,status){let a=answer(id);a.status=a.status===status?null:status;state.answers[id]=a;save();renderAll();toast('Saved')}
+function setAssign(id,val){let a=answer(id);a.assign=val;state.answers[id]=a;save();renderPacket()}
+function setDate(id,val){let a=answer(id);a.date=val;state.answers[id]=a;save();renderScores()}
+function itemHtml(item){let a=answer(item.id);let hidden='';return `<div class="item" data-id="${item.id}"><div class="item-head"><div><div class="item-title">${item.title}</div><div class="tags"><span class="tag ${item.priority}">${item.priority==='must'?'Must fix now':item.priority==='soon'?'Fix soon':'Nice to clean up'}</span><span class="tag">${item.cat}</span>${item.countries.length?`<span class="tag">${item.countries.join('/')}</span>`:''}</div></div></div><div class="why">${item.why}</div><div class="next"><b>Next:</b> ${item.next}</div><div class="item-actions"><div class="status-btns"><button class="status-btn ${a.status==='done'?'active':''}" data-status="done" onclick="setStatus('${item.id}','done')">Done</button><button class="status-btn ${a.status==='needs'?'active':''}" data-status="needs" onclick="setStatus('${item.id}','needs')">Needs work</button><button class="status-btn ${a.status==='na'?'active':''}" data-status="na" onclick="setStatus('${item.id}','na')">N/A</button></div><select class="select" onchange="setAssign('${item.id}',this.value)">${['Self','Spouse','Parent','Sibling','CA','CPA','Lawyer','Trusted contact'].map(x=>`<option ${a.assign===x?'selected':''}>${x}</option>`).join('')}</select><input class="date" type="date" value="${a.date||''}" onchange="setDate('${item.id}',this.value)" title="Target date"></div></div>`}
+function renderStart(){document.getElementById('starterList').innerHTML=items.filter(i=>i.starter&&applies(i)).map(itemHtml).join('')}
+function renderChecklist(){let q=(document.getElementById('searchBox')?.value||'').toLowerCase().trim();let list=visibleItems().filter(i=>{let a=answer(i.id);if(state.filterNeeds&&a.status!=='needs')return false;if(state.filterMust&&i.priority!=='must')return false;if(state.filterCountry&&!(i.countries.includes(state.country)||i.countries.length===0))return false;if(q&&!`${i.title} ${i.cat} ${i.why} ${i.next}`.toLowerCase().includes(q))return false;return true});document.getElementById('checklistList').innerHTML=list.map(itemHtml).join('')||'<div class="notice dark">No items match this view.</div>'}
+function toggleFilter(which){state['filter'+which[0].toUpperCase()+which.slice(1)]=!state['filter'+which[0].toUpperCase()+which.slice(1)];save();document.getElementById('filterNeeds').classList.toggle('active',state.filterNeeds);document.getElementById('filterMust').classList.toggle('active',state.filterMust);document.getElementById('filterCountry').classList.toggle('active',state.filterCountry);renderChecklist()}
+function renderScores(){let applicable=visibleItems().filter(i=>answer(i.id).status!=='na');let done=applicable.filter(i=>answer(i.id).status==='done');let needs=applicable.filter(i=>answer(i.id).status==='needs');let must=applicable.filter(i=>i.priority==='must');let mustDone=must.filter(i=>answer(i.id).status==='done');let pct=applicable.length?Math.round(done.length/applicable.length*100):0;let mpct=must.length?Math.round(mustDone.length/must.length*100):0;score.textContent=pct;scoreFill.style.width=pct+'%';scoreText.textContent=applicable.length?`${done.length} done, ${needs.length} needs work, ${applicable.length} active items.`:'No active items yet.';mustScore.textContent=mpct;mustFill.style.width=mpct+'%';mustText.textContent=must.length?`${mustDone.length} of ${must.length} must-fix items done.`:'No must-fix items active.';let byCat={};needs.forEach(i=>byCat[i.cat]=(byCat[i.cat]||0)+1);let top=Object.entries(byCat).sort((a,b)=>b[1]-a[1])[0];weakSpot.textContent=top?top[0]:'None yet';let lr=state.packet.lastReviewed;let nr=state.packet.nextReview;if(lr){let days=Math.floor((new Date()-new Date(lr))/(86400000));reviewStatus.textContent=days>365?'Stale':days>180?'Review soon':'Current';reviewHint.textContent=`Last reviewed ${lr}${nr?`, next ${nr}`:''}`;} else {reviewStatus.textContent='No date';reviewHint.textContent='Set a review date every 6 months.'}document.getElementById('successNotice').style.display=(mpct===100&&must.length>0)?'block':'none';}
+function renderPacketForm(){let el=document.getElementById('packetForm');el.innerHTML=packetFields.map(([id,label])=>`<div class="field" style="${id==='notes'?'grid-column:1/-1':''}"><label>${label}</label>${id==='notes'?`<textarea oninput="setPacket('${id}',this.value)">${state.packet[id]||''}</textarea>`:`<input value="${state.packet[id]||''}" oninput="setPacket('${id}',this.value)">`}</div>`).join('')}
+function setPacket(id,val){state.packet[id]=val;save();renderPacket();renderScores()}
+function renderPacket(){let p=state.packet;let needs=visibleItems().filter(i=>answer(i.id).status==='needs').slice(0,6);let mustNeeds=needs.filter(i=>i.priority==='must');let emergency=['Find this packet and document vault','Confirm phone, email, password manager access','Call trusted contacts and tax/legal contacts','Check insurance, bank, property, and immigration folders'];document.getElementById('packetPreview').innerHTML=`<h2>NRI Family Access Packet</h2><div class="line"><b>Prepared by:</b> ${p.owner||'____'} &nbsp; <b>Last reviewed:</b> ${p.lastReviewed||'____'} &nbsp; <b>Next review:</b> ${p.nextReview||'____'}</div><h3>First calls</h3><div class="packet-grid"><div class="line"><b>First person:</b> ${p.firstStep||'____'}</div><div class="line"><b>Trusted contact:</b> ${p.trusted||'____'}</div><div class="line"><b>India CA:</b> ${p.ca||'____'}</div><div class="line"><b>Tax contact:</b> ${p.taxPro||'____'}</div><div class="line"><b>Lawyer:</b> ${p.lawyer||'____'}</div><div class="line"><b>Insurance:</b> ${p.insurance||'____'}</div></div><h3>Access map, no secrets</h3><div class="packet-grid"><div class="line"><b>OTP phone:</b> ${p.mainPhone||'____'}</div><div class="line"><b>Financial email:</b> ${p.mainEmail||'____'}</div><div class="line"><b>Password map:</b> ${p.passwordMap||'____'}</div><div class="line"><b>Document vault:</b> ${p.vault||'____'}</div><div class="line"><b>Indian bank:</b> ${p.indiaBank||'____'}</div><div class="line"><b>Foreign bank:</b> ${p.foreignBank||'____'}</div><div class="line"><b>NRE/NRO:</b> ${p.nreNro||'____'}</div><div class="line"><b>Property docs:</b> ${p.property||'____'}</div><div class="line"><b>Immigration files:</b> ${p.immigration||'____'}</div><div class="line"><b>Parent docs:</b> ${p.parentDocs||'____'}</div></div><h3>First 48 hours</h3>${emergency.map(x=>`<div class="line">□ ${x}</div>`).join('')}<h3>Fix-first items</h3>${needs.length?needs.map(i=>`<div class="line">□ ${i.priority==='must'?'Must fix: ':'Fix: '}${i.title} <small>(${answer(i.id).assign||'Self'})</small></div>`).join(''):'<div class="line">No needs-work items selected yet.</div>'}<h3>Safe notes</h3><div class="line">${p.notes||'Keep passwords, full account numbers, SSN, Aadhaar, PAN, and secret codes outside this packet.'}</div>`}
+function packetText(){return document.getElementById('packetPreview').innerText}
+function copyPacket(){navigator.clipboard.writeText(packetText());toast('Family packet copied')}
+function copyShareSummary(){let applicable=visibleItems().filter(i=>answer(i.id).status!=='na');let done=applicable.filter(i=>answer(i.id).status==='done').length;let needs=applicable.filter(i=>answer(i.id).status==='needs');let must=applicable.filter(i=>i.priority==='must');let mustDone=must.filter(i=>answer(i.id).status==='done').length;let pct=applicable.length?Math.round(done/applicable.length*100):0;let mpct=must.length?Math.round(mustDone/must.length*100):0;let cats=[...new Set(needs.map(i=>i.cat))].slice(0,4).join(', ')||'none yet';let text=`I tried the RupeeStories NRI Emergency Access Planner.\n\nMy overall readiness: ${pct}%\nMust-fix access score: ${mpct}%\nBiggest weak spots: ${cats}\nProfile: ${state.profile}\nCountry path: ${state.country}\n\nThe scary part was not money. It was whether family can actually access things when phone, OTP, banks, documents, and contacts are scattered.\n\nNo login. No data collected. Browser-only.`;navigator.clipboard.writeText(text);toast('Shareable summary copied')}
+function printPacket(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('printing'));document.getElementById('panel-packet').classList.add('printing');window.print()}
+function showTab(name){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById('panel-'+name).classList.add('active');document.getElementById('tab-'+name).classList.add('active');if(name==='checklist')renderChecklist();if(name==='packet'){renderPacketForm();renderPacket();}}
+function renderGlossary(){document.getElementById('glossaryList').innerHTML=glossary.map(([t,p])=>`<div class="term"><b>${t}</b><p>${p}</p></div>`).join('')}
+function applyProfileDefaults(){visibleItems().forEach(i=>{if(!applies(i)){let a=answer(i.id);a.status='na';state.answers[i.id]=a}});save();renderAll();toast('Profile defaults applied')}
+function setReviewToday(){let d=new Date().toISOString().slice(0,10);let n=new Date();n.setMonth(n.getMonth()+6);state.packet.lastReviewed=d;state.packet.nextReview=n.toISOString().slice(0,10);save();renderAll();toast('Review dates set')}
+function exportJSON(){let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nri-emergency-access-planner-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function importJSON(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{state={...state,...JSON.parse(r.result)};save();renderAll();toast('Restored')}catch(err){alert('Could not read JSON')}};r.readAsText(f)}
+function resetAll(){if(confirm('Clear all answers and packet fields?')){localStorage.removeItem(STORAGE_KEY);location.reload()}}
+function renderAll(){renderChips();renderStart();renderChecklist();renderPacketForm();renderPacket();renderGlossary();renderScores();}
+renderAll();
 </script>
 </body>
 </html>
