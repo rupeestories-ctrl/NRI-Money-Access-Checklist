@@ -1046,7 +1046,7 @@ function toast(msg, actionLabel, actionFn){
  const t=document.getElementById('toast');
  t.innerHTML=esc(msg)+(actionLabel?` <button type="button" style="margin-left:10px;border:1px solid rgba(244,234,210,.35);background:rgba(244,234,210,.12);color:var(--paper);border-radius:999px;padding:4px 10px;font:inherit;font-size:12px;cursor:pointer">${esc(actionLabel)}</button>`:'');
  t.classList.add('show');
- if(actionLabel){t.querySelector('button').onclick=()=>{actionFn&&actionFn();t.classList.remove('show')}}
+ if(actionLabel){t.querySelector('button').onclick=()=>{actionFn&&actionFn();}}
  clearTimeout(t._hideTimer);
  t._hideTimer=setTimeout(()=>t.classList.remove('show'), actionLabel?5000:1800);
 }
