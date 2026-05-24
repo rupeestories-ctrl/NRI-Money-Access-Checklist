@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="A free browser-only NRI emergency access planner from RupeeStories. Build a family handoff, document vault map, emergency steps, and fix-first list without entering secrets." />
 <title>NRI Emergency Access Planner · RupeeStories</title>
-<!-- Final beta: accuracy cleanup for beneficiary, NRO, RNOR, POA, FATCA/CRS, authority mapping, and lost-phone recovery. -->
+<!-- Publish Beta: accuracy cleanup for beneficiary, NRO, RNOR, POA, FATCA/CRS, authority mapping, dynamic scenarios, and final launch polish. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -695,7 +695,7 @@ h1 em{font-style:italic;color:var(--gold);font-weight:400}
   <!-- SETUP -->
   <section class="card setup">
     <h2>Set your situation</h2>
-    <p class="sub">Pick what applies. Beginner mode keeps the first pass light by hiding items that do not match your situation.</p>
+    <p class="sub">Pick what applies. Beginner mode keeps the first pass light by hiding items that do not match your selected profile and country path.</p>
     <div class="setup-grid">
       <div>
         <span class="sub-label">Profile</span>
@@ -931,7 +931,7 @@ const scenarios = {
     steps: [
       { time:'First weeks', sub:'Plan the move', items:[
         'Confirm RNOR eligibility and likely window with a cross-border CA before selling or moving large assets.',
-        'Note the precise date your Indian residency status changes for tax purposes. It drives everything.',
+        'Project your day-count to confirm which financial year you become Indian tax resident, and when RNOR likely ends.',
         'Do not rush asset sales. RNOR may shelter many foreign income streams for 2 to 3 years, subject to the rules and your facts.'
       ]},
       { time:'First months', sub:'Convert accounts', items:[
@@ -942,7 +942,7 @@ const scenarios = {
       ]},
       { time:'Ongoing', sub:'Coordinate filings', items:[
         'Plan large asset moves to land inside the RNOR window where possible.',
-        'Some foreign tax obligations continue after you land. US citizens and green card holders need extra care.',
+        'Some foreign tax obligations continue after you land. US citizens, green card holders, and some former residents need extra care.',
         'Coordinate Indian and foreign tax filings for transition years with a specialist who handles both sides.'
       ]}
     ]
@@ -974,20 +974,21 @@ function renderScenario() {
 }
 
 const glossary=[
- ['Nominee','For Indian bank accounts, a nominee is a trustee who receives the asset on behalf of legal heirs, the will or succession law still controls who actually inherits (Section 45ZA, Banking Regulation Act). For mutual funds and demat accounts, post-2023 SEBI rules give nominees stronger standing, but a properly drafted will still wins.'],
+ ['Nominee','For Indian bank accounts, a nominee is a trustee who receives the asset on behalf of legal heirs, the will or succession law still controls who actually inherits (Section 45ZA, Banking Regulation Act). For mutual funds and demat accounts, SEBI now requires investors to nominate or formally opt out for new holdings, while older accounts have seen deadline extensions. Courts have been inconsistent on whether nominees can override a will, so a properly drafted will is still essential.'],
  ['Beneficiary','A person listed to receive money from insurance, retirement accounts, brokerage, or similar accounts. In many countries, beneficiary, TOD, or POD designations are processed outside the will for those accounts, but local law, account structure, divorce, community property, trusts, and incomplete forms can change the result.'],
  ['NRE','Non-Resident External account. Holds foreign income converted to rupees. Interest is generally tax-free in India while the account holder qualifies as non-resident under Indian tax rules, and balances are generally repatriable subject to bank checks.'],
  ['NRO','Non-Resident Ordinary account. Holds Indian income such as rent, dividends, pension, or sale proceeds. Interest is taxable in India and commonly subject to TDS around 30% plus surcharge and cess. Current FEMA rules generally permit up to USD 1 million per financial year from NRO balances, subject to tax clearance, source documents, bank checks, and Form 15CA/CB where applicable.'],
+ ['PIS / PINS','Portfolio Investment Scheme route used by NRIs for buying and selling Indian listed shares through a designated bank/broker setup, especially for repatriable equity transactions. Families often discover this only when they try to sell legacy resident-held shares after NRI status changes.'],
  ['RNOR','Resident but Not Ordinarily Resident. A transition status often available for about 2 to 3 years after returning to India. Many foreign income streams may remain outside Indian tax during RNOR years, but India-source income and some business or professional income connected to India can still be taxable. Worth planning before moving assets.'],
  ['Repatriation','Moving money from India to another country. NRO transfers often need Form 15CA and, in many cases, CA-issued Form 15CB, plus source-of-funds documents. NRE transfers are usually simpler but still subject to bank compliance checks.'],
  ['POA (Power of Attorney)','A legal document letting someone act for you. For Indian property, POAs executed abroad often need apostille in Hague countries or Indian Embassy or Consulate attestation. State-level stamp and adjudication rules apply in India, often within a few months of arrival. Property work usually needs a specific POA, not a broad general POA. Sub-registrars may reject vague documents.'],
  ['KYC','Know Your Customer. Identity verification by banks and brokers. Stale KYC, mismatched names, or outdated phone numbers are the most common reason NRI accounts go inaccessible.'],
  ['Aadhaar and PAN','Core Indian identity and tax identifiers. For NRIs who use Aadhaar-linked banking, tax, or investment systems, the linked phone number must remain reachable. Name, date-of-birth, and phone mismatches can block many Indian financial operations.'],
  ['2FA / OTP','Second-factor access via SMS, app, email, or hardware key. The single biggest NRI access failure point, old SIMs, lost phones, and parent-owned numbers.'],
- ['Will (Indian + Foreign)','Indian-situs assets (property, demat, MFs, bank) and foreign-situs assets often need separate wills, or one carefully drafted will with country-specific schedules. Uncoordinated multiple wills cause real problems.'],
+ ['Will (Indian + Foreign)','Indian-situs assets (property, demat, MFs, bank) and foreign-situs assets often work best with separate, coordinated wills. Some families use one carefully drafted will with country-specific schedules, but separate wills can make local probate cleaner. Uncoordinated multiple wills cause real problems.'],
  ['Digital legacy','iCloud Legacy Contact, Google Inactive Account Manager, password manager emergency access, and WhatsApp/Signal 2FA PINs. Family routinely gets locked out of photos, messages, and authenticators.'],
  ['Document vault','A simple map showing where important papers are stored (cloud folder, locker, safe, parent home). Should not contain passwords.'],
- ['TOD / POD','Transfer on Death / Payable on Death designations on US brokerage and bank accounts. Separate from beneficiary designations and worth checking explicitly.'],
+ ['TOD / POD','Transfer on Death / Payable on Death designations on US brokerage and bank accounts. These are the brokerage and bank versions of beneficiary designations, separate forms from your retirement-account beneficiaries, and the ones people often forget exist.'],
  ['FATCA / CRS','Information about foreign financial accounts may be reported between countries under FATCA, CRS, and local reporting regimes. These rules do not replace your filing duties, but they mean cross-border accounts are usually not invisible.'],
  ['Legal authority','Knowing where assets are is not the same as being allowed to act. A spouse or trusted person may know an account exists but still need POA, executor authority, TOD/POD, beneficiary status, nominee paperwork, or court documents to access or transfer it.']
 ];
@@ -995,16 +996,16 @@ const glossary=[
 const items=[
  {id:'phone-main',cat:'Phone and OTP',title:'Main OTP phone is identified and working outside India',why:'Many NRI accounts fail because OTPs still go to an old Indian SIM or a parent\u2019s phone.',next:'Write the active OTP phone in the family packet and test it from your current country.',priority:'must',starter:true,profiles:[],countries:[]},
  {id:'email-main',cat:'Email and passwords',title:'Main financial email is known and recoverable',why:'Email is usually the first recovery path. Hardware keys, backup codes, and trusted devices matter too if email is locked.',next:'Confirm recovery email, recovery phone, trusted devices, backup codes, and hardware keys. Store recovery notes in your password manager.',priority:'must',starter:true,profiles:[],countries:[]},
- {id:'password-manager',cat:'Email and passwords',title:'Spouse or trusted person knows how to reach the password manager or emergency folder',why:'Knowing accounts exist is not enough if nobody can reach the access map.',next:'Use emergency access features (1Password, Bitwarden, Dashlane) or keep a sealed instruction sheet in a safe place.',priority:'must',starter:true,profiles:['Married couple','Dual-income couple','Parents with kids'],countries:[]},
+ {id:'password-manager',cat:'Email and passwords',title:'Spouse or trusted person knows how to reach the password manager or emergency folder',why:'Knowing accounts exist is not enough if nobody can reach the access map.',next:'Use emergency access features (1Password, Bitwarden, Dashlane) or keep a sealed instruction sheet in a safe place.',priority:'must',starter:true,profiles:['Single NRI','Married couple','Dual-income couple','Parents with kids'],countries:[]},
  {id:'digital-legacy',cat:'Email and passwords',title:'Digital legacy contacts are set on phone and major accounts',why:'iCloud Legacy Contact, Google Inactive Account Manager, and WhatsApp/Signal 2FA PINs are the most-missed access points.',next:'Set Legacy Contact on iPhone, Inactive Account Manager on Google, and store WhatsApp/Signal PINs in your password manager.',priority:'soon',starter:false,profiles:[],countries:[]},
  {id:'india-bank',cat:'Banking',title:'Main Indian bank login works',why:'Indian bank access depends on phone, email, KYC, and app status all working together.',next:'Test login, transfer limits, and OTP flow. Do not save passwords in this tool.',priority:'must',starter:true,profiles:[],countries:[]},
  {id:'foreign-bank',cat:'Banking',title:'Main foreign bank login works',why:'Cash access matters in the first week, mortgage, rent, bills, travel.',next:'Confirm login, recovery phone, and backup user access if allowed.',priority:'must',starter:true,profiles:[],countries:[]},
  {id:'nre-nro',cat:'Banking',title:'NRE and NRO accounts are listed with purpose',why:'Family may not know which account holds foreign income vs Indian income, or which money can move abroad.',next:'List bank, account type, branch contact, source of funds, and repatriation path. Note that NRE interest is generally tax-free for qualifying NRIs, while NRO interest is taxable and often TDS-deducted.',priority:'soon',starter:false,profiles:['Returning to India','Retired NRI','India property owner'],countries:[]},
- {id:'demat',cat:'Investments India',title:'Demat and mutual fund access is known',why:'Investments can be visible on statements but hard to sell or claim without login, nominee, and NRI-status flags.',next:'Check broker login, CDSL or NSDL access, nominee, linked bank, and NRI status on each folio.',priority:'soon',starter:false,profiles:['India property owner','Returning to India','Retired NRI'],countries:[]},
- {id:'nominee-india',cat:'Nominee and beneficiary',title:'Indian bank, demat, and mutual fund nominees are added',why:'Missing nominees turn a simple claim into months of paperwork. Note: bank nominees are trustees for legal heirs; mutual fund and demat nominees have stronger standing post-2023.',next:'Check each account and update nominees where missing. For clean inheritance, also have a current will.',priority:'must',starter:true,profiles:[],countries:[]},
- {id:'beneficiary-retirement',cat:'Nominee and beneficiary',title:'Foreign retirement, brokerage, and TOD/POD designations are updated',why:'Old beneficiaries from early career years are common and create real family problems. TOD/POD on brokerage is separate from beneficiary designations and often missed.',next:'Check 401k, IRA, Roth, pension, HSA, brokerage TOD/POD, insurance, 529 plans, and similar accounts.',priority:'must',starter:true,profiles:['US','Married couple','Dual-income couple','Parents with kids','Retired NRI'],countries:['US','Canada','UK','Australia','Singapore']},
- {id:'will-coordinated',cat:'Nominee and beneficiary',title:'Will (or coordinated Indian + foreign wills) exists and family knows where it is',why:'Nominees are not inheritors for Indian bank accounts. Without a will, succession law decides, often slowly, sometimes unexpectedly. NRIs with Indian + foreign assets usually need either one carefully drafted will with country-specific schedules, or separate Indian and foreign wills that don\u2019t conflict.',next:'Talk to a lawyer who handles cross-border estates. Store original locations in the family packet.',priority:'must',starter:false,profiles:['Married couple','Dual-income couple','Parents with kids','India property owner','Retired NRI','Returning to India'],countries:[]},
- {id:'insurance-life',cat:'Insurance',title:'Life and health insurance details are listed by country',why:'US life insurance death benefits are usually tax-free to beneficiary. Indian life insurance (LIC etc.) follows nominee + assignment rules. Health insurance terminates differently from life. Family needs the right contact for each.',next:'Add provider, claim contact, and country for each policy. Note any assignment on Indian LIC.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'demat',cat:'Investments India',title:'Demat and mutual fund access is known',why:'Investments can be visible on statements but hard to sell or claim without login, nominee, and NRI-status flags.',next:'Check broker login, CDSL or NSDL access, nominee, linked bank, NRI status, and whether a PIS/PINS route is needed for repatriable listed-equity transactions.',priority:'soon',starter:false,profiles:['India property owner','Returning to India','Retired NRI'],countries:[]},
+ {id:'nominee-india',cat:'Nominee and beneficiary',title:'Indian bank, demat, and mutual fund nominees are added',why:'Missing nominees turn a simple claim into months of paperwork. Bank nominees are trustees for legal heirs. For mutual funds and demat accounts, SEBI requires nomination or formal opt-out, but nominee vs legal-heir disputes still depend on law, documents, and facts.',next:'Check each account and update nominees where missing. For clean inheritance, also have a current will.',priority:'must',starter:true,profiles:[],countries:[]},
+ {id:'beneficiary-retirement',cat:'Nominee and beneficiary',title:'Foreign retirement, brokerage, and TOD/POD designations are updated',why:'Old beneficiaries from early career years are common and create real family problems. TOD/POD forms on taxable brokerage and bank accounts are separate from your retirement-account beneficiary forms, and people often forget them.',next:'Check 401k, IRA, Roth, pension, HSA, brokerage TOD/POD, insurance, 529 plans, and similar accounts.',priority:'must',starter:true,profiles:['US','Married couple','Dual-income couple','Parents with kids','Retired NRI'],countries:['US','Canada','UK','Australia','Singapore']},
+ {id:'will-coordinated',cat:'Nominee and beneficiary',title:'Will (or coordinated Indian + foreign wills) exists and family knows where it is',why:'Nominees are not inheritors for Indian bank accounts. Without a will, succession law decides, often slowly, sometimes unexpectedly. NRIs with Indian + foreign assets usually need either one carefully drafted will with country-specific schedules, or separate Indian and foreign wills that don\u2019t conflict.',next:'Talk to a lawyer who handles cross-border estates. Store original locations in the family packet.',priority:'must',starter:false,profiles:['Single NRI','Married couple','Dual-income couple','Parents with kids','India property owner','Retired NRI','Returning to India'],countries:[]},
+ {id:'insurance-life',cat:'Insurance',title:'Life and health insurance details are listed by country',why:'US life insurance death benefits are usually tax-free to beneficiary. Indian life insurance (LIC etc.) follows nominee + assignment rules. Health insurance terminates differently from life. Family needs the right contact for each.',next:'Add provider, claim contact, and country for each policy. Note any assignment on Indian LIC. For US employer health coverage, dependents may have a COBRA election window, often 60 days from notice or loss of coverage.',priority:'must',starter:true,profiles:[],countries:[]},
  {id:'ca-cpa',cat:'Contacts',title:'CA, CPA, lawyer, and key advisor contacts are saved',why:'The person who knows the paperwork is useless if family does not know who they are.',next:'Add names, phone/email, country, and what each person helps with.',priority:'must',starter:true,profiles:[],countries:[]},
  {id:'property-docs',cat:'Property India',title:'Original India property documents location is known',why:'Property is often the biggest India asset, but documents may be in a locker, parent home, or unknown folder.',next:'Add storage location, scanned copy location, caretaker, tenant, and local lawyer contact.',priority:'must',starter:true,profiles:['India property owner','Parent-care planner','Returning to India'],countries:[]},
  {id:'property-records',cat:'Property India',title:'Society NOC, share certificate, mutation/khata, and lease deed records are accessible',why:'Original sale deed alone is not enough. Society documents, mutation records, and lease deeds (if leasehold) surface only when someone tries to sell or transfer, and missing pieces stall the transaction.',next:'Confirm location for each: society share certificate, mutation/khata copy, lease deed if applicable, and last property tax receipt.',priority:'soon',starter:false,profiles:['India property owner','Returning to India','Retired NRI'],countries:[]},
@@ -1012,7 +1013,7 @@ const items=[
  {id:'immigration',cat:'Immigration',title:'Passport, visa, green card, OCI, and immigration files are stored in one known place',why:'Travel, benefits, and emergency decisions depend on these documents.',next:'Add folder location and lawyer or employer contact.',priority:'must',starter:true,profiles:['US','Canada','UK','Australia','Singapore','UAE','Europe'],countries:['US','Canada','UK','UAE','Singapore','Australia','Europe']},
  {id:'kids-guardian',cat:'Kids and dependents',title:'Kids documents, guardian instructions, and 529 plans are documented',why:'If both parents are unavailable, family needs passports, school contacts, medical info, guardian names, and 529 beneficiary status.',next:'Add school, doctor, passports, OCI, birth certificates, guardian notes, and 529 successor owner / beneficiary.',priority:'must',starter:false,profiles:['Parents with kids'],countries:[]},
  {id:'vault-map',cat:'Document vault',title:'Document vault map exists',why:'Scanned files help only if family knows which cloud, folder, drive, locker, or safe to check.',next:'Fill the vault map in the family packet.',priority:'must',starter:true,profiles:[],countries:[]},
- {id:'autopay',cat:'Bills and debt',title:'Auto-pay, mortgage, rent, and major bills are listed',why:'The first month gets messy if nobody knows what must keep getting paid.',next:'List payment categories and providers, not full numbers.',priority:'soon',starter:false,profiles:['Married couple','Dual-income couple','Parents with kids','Retired NRI'],countries:[]},
+ {id:'autopay',cat:'Bills and debt',title:'Auto-pay, mortgage, rent, and major bills are listed',why:'The first month gets messy if nobody knows what must keep getting paid.',next:'List payment categories and providers, not full numbers.',priority:'soon',starter:false,profiles:['Single NRI','Married couple','Dual-income couple','Parents with kids','Retired NRI'],countries:[]},
  {id:'country-tax',cat:'Tax and country path',title:'Country-specific tax and estate contact is identified',why:'US, Canada, UK, UAE, Singapore, Australia, and Europe each have different rules for tax, estate, and account recovery. For US persons, the executor may need to handle the decedent\'s final FBAR/Form 8938 plus any ongoing estate-level foreign-account reporting if applicable.',next:'Add a local tax person or lawyer contact for your country path. For US NRIs, note final-year and estate-level foreign account reporting questions.',priority:'soon',starter:false,profiles:[],countries:['US','Canada','UK','UAE','Singapore','Australia','Europe']},
  {id:'return-india',cat:'Return to India',title:'Return-to-India plan addresses RNOR window and account cleanup',why:'Moving back changes banking status, tax residency, insurance, phone, and document needs. RNOR years may protect many foreign income streams from Indian tax, but India-source income and some India-connected business or professional income can still be taxable. Banks also expect NRE/NRO status to be updated after residency changes.',next:'List items for RNOR planning, NRE/NRO conversion, demat status change, PAN/Aadhaar phone update, tax contacts, insurance, and repatriation.',priority:'soon',starter:false,profiles:['Returning to India','Retired NRI'],countries:[]},
  {id:'lost-phone',cat:'Recovery plan',title:'Lost phone recovery steps are written down',why:'A dead or lost phone can block email, banks, brokers, Aadhaar-linked services, PAN-linked services, tax portals, and authenticator apps.',next:'Write your actual recovery order. If a password manager recovery kit or hardware key is stored separately, start there. Otherwise use email recovery, SIM replacement, password manager, then financial accounts.',priority:'must',starter:true,profiles:[],countries:[]},
@@ -1041,7 +1042,14 @@ let state={profile:'Married couple',country:'US',lite:false,filterNeeds:false,fi
 try{const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');state={...state,...saved}}catch(e){}
 
 function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}
-function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function toast(msg, actionLabel, actionFn){
+ const t=document.getElementById('toast');
+ t.innerHTML=esc(msg)+(actionLabel?` <button type="button" style="margin-left:10px;border:1px solid rgba(244,234,210,.35);background:rgba(244,234,210,.12);color:var(--paper);border-radius:999px;padding:4px 10px;font:inherit;font-size:12px;cursor:pointer">${esc(actionLabel)}</button>`:'');
+ t.classList.add('show');
+ if(actionLabel){t.querySelector('button').onclick=()=>{actionFn&&actionFn();t.classList.remove('show')}}
+ clearTimeout(t._hideTimer);
+ t._hideTimer=setTimeout(()=>t.classList.remove('show'), actionLabel?5000:1800);
+}
 
 function renderChips(){
  document.getElementById('profileChips').innerHTML=profiles.map(p=>`<button class="chip ${state.profile===p?'active':''}" onclick="setProfile('${p}')">${p}</button>`).join('');
@@ -1113,10 +1121,10 @@ function itemHtml(item){
       <button class="status-btn ${a.status==='needs'?'active':''}" data-status="needs" onclick="setStatus('${item.id}','needs')">Needs work</button>
       <button class="status-btn ${a.status==='na'?'active':''}" data-status="na" onclick="setStatus('${item.id}','na')">N/A</button>
     </div>
-    <select class="select" onchange="setAssign('${item.id}',this.value)">
+    <select class="select" aria-label="Assign to" onchange="setAssign('${item.id}',this.value)">
       ${['Self','Spouse','Parent','Sibling','CA','CPA','Lawyer','Trusted contact'].map(x=>`<option ${a.assign===x?'selected':''}>${x}</option>`).join('')}
     </select>
-    <input class="date" type="date" value="${a.date||''}" onchange="setDate('${item.id}',this.value)" title="Target date">
+    <input class="date" aria-label="Target date" type="date" value="${a.date||''}" onchange="setDate('${item.id}',this.value)" title="Target date">
   </div>
  </div>`;
 }
@@ -1296,8 +1304,16 @@ function renderGlossary(){
 }
 
 function applyProfileDefaults(){
- visibleItems().forEach(i=>{if(!applies(i)){const a=answer(i.id);a.status='na';state.answers[i.id]=a}});
- save();renderAll();toast('Profile defaults applied');
+ let count=0;
+ items.forEach(i=>{
+   if(!applies(i)){
+     const a=answer(i.id);
+     if(a.status!=='na') count++;
+     a.status='na';
+     state.answers[i.id]=a;
+   }
+ });
+ save();renderAll();toast(count ? `Marked ${count} non-applicable items N/A` : 'No non-applicable items to mark');
 }
 
 function setReviewToday(){
@@ -1313,7 +1329,8 @@ function exportJSON(){
  const a=document.createElement('a');
  a.href=URL.createObjectURL(blob);
  a.download='nri-emergency-access-planner-backup.json';
- a.click();URL.revokeObjectURL(a.href);
+ a.click();
+ setTimeout(() => URL.revokeObjectURL(a.href), 0);
 }
 
 function importJSON(e){
@@ -1323,7 +1340,16 @@ function importJSON(e){
  r.readAsText(f);
 }
 
-function resetAll(){if(confirm('Clear all answers and packet fields?')){localStorage.removeItem(STORAGE_KEY);location.reload()}}
+function resetAll(){
+ if(!confirm('Clear all answers and packet fields? You will have 5 seconds to undo.')) return;
+ const snapshot=JSON.stringify(state);
+ state={profile:'Married couple',country:'US',lite:false,filterNeeds:false,filterMust:false,filterCountry:false,answers:{},packet:{}};
+ localStorage.removeItem(STORAGE_KEY);
+ renderAll();
+ toast('Planner reset', 'Undo', ()=>{
+   try{state=JSON.parse(snapshot);save();renderAll();toast('Reset undone')}catch(e){}
+ });
+}
 
 function renderAll(){
  renderChips();renderCategoryIntro();renderStart();renderChecklist();
