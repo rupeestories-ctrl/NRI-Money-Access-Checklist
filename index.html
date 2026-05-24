@@ -290,8 +290,24 @@ h1 em{font-style:italic;color:var(--gold);font-weight:400}
   border-radius:var(--radius);
   background:var(--paper-warm);
   transition:all .2s ease;
+  cursor:pointer;
+  text-align:left;
+  font-family:inherit;
+  color:inherit;
+  width:100%;
 }
-.mode-card:hover{border-color:var(--gold);box-shadow:var(--shadow-1)}
+.mode-card:hover{border-color:var(--gold);box-shadow:var(--shadow-1);transform:translateY(-1px)}
+.mode-card.active{
+  border-color:var(--gold);
+  background:linear-gradient(180deg,#fef6df,var(--paper-warm));
+  box-shadow:inset 0 0 0 1px var(--gold), var(--shadow-1);
+}
+.mode-card.active::after{
+  content:"";position:absolute;left:50%;bottom:-9px;
+  transform:translateX(-50%);width:18px;height:9px;
+  background:var(--gold);clip-path:polygon(0 0,100% 0,50% 100%);
+}
+@media(max-width:880px){.mode-card.active::after{display:none}}
 .mode-card .num-label{
   font-family:'JetBrains Mono',monospace;
   font-size:10px;letter-spacing:.16em;color:var(--gold-deep);
@@ -744,51 +760,25 @@ h1 em{font-style:italic;color:var(--gold);font-weight:400}
     <div class="notice dark"><b>For when nobody has time to decode accounts.</b> Country-neutral first. India and US examples appear only where they help.</div>
 
     <div class="mode-cards">
-      <div class="mode-card">
+      <button type="button" class="mode-card active" data-scenario="death" onclick="setScenario('death')">
         <span class="num-label">Scenario 01</span>
         <h3>If I die tomorrow</h3>
         <p>Who to call, where to start, and what documents matter first.</p>
-      </div>
-      <div class="mode-card">
+      </button>
+      <button type="button" class="mode-card" data-scenario="phone" onclick="setScenario('phone')">
         <span class="num-label">Scenario 02</span>
         <h3>If I lose my phone</h3>
         <p>OTP, email recovery, SIM, banking, and password manager recovery.</p>
-      </div>
-      <div class="mode-card">
+      </button>
+      <button type="button" class="mode-card" data-scenario="return" onclick="setScenario('return')">
         <span class="num-label">Scenario 03</span>
         <h3>If I return to India</h3>
         <p>Account cleanup, NRE/NRO, RNOR window, tax contacts, and money movement.</p>
-      </div>
+      </button>
     </div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="time">First 2 hours<small>Stabilize access</small></div>
-        <ul>
-          <li>Find the emergency folder or family packet.</li>
-          <li>Confirm access to the main phone, main email, and password manager.</li>
-          <li>Call spouse, sibling, trusted friend, CA or CPA, and employer HR if needed.</li>
-        </ul>
-      </div>
-      <div class="step">
-        <div class="time">First 24 hours<small>Map the assets</small></div>
-        <ul>
-          <li>Locate main bank accounts, insurance cards, property documents, and immigration files.</li>
-          <li>Check which payments cannot stop, mortgage, rent, insurance, utilities.</li>
-          <li>If phone is lost, follow the recovery path recorded in the family packet. For many families, this starts with the password manager recovery kit or recovery keys, then email, SIM, and financial accounts.</li>
-        </ul>
-      </div>
-      <div class="step">
-        <div class="time">First week<small>Activate the network</small></div>
-        <ul>
-          <li>Order certified copies of key documents if needed.</li>
-          <li>Contact insurance, retirement account providers, banks, brokers, and lawyers.</li>
-          <li>For India assets, ask the CA about nominee claims, NRO/NRE movement, and required forms (15CA/CB).</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="notice"><b>Lost-phone recovery order:</b> The right order depends on your setup. If a password manager recovery kit, hardware key, or spouse copy exists outside the lost phone, start there. Otherwise use email recovery, SIM replacement, password manager, then banks and brokers. Record the correct starting point in the family packet.</div>
+    <div class="steps" id="scenarioSteps"></div>
+    <div class="notice dark" id="scenarioNote" style="margin-top:14px"></div>
   </section>
 
   <!-- 10-MIN TEST PANEL -->
@@ -891,6 +881,97 @@ h1 em{font-style:italic;color:var(--gold);font-weight:400}
 const STORAGE_KEY='rs_nri_access_final_beta';
 const profiles=['Single NRI','Married couple','Dual-income couple','Parents with kids','India property owner','Parent-care planner','Retired NRI','Returning to India'];
 const countries=['US','Canada','UK','UAE','Singapore','Australia','Europe','Other'];
+
+const scenarios = {
+  death: {
+    note: '<b>When time matters.</b> Stabilize access, locate documents, activate the network.',
+    steps: [
+      { time:'First 2 hours', sub:'Stabilize access', items:[
+        'Find the emergency folder or family packet.',
+        'Confirm access to the main phone, main email, and password manager.',
+        'Call spouse, sibling, trusted friend, CA or CPA, and employer HR if needed.'
+      ]},
+      { time:'First 24 hours', sub:'Map the assets', items:[
+        'Locate main bank accounts, insurance cards, property documents, and immigration files.',
+        'Identify payments that cannot stop: mortgage, rent, insurance, utilities.',
+        'Locate the will (Indian and foreign if applicable) and confirm who has legal authority to act.'
+      ]},
+      { time:'First week', sub:'Activate the network', items:[
+        'Order multiple certified death certificates. Most institutions want originals.',
+        'Contact insurance, retirement account providers, banks, brokers, and lawyers.',
+        'For India assets, the CA handles nominee claims, NRO/NRE movement, and Form 15CA/CB.'
+      ]}
+    ]
+  },
+  phone: {
+    note: '<b>A lost phone is not a catastrophe</b> if recovery paths were set up in advance. Most damage comes from rushing.',
+    steps: [
+      { time:'First 2 hours', sub:'Lock down', items:[
+        'Sign in to email from a trusted device or computer.',
+        'Use Find My iPhone / Find My Device to lock or remotely wipe the phone.',
+        'Locate password manager recovery kit, hardware key, or backup codes — stored separately from the phone.',
+        'Note which authenticator apps were on the phone (Google Authenticator, Authy, Microsoft Authenticator).'
+      ]},
+      { time:'First 24 hours', sub:'Restore access', items:[
+        'Order replacement SIM from both Indian and foreign carriers. Indian SIM often needs in-person verification, so plan for it if you are abroad.',
+        'Restore authenticator app from backup or recovery code.',
+        'Sign in to banking from desktop. Freeze cards if there is any sign of compromise.',
+        'Re-enable WhatsApp / Signal with your 2FA PIN.'
+      ]},
+      { time:'First week', sub:'Clean up the trail', items:[
+        'Update OTP phone number on Indian banks, broker, and mutual fund folios if the number changed.',
+        'Re-link Aadhaar and PAN-connected services to the new number if you use them.',
+        'Audit recent transactions across all accounts.',
+        'Set up a recovery pattern that does not depend on one device. Hardware key plus printed backup codes is the safest pattern for many families.'
+      ]}
+    ]
+  },
+  return: {
+    note: '<b>Return to India is planned, not acute.</b> The clock here is months, not hours. The biggest mistake is rushing to sell or repatriate before understanding the RNOR window.',
+    steps: [
+      { time:'First weeks', sub:'Plan the move', items:[
+        'Confirm RNOR eligibility and likely window with a cross-border CA before selling or moving large assets.',
+        'Note the precise date your Indian residency status changes for tax purposes. It drives everything.',
+        'Do not rush asset sales. RNOR may shelter many foreign income streams for 2 to 3 years, subject to the rules and your facts.'
+      ]},
+      { time:'First months', sub:'Convert accounts', items:[
+        'Update NRE / NRO / FCNR status per FEMA and bank requirements. Banks expect this fairly soon after status change.',
+        'Update demat folios from NRI to resident status if applicable.',
+        'Update phone on PAN and Aadhaar-linked services to a working Indian number if you use those services.',
+        'Tell foreign employers, brokers, and benefits providers about your new address where required.'
+      ]},
+      { time:'Ongoing', sub:'Coordinate filings', items:[
+        'Plan large asset moves to land inside the RNOR window where possible.',
+        'Some foreign tax obligations continue after you land. US citizens and green card holders need extra care.',
+        'Coordinate Indian and foreign tax filings for transition years with a specialist who handles both sides.'
+      ]}
+    ]
+  }
+};
+
+let activeScenario = 'death';
+
+function setScenario(name) {
+  activeScenario = name;
+  document.querySelectorAll('.mode-card').forEach(c => {
+    c.classList.toggle('active', c.dataset.scenario === name);
+  });
+  renderScenario();
+}
+
+function renderScenario() {
+  const s = scenarios[activeScenario] || scenarios.death;
+  const el = document.getElementById('scenarioSteps');
+  if (!el) return;
+  el.innerHTML = s.steps.map(step => `
+    <div class="step">
+      <div class="time">${esc(step.time)}<small>${esc(step.sub)}</small></div>
+      <ul>${step.items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+    </div>
+  `).join('');
+  const note = document.getElementById('scenarioNote');
+  if (note) note.innerHTML = s.note;
+}
 
 const glossary=[
  ['Nominee','For Indian bank accounts, a nominee is a trustee who receives the asset on behalf of legal heirs, the will or succession law still controls who actually inherits (Section 45ZA, Banking Regulation Act). For mutual funds and demat accounts, post-2023 SEBI rules give nominees stronger standing, but a properly drafted will still wins.'],
@@ -1245,6 +1326,7 @@ function resetAll(){if(confirm('Clear all answers and packet fields?')){localSto
 function renderAll(){
  renderChips();renderCategoryIntro();renderStart();renderChecklist();
  renderPacketForm();renderPacket();renderGlossary();renderScores();
+ renderScenario();
 }
 
 renderAll();
